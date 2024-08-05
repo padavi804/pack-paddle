@@ -2,6 +2,7 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
+
 --Database name "paddle"
 
 
@@ -11,16 +12,47 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE "entry-points" (
+CREATE TABLE "trips" (
     "id" SERIAL PRIMARY KEY,
-    "entry_number" VARCHAR,
-    "entry_point" VARCHAR (80) NOT NULL,
-    "latitude" INT,
-    "longitude" INT
+    "entryDate" DATE,
+    "userid" INT REFERENCES "user",
+    "entryid" INT REFERENCES "entrypoints",
 );
 
-INSERT INTO "entry-points"
-    ("entry_number", "entry_point", "latitude", "longitude")
+CREATE TABLE "entrypoints" (
+    "id" SERIAL PRIMARY KEY,
+    "entryNumber" VARCHAR,
+    "entryPoint" VARCHAR (80) NOT NULL,
+    "latitude" DECIMAL(10, 6),
+    "longitude" DECIMAL(10, 6)
+);
+
+CREATE TABLE "paddlers" (
+    "id" SERIAL PRIMARY KEY,
+    "firstName" VARCHAR (1000) NOT NULL,
+    "lastName" VARCHAR (1000) NOT NULL,
+    "tripid" INT REFERENCES "trips",
+);
+
+CREATE TABLE "gearlist" (
+    "id" SERIAL PRIMARY KEY,
+    "item" VARCHAR (1000) NOT NULL,
+    "quantity" INT,
+    "gotIt" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers",
+);
+
+CREATE TABLE "meallist" (
+    "id" SERIAL PRIMARY KEY,
+    "item" VARCHAR (1000) NOT NULL,
+    "meal" VARCHAR (100) NOT NULL,
+    "quantity" INT,
+    "gotIt" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers",
+);
+
+INSERT INTO "entrypoints"
+    ("entryNumber", "entryPoint", "latitude", "longitude")
 VALUES
     ('1', 'Trout Lake', 47.91438, -92.32196),
     ('4', 'Crab Lake', 47.93367, 92.02692),
@@ -92,5 +124,4 @@ VALUES
     ('J', 'Saganaga Lake', 48.16881, -90.88687),
     ('K', 'Seagull Lake', 48.14543, -90.86826),
     ('L', 'Clearwater Lake', 48.07138, -90.37451),
-    ('M', 'East Bearskin Lake', 48.03990, -90.37811),
-    ('', '', , -),
+    ('M', 'East Bearskin Lake', 48.03990, -90.37811);
