@@ -14,32 +14,32 @@ CREATE TABLE "user" (
 
 CREATE TABLE "trips" (
     "id" SERIAL PRIMARY KEY,
-    "entryDate" DATE,
+    "entry_date" DATE,
     "userid" INT REFERENCES "user",
-    "entryid" INT REFERENCES "entrypoints",
+    "entryid" INT REFERENCES "entrypoints"
 );
 
 CREATE TABLE "entrypoints" (
     "id" SERIAL PRIMARY KEY,
-    "entryNumber" VARCHAR,
-    "entryPoint" VARCHAR (80) NOT NULL,
+    "entry_number" VARCHAR,
+    "entry_point" VARCHAR (80) NOT NULL,
     "latitude" DECIMAL(10, 6),
     "longitude" DECIMAL(10, 6)
 );
 
 CREATE TABLE "paddlers" (
     "id" SERIAL PRIMARY KEY,
-    "firstName" VARCHAR (1000) NOT NULL,
-    "lastName" VARCHAR (1000) NOT NULL,
-    "tripid" INT REFERENCES "trips",
+    "first_name" VARCHAR (1000) NOT NULL,
+    "last_name" VARCHAR (1000) NOT NULL,
+    "tripid" INT REFERENCES "trips"
 );
 
 CREATE TABLE "gearlist" (
     "id" SERIAL PRIMARY KEY,
     "item" VARCHAR (1000) NOT NULL,
     "quantity" INT,
-    "gotIt" BOOLEAN NOT NULL,
-    "paddlerid" INT REFERENCES "paddlers",
+    "got_it" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers"
 );
 
 CREATE TABLE "meallist" (
@@ -47,8 +47,8 @@ CREATE TABLE "meallist" (
     "item" VARCHAR (1000) NOT NULL,
     "meal" VARCHAR (100) NOT NULL,
     "quantity" INT,
-    "gotIt" BOOLEAN NOT NULL,
-    "paddlerid" INT REFERENCES "paddlers",
+    "got_it" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers"
 );
 
 INSERT INTO "entrypoints"
