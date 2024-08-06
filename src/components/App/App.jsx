@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Trips from '../Trips/Trips';
+import NewTrip from '../NewTrip/NewTrip';
 
 import './App.css';
 
@@ -58,6 +60,22 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/trips"
+          >
+            <Trips />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/newtrip"
+          >
+            <NewTrip />
           </ProtectedRoute>
 
           <ProtectedRoute

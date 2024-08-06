@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
   
 
-function Trips() {
+function NewTrip() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
@@ -16,22 +16,21 @@ function Trips() {
       <h2>Ahoy, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <div className="past trips">
-        <h2>Past Trips</h2>
-        <p>Hardcoded past trips</p>
-        <p>Seagull Lake</p>
-        <p>Gunflint Lake</p>
-        <p>Sawbill Lake</p>
-        <p>Missing Link Lake</p>
+        <h2>New Trip Details</h2>
+        <input placeholder='Entry Point'></input>
+        <br/>
+        <input placeholder='Entry Date'></input>
+
       </div>
       <br/>
-      <div className='newTrip'>
+      <div className='toDashboard'>
       <button
           type="button"
           onClick={() => {
-            history.push('/newtrip');
+            history.push('/dashboard');
           }}
         >
-          New Trip
+          Start Packing
         </button>
       </div>
       {/* <LogOutButton className="btn" /> */}
@@ -39,4 +38,4 @@ function Trips() {
   );
 }
 
-export default Trips;
+export default NewTrip;
