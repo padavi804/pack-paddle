@@ -34,15 +34,18 @@ function NewTrip() {
         <h2>New Trip Details</h2>
         <label for="entrypoint">Choose Entry Point</label>
         <br/>
-        {entryPoint.map(trips => {
-          return <div className="list" key={trips.id}>
-            <p>{trips.entry_point}</p>
-            <select name='entrypoint' id='entrypoint'>
-        <option value= 'Trout Lake'>Trout Lake</option>
-        <option value= 'Crab Lake'>Crab Lake</option>
+
+
+      <select name='entrypoint' id='entrypoint'>
+          <option value="">Select an entry point</option>
+          {entryPoint.map((trip) => (
+            <option key={trip.id} value={trip.entry_point}>
+              {trip.entry_point}
+            </option>
+          ))}
         </select>
-            </div>
-        })}
+            
+
         
         <br/>
         <input placeholder='Entry Date'></input>
