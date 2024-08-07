@@ -33,14 +33,9 @@ const fetchTrips = () => {
       <p>Your ID is: {user.id}</p>
       <div className="past-trips">
         <h2>Past Trips</h2>
-        <p>Hardcoded past trips</p>
-        <p>Seagull Lake</p>
-        <p>Gunflint Lake</p>
-        <p>Sawbill Lake</p>
-        <p>Missing Link Lake</p>
         {pastTripList.map(trips => {
           return <div className="list" key={trips.id}>
-            <p>{trips.entryid}</p>
+            <p>{trips.entry_point}</p>
             <p>{trips.entry_date}</p>            
             </div>
         })}

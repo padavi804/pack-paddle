@@ -6,7 +6,7 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM trips';
+  let queryText = 'SELECT entry_date, entry_point FROM trips JOIN entrypoints ON trips.entryid = entrypoints.id;';
   pool.query(queryText).then((result) => {
     console.log('Trips results', result.rows)
     res.send(result.rows);

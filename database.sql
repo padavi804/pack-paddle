@@ -52,7 +52,7 @@ CREATE TABLE "meallist" (
 );
 
 INSERT INTO "entrypoints"
-    ("entryNumber", "entryPoint", "latitude", "longitude")
+    ("entry_number", "entry_point", "latitude", "longitude")
 VALUES
     ('1', 'Trout Lake', 47.91438, -92.32196),
     ('4', 'Crab Lake', 47.93367, 92.02692),
@@ -125,3 +125,7 @@ VALUES
     ('K', 'Seagull Lake', 48.14543, -90.86826),
     ('L', 'Clearwater Lake', 48.07138, -90.37451),
     ('M', 'East Bearskin Lake', 48.03990, -90.37811);
+
+    -- PostgreSQL code for fetching entry point and date:
+    SELECT entry_date, entry_point FROM trips
+    JOIN entrypoints ON trips.entryid = entrypoints.id; 

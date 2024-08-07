@@ -11,13 +11,20 @@ function NewTrip() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
 
+  
+
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <div className="past trips">
         <h2>New Trip Details</h2>
-        <input placeholder='Entry Point'></input>
+        <label for="entrypoint">Choose Entry Point</label>
+        <br/>
+        <select name='entrypoint' id='entrypoint'>
+        <option value= 'Trout Lake'>Trout Lake</option>
+        <option value= 'Crab Lake'>Crab Lake</option>
+        </select>
         <br/>
         <input placeholder='Entry Date'></input>
 
