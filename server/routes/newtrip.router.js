@@ -20,6 +20,22 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+  console.log('POST req.body', req.body);
+  let newTrip = req.body;
+  let entryid = newTrip.entryPoint;
+  let entry_date = newTrip.entryDate;
+
+  let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
+
+  pool.query(queryText, [entryid, entry_date])
+    .then(dbResult => {
+      console.log('dbResult.rows', dbResult.rows);
+      res.sendStatus(201);
+    })
+    .catch(dbError => {
+      console.log('dberror', dbError);
+      res.sendStatus(500);
+    })
 });
 
 module.exports = router;
