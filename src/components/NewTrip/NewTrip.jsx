@@ -49,7 +49,7 @@ function NewTrip() {
       .catch((error) => {
         console.log('post failed', error)
       })
-    history.push('/dashboard');
+    history.push('/paddlers');
   }
 
   return (
@@ -76,7 +76,7 @@ function NewTrip() {
 
       
       <br />
-      <div className='toDashboard'>
+      <div className='toPaddlers'>
         <button
           type="button"
           onClick={(e) => handleSubmit(e)}

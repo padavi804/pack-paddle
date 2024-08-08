@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Trips from '../Trips/Trips';
 import NewTrip from '../NewTrip/NewTrip';
+import Paddlers from '../Paddlers/Paddlers';
 
 import './App.css';
 
@@ -76,6 +77,14 @@ function App() {
             path="/newtrip"
           >
             <NewTrip />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/paddlers"
+          >
+            <Paddlers />
           </ProtectedRoute>
 
           <ProtectedRoute
