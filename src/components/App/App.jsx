@@ -22,6 +22,10 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Trips from '../Trips/Trips';
 import NewTrip from '../NewTrip/NewTrip';
 import Paddlers from '../Paddlers/Paddlers';
+import GearList from '../GearList/GearList';
+import MealList from '../MealList/MealList';
+import Dashboard from '../Dashboard/Dashboard';
+
 
 import './App.css';
 
@@ -85,6 +89,30 @@ function App() {
             path="/paddlers"
           >
             <Paddlers />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/dashboard"
+          >
+            <Dashboard />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/gearlist"
+          >
+            <GearList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/meallist"
+          >
+            <MealList />
           </ProtectedRoute>
 
           <ProtectedRoute
