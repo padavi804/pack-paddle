@@ -1,6 +1,6 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -10,22 +10,31 @@ import axios from 'axios';
 function Trips() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const trips = useSelector((store) => store.trips);
   const history = useHistory();
   const [pastTripList, setPastTripList] = useState ([]);
   const [pastTrip, setPastTrip] = useState ('');
 
-useEffect(() => {
-  fetchTrips();
-}, []);
+  const dispatch = useDispatch();
 
-const fetchTrips = () => {
-  axios.get('/api/trips').then((response) => {
-    setPastTripList(response.data);
-  }).catch((error) => {
-    console.log(error);
-    alert('Something went wrong getting the trips.');
-  });
-}
+
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_TRIPS' });
+  }, [dispatch]);
+
+// useEffect(() => {
+//   fetchTrips();
+// }, []);
+
+// const fetchTrips = () => {
+//   axios.get('/api/trips').then((response) => {
+//     setPastTripList(response.data);
+//   }).catch((error) => {
+//     console.log(error);
+//     alert('Something went wrong getting the trips.');
+//   });
+// }
 
   return (
     <div className="container">
@@ -33,10 +42,10 @@ const fetchTrips = () => {
       <p>Your ID is: {user.id}</p>
       <div className="past-trips">
         <h2>Past Trips</h2>
-        {pastTripList.map(trips => {
-          return <div className="list" key={trips.id}>
-            <p>{trips.entry_point}</p>
-            <p>{trips.entry_date}</p>            
+        {trips.map(trip => {
+          return <div className="list" key={trip.id}>
+            <p>{trip.entry_point}</p>
+            <p>{trip.entry_date}</p>            
             </div>
         })}
       </div>
