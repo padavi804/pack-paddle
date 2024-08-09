@@ -55,16 +55,16 @@ function NewTrip() {
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
-      
-        <h2>New Trip Details</h2>
-        <label htmlFor="entrypoint">Choose Entry Point</label>
-        <br />
-        <form>
+
+      <h2>New Trip Details</h2>
+      <label htmlFor="entrypoint">Choose Entry Point</label>
+      <br />
+      <form>
         <select name='entrypoint' id='entrypoint'>
           <option value="">Select an entry point</option>
           {entryPoint.map((trip) => (
             <option key={trip.id} onChange={(evt) => setNewEntryPoint(evt.target.value)} value={trip.entry_point}>
-              {trip.entry_point}
+              {trip.entry_number}. {trip.entry_point}
             </option>
           ))}
         </select>
@@ -74,19 +74,18 @@ function NewTrip() {
           <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
         </div>
 
-      
-      <br />
-      <div className='toPaddlers'>
-        <button
-          type="button"
-          onClick={(e) => handleSubmit(e)}
-        >Start Packing
-        </button>        
-      </div> 
+
+        <br />
+        <div className='toPaddlers'>
+          <button
+            type="button"
+            onClick={(e) => handleSubmit(e)}
+          >Add Paddlers
+          </button>
+        </div>
       </form>
-      {/* <LogOutButton className="btn" /> */}
     </div>
-   
+
   );
 }
 
