@@ -7,7 +7,7 @@ import * as React from 'react';
 
 
 
-function GearList() {
+function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
@@ -19,38 +19,7 @@ function GearList() {
   //   fetchPaddlers();
   // }, []);
 
-  // Create router for paddlers
-
-  // const fetchPaddlers = () => {
-  //   axios.get('/api/paddlers').then((response) => {
-  //     setEntryPoint(response.data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     alert('Something went wrong getting the entry points.');
-  //   });
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('comment submitted');
-
-  //   axios({
-  //     method: 'POST',
-  //     url: '/api/paddlers',
-  //     data: {
-  //       first_name: ,
-  //       entryDate: newEntryDate
-  //     }
-  //   })
-  //     .then((response) => {
-  //       console.log('successful post', response);
-  //       fetchEntryPoint();
-  //       setNewEntryPoint('');
-  //       setNewEntryDate('');
-  //     })
-  //     .catch((error) => {
-  //       console.log('post failed', error)
-  //     })
+ 
   //   history.push('/paddlers');
   // }
 
@@ -66,10 +35,10 @@ function GearList() {
         <br />
         <input placeholder="Last Name"></input>      
       <br />
-      <div className='toPaddlers'>
+      <div className='toGear'>
         <button
           type="button"
-          // onClick={(e) => handleSubmit(e)}
+          // onClick={(e) => history.push('/gear')}
         >Add to List
         </button>        
       </div> 
@@ -79,4 +48,4 @@ function GearList() {
   );
 }
 
-export default GearList;
+export default Dashboard;
