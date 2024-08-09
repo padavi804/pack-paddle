@@ -1,0 +1,41 @@
+const express = require('express');
+const pool = require('../modules/pool');
+const router = express.Router();
+
+/**
+ * GET route template
+ */
+router.get('/', (req, res) => {
+  let queryText = 'SELECT * FROM entrypoints';
+  pool.query(queryText).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});
+
+/**
+ * POST route template
+ */
+router.post('/', (req, res) => {
+  // POST route code here
+  console.log('POST req.body', req.body);
+  let newTrip = req.body;
+  let entryid = newTrip.entryPoint;
+  let entry_date = newTrip.entryDate;
+
+  let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
+
+  pool.query(queryText, [entryid, entry_date])
+    .then(dbResult => {
+      console.log('dbResult.rows', dbResult.rows);
+      res.sendStatus(201);
+    })
+    .catch(dbError => {
+      console.log('dberror', dbError);
+      res.sendStatus(500);
+    })
+});
+
+module.exports = router;
