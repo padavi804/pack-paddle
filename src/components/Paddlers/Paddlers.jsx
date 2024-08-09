@@ -1,5 +1,5 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -10,25 +10,27 @@ import * as React from 'react';
 function Paddlers() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const paddlers = useSelector((store) => store.paddlers);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [paddlers, setPaddlers] = useState([]);
+  // const [paddlers, setPaddlers] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   useEffect(() => {
-    fetchPaddlers();
-  }, []);
+    dispatch({ type: 'FETCH_PADDLERS' });
+  }, [dispatch]);
 
   // Create route for paddlers
 
-  const fetchPaddlers = () => {
-    axios.get('/api/paddlers').then((response) => {
-      setPaddlers(response.data);
-    }).catch((error) => {
-      console.log(error);
-      alert('Something went wrong getting the paddlers.');
-    });
-  }
+  // const fetchPaddlers = () => {
+  //   axios.get('/api/paddlers').then((response) => {
+  //     setPaddlers(response.data);
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     alert('Something went wrong getting the paddlers.');
+  //   });
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +46,7 @@ function Paddlers() {
     })
       .then((response) => {
         console.log('successful post', response);
-        fetchPaddlers();
+        // fetchPaddlers();
         setFirstName('');
         setLastName('');
       })
