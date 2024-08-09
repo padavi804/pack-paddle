@@ -11,7 +11,7 @@ function Paddlers() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
-  const [entryPoint, setEntryPoint] = useState([]);
+  const [paddlers, setPaddlers] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
@@ -23,7 +23,7 @@ function Paddlers() {
 
   const fetchPaddlers = () => {
     axios.get('/api/paddlers').then((response) => {
-      setEntryPoint(response.data);
+      setPaddlers(response.data);
     }).catch((error) => {
       console.log(error);
       alert('Something went wrong getting the paddlers.');
@@ -51,8 +51,7 @@ function Paddlers() {
       .catch((error) => {
         console.log('post failed', error)
       })
-    history.push('/paddlers');
-  // }
+  }
 
   return (
     <div className="container">
@@ -62,21 +61,38 @@ function Paddlers() {
         <label htmlFor="entrypoint">Add Paddlers</label>
         <br />
         <form>
-        <input placeholder="First Name"></input>
+        <input placeholder="First Name" onChange={(event) => setFirstName(event.target.value)}></input>
         <br />
-        <input placeholder="Last Name"></input>      
+        <input placeholder="Last Name" onChange={(event) => setLastName(event.target.value)}></input>      
       <br />
       <div className='toPaddlers'>
         <button
           type="button"
-          // onClick={(e) => handleSubmit(e)}
-        >Start Packing
+          onClick={(e) => handleSubmit(e)}
+        >Add Paddler
         </button>        
       </div> 
       </form>
+<ul>
+<div className="past-trips" key={paddlers.id}>
+        <h2>Paddlers</h2>
+        {paddlers.map(paddler => {
+          return <div className="list" key={paddler.id}>
+            <li>{paddler.first_name} {paddler.last_name}</li>                   
+            </div>
+        })}
+      </div>
+</ul>
+
+      <button
+          type="button"
+          onClick= {(e) => history.push('/dashboard')}
+
+        >Start Packing
+        </button>  
     </div>
    
   );
 }
-}
+
 export default Paddlers;

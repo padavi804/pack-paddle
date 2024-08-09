@@ -6,7 +6,7 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM entrypoints';
+  let queryText = 'SELECT * FROM paddlers';
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   }).catch((error) => {
@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('POST req.body', req.body);
-  let newTrip = req.body;
-  let entryid = newTrip.entryPoint;
-  let entry_date = newTrip.entryDate;
+  let paddlers = req.body;
+  let firstName = paddlers.first_name;
+  let lastName = paddlers.last_name;
 
-  let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO paddlers (first_name, last_name) VALUES ($1, $2);`;
 
-  pool.query(queryText, [entryid, entry_date])
+  pool.query(queryText, [firstName, lastName])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);
