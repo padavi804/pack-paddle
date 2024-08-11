@@ -11,69 +11,74 @@ function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
-  const [entryPoint, setEntryPoint] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  let [mealArray, setMealArray] = useState([]);
 
-  // useEffect(() => {
-  //   fetchPaddlers();
-  // }, []);
+  const fetchMeal = () => {
+    axios({
+      method: 'GET',
+      url: 'api/meal'
+    })
+      .then((response) => {
+        console.log(response.data);
+        setMealArray(response.data);
+      })
+      .catch((error) => {
+        console.log('error fetching list', error);
+      });
+  }
+  useEffect(fetchMeal, []); 
 
-  // Create router for paddlers
+  const toggleBuy = (id) => {
+    console.log('toggling buy/bought status', id);
 
-  // const fetchPaddlers = () => {
-  //   axios.get('/api/paddlers').then((response) => {
-  //     setEntryPoint(response.data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     alert('Something went wrong getting the entry points.');
-  //   });
-  // }
+    axios({
+      method: 'PUT',
+      url: `/api/meal/buy/${id}`
+    })
+      .then((response) => {
+        console.log('complete toggle successful', response);
+        fetchMeal();
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('comment submitted');
-
-  //   axios({
-  //     method: 'POST',
-  //     url: '/api/paddlers',
-  //     data: {
-  //       first_name: ,
-  //       entryDate: newEntryDate
-  //     }
-  //   })
-  //     .then((response) => {
-  //       console.log('successful post', response);
-  //       fetchEntryPoint();
-  //       setNewEntryPoint('');
-  //       setNewEntryDate('');
-  //     })
-  //     .catch((error) => {
-  //       console.log('post failed', error)
-  //     })
-  //   history.push('/paddlers');
-  // }
+ const deleteItem = (id) => {
+    axios({
+      method: 'DELETE',
+      url: `/api/meal/${id}`
+    })
+      .then((response) => {
+        console.log('delete item worked', response)
+        fetchMeal();
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
       
+        
         <h2>Meal List</h2>
-        <label htmlFor="entrypoint">Add Paddlers</label>
-        <br />
-        <form>
-        <input placeholder="First Name"></input>
-        <br />
-        <input placeholder="Last Name"></input>      
-      <br />
-      <div className='toPaddlers'>
-        <button
-          type="button"
-          // onClick={(e) => handleSubmit(e)}
-        >Add to List
-        </button>        
-      </div> 
-      </form>
+      <table>
+        <tbody>
+          {mealArray.map((meal) => {
+            return (
+              <tr key={meal.id}
+              //  className={meal.buy ? 'true' : 'false'}
+               >
+                <td>{meal.item} {meal.quantity} {meal.buy} {meal.paddlerid}</td>
+                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Mark Complete </button> </td> */}
+                <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
+                </tr>);
+          })
+          }
+        </tbody>
+      </table>
     </div>
    
   );

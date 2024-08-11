@@ -11,13 +11,6 @@ function GearList() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
-  const [entryPoint, setEntryPoint] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-
-  let [todoNote, setTodoNote] = useState('');
-  let [todoComplete, setTodoComplete] = useState('');
-  let [todoArray, setTodoArray] = useState([]);
 
   let [gearArray, setGearArray] = useState([]);
 
@@ -36,12 +29,12 @@ function GearList() {
   }
   useEffect(fetchGear, []); 
 
-  const toggleComplete = (id) => {
-    console.log('completely toggling completeness', id);
+  const toggleBuy = (id) => {
+    console.log('toggling buy/bought status', id);
 
     axios({
       method: 'PUT',
-      url: `/api/gear/toggle/${id}`
+      url: `/api/gear/buy/${id}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
@@ -58,7 +51,7 @@ function GearList() {
       url: `/api/gear/${id}`
     })
       .then((response) => {
-        console.log('delete task worked', response)
+        console.log('delete item worked', response)
         fetchGear();
       })
       .catch(function (error) {
@@ -80,8 +73,8 @@ function GearList() {
               //  className={gear.buy ? 'true' : 'false'}
                >
                 <td>{gear.item} {gear.quantity} {gear.buy} {gear.paddlerid}</td>
-                {/* <td><button className="doneButton" onClick={() => toggleComplete(gear.id)}> Mark Complete </button> </td> */}
-                <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td>
+                <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Mark Complete </button> </td>
+                {/* <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td> */}
                 </tr>);
           })
           }
