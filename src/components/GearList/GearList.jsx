@@ -15,65 +15,78 @@ function GearList() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // useEffect(() => {
-  //   fetchPaddlers();
-  // }, []);
+  let [todoNote, setTodoNote] = useState('');
+  let [todoComplete, setTodoComplete] = useState('');
+  let [todoArray, setTodoArray] = useState([]);
 
-  // Create router for paddlers
+  let [gearArray, setGearArray] = useState([]);
 
-  // const fetchPaddlers = () => {
-  //   axios.get('/api/paddlers').then((response) => {
-  //     setEntryPoint(response.data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     alert('Something went wrong getting the entry points.');
-  //   });
-  // }
+  const fetchGear = () => {
+    axios({
+      method: 'GET',
+      url: 'api/gear'
+    })
+      .then((response) => {
+        console.log(response.data);
+        setGearArray(response.data);
+      })
+      .catch((error) => {
+        console.log('error fetching list', error);
+      });
+  }
+  useEffect(fetchGear, []); 
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('comment submitted');
+  const toggleComplete = (id) => {
+    console.log('completely toggling completeness', id);
 
-  //   axios({
-  //     method: 'POST',
-  //     url: '/api/paddlers',
-  //     data: {
-  //       first_name: ,
-  //       entryDate: newEntryDate
-  //     }
-  //   })
-  //     .then((response) => {
-  //       console.log('successful post', response);
-  //       fetchEntryPoint();
-  //       setNewEntryPoint('');
-  //       setNewEntryDate('');
-  //     })
-  //     .catch((error) => {
-  //       console.log('post failed', error)
-  //     })
-  //   history.push('/paddlers');
-  // }
+    axios({
+      method: 'PUT',
+      url: `/api/gear/toggle/${id}`
+    })
+      .then((response) => {
+        console.log('complete toggle successful', response);
+        fetchGear();
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+ const deleteItem = (id) => {
+    axios({
+      method: 'DELETE',
+      url: `/api/gear/${id}`
+    })
+      .then((response) => {
+        console.log('delete task worked', response)
+        fetchGear();
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
       
+        
         <h2>Gear List</h2>
-        <label htmlFor="entrypoint">Add Paddlers</label>
-        <br />
-        <form>
-        <input placeholder="First Name"></input>
-        <br />
-        <input placeholder="Last Name"></input>      
-      <br />
-      <div className='toPaddlers'>
-        <button
-          type="button"
-          // onClick={(e) => handleSubmit(e)}
-        >Add to List
-        </button>        
-      </div> 
-      </form>
+      <table>
+        <tbody>
+          {gearArray.map((gear) => {
+            return (
+              <tr key={gear.id}
+              //  className={gear.buy ? 'true' : 'false'}
+               >
+                <td>{gear.item} {gear.quantity} {gear.buy} {gear.paddlerid}</td>
+                {/* <td><button className="doneButton" onClick={() => toggleComplete(gear.id)}> Mark Complete </button> </td> */}
+                <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td>
+                </tr>);
+          })
+          }
+        </tbody>
+      </table>
     </div>
    
   );

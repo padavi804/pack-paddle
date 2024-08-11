@@ -102,7 +102,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/gearlist"
+            path="/gear"
           >
             <GearList />
           </ProtectedRoute>
@@ -110,7 +110,7 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/meallist"
+            path="/meal"
           >
             <MealList />
           </ProtectedRoute>

@@ -10,6 +10,7 @@ import * as React from 'react';
 function Dashboard() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const trips = useSelector((store) => store.trips)
   const history = useHistory();
   const [entryPoint, setEntryPoint] = useState([]);
   const [firstName, setFirstName] = useState('');
@@ -24,6 +25,7 @@ function Dashboard() {
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Dashboard</h2>
+      <h2>{trips.entry_point}</h2>
 
       <br />
 
