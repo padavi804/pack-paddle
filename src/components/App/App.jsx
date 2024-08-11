@@ -25,6 +25,8 @@ import Paddlers from '../Paddlers/Paddlers';
 import GearList from '../GearList/GearList';
 import MealList from '../MealList/MealList';
 import Dashboard from '../Dashboard/Dashboard';
+import GearHome from '../GearHome/GearHome';
+import MealHome from '../MealHome/MealHome';
 
 
 import './App.css';
@@ -104,13 +106,29 @@ function App() {
             exact
             path="/gear"
           >
-            <GearList />
+            <GearHome />
           </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/meal"
+          >
+            <MealHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/gearlist"
+          >
+            <GearList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/meallist"
           >
             <MealList />
           </ProtectedRoute>
