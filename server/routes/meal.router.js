@@ -25,10 +25,12 @@ router.post('/', (req, res) => {
   let item = meals.item;
   let quantity = meals.quantity;
   let meal = meals.meal;
+  let buy = meals.buy;
+  let paddler = meals.paddlerid
 
-  let queryText = `INSERT INTO meallist (item, quantity, meal) VALUES ($1, $2, $3);`;
+  let queryText = `INSERT INTO meallist (item, quantity, meal, buy, paddler) VALUES ($1, $2, $3, $4, $5);`;
 
-  pool.query(queryText, [item, quantity, meal])
+  pool.query(queryText, [item, quantity, meal, buy, paddler])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);

@@ -24,10 +24,12 @@ router.post('/', (req, res) => {
   let gear = req.body;
   let item = gear.item;
   let quantity = gear.quantity;
+  let buy = gear.buy;
+  let paddler = gear.paddlerid;
 
-  let queryText = `INSERT INTO gearlist (item, quantity) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO gearlist (item, quantity, buy, paddler) VALUES ($1, $2, $3, $4);`;
 
-  pool.query(queryText, [item, quantity])
+  pool.query(queryText, [item, quantity, buy, paddler])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);
