@@ -71,7 +71,7 @@ function GearHome() {
       </div> 
       </form>
 
-
+{/* Add Gear List component */}
       <button
           type="button"
           onClick= {(e) => history.push('/dashboard')}

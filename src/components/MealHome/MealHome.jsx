@@ -7,30 +7,18 @@ import * as React from 'react';
 
 
 
-function GearHome() {
+function MealHome() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
   const history = useHistory();
-  // const [paddlers, setPaddlers] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_PADDLERS' });
-  }, [dispatch]);
-
-  // Create route for paddlers
-
-  // const fetchPaddlers = () => {
-  //   axios.get('/api/paddlers').then((response) => {
-  //     setPaddlers(response.data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     alert('Something went wrong getting the paddlers.');
-  //   });
-  // }
+  const [item, setItem] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [meal, setMeal] = useState('');
+  const [buy, setBuy] = useState('');
+  const [paddler, setPaddler] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,17 +26,23 @@ function GearHome() {
 
     axios({
       method: 'POST',
-      url: '/api/paddlers',
+      url: '/api/meal',
       data: {
-        first_name: firstName,
-        last_name: lastName
+        item: item,
+        quantity: quantity,
+        meal: meal,
+        buy: buy,
+        paddler: paddler
       }
     })
       .then((response) => {
         console.log('successful post', response);
         // fetchPaddlers();
-        setFirstName('');
-        setLastName('');
+        setItem('');
+        setQuantity('');
+        setMeal('');
+        setBuy('');
+        setPaddler('');
       })
       .catch((error) => {
         console.log('post failed', error)
@@ -63,10 +57,16 @@ function GearHome() {
         <label htmlFor="entrypoint">Add Paddlers</label>
         <br />
         <form>
-        <input placeholder="First Name" onChange={(event) => setFirstName(event.target.value)}></input>
+        <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
         <br />
-        <input placeholder="Last Name" onChange={(event) => setLastName(event.target.value)}></input>      
-      <br />
+        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>      
+        <br />
+        <input placeholder="Meal" onChange={(event) => setMeal(event.target.value)}></input>      
+        <br />
+        <input placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>      
+        <br />
+        <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>      
+        <br />
       <div className='toPaddlers'>
         <button
           type="button"
@@ -75,26 +75,17 @@ function GearHome() {
         </button>        
       </div> 
       </form>
-<ul>
-<div className="past-trips" key={paddlers.id}>
-        <h2>Paddlers</h2>
-        {paddlers.map(paddler => {
-          return <div className="list" key={paddler.id}>
-            <li>{paddler.first_name} {paddler.last_name}</li>                   
-            </div>
-        })}
-      </div>
-</ul>
 
+{/* Add MealList component */}
       <button
           type="button"
           onClick= {(e) => history.push('/dashboard')}
 
-        >Start Packing
+        >Return to Dashboard
         </button>  
     </div>
    
   );
 }
 
-export default GearHome;
+export default MealHome;
