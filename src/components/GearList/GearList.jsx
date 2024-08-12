@@ -61,9 +61,7 @@ function GearList() {
 
   return (
     <div className="container">
-      <h2>Greetings, {user.username}!</h2>
-      
-        
+    
         <h2>Gear List</h2>
       <table>
         <tbody>
@@ -74,7 +72,7 @@ function GearList() {
                >
                 <td>{gear.item} {gear.quantity} {gear.buy} {gear.paddlerid}</td>
                 <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Mark Complete </button> </td>
-                {/* <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td> */}
+                <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td>
                 </tr>);
           })
           }

@@ -60,9 +60,7 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h2>Greetings, {user.username}!</h2>
       
-        
         <h2>Meal List</h2>
       <table>
         <tbody>

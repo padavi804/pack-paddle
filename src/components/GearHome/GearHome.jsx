@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
+import GearList from '../GearList/GearList';
 
 
 
@@ -71,6 +72,7 @@ function GearHome() {
       </form>
 
 {/* Add Gear List component */}
+<GearList />
       <button
           type="button"
           onClick= {(e) => history.push('/dashboard')}

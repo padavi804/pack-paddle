@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
+import MealList from '../MealList/MealList'
+import GearList from '../GearList/GearList';
 
 
 
@@ -44,6 +46,8 @@ function Dashboard() {
         >Add to Meal List
         </button>
       </div>
+      <GearList />
+      <MealList />
     </div>
   );
 }

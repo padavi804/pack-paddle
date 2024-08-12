@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
-
+import MealList from '../MealList/MealList'
 
 
 function MealHome() {
@@ -53,7 +53,7 @@ function MealHome() {
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
-      <h2>New Trip Details</h2>
+      <h2>Add to Meals</h2>
       <label htmlFor="entrypoint">Add Paddlers</label>
       <br />
       <form>
@@ -77,12 +77,14 @@ function MealHome() {
           <button
             type="button"
             onClick={(e) => handleSubmit(e)}
-          >Add to List
+          >Add
           </button>
         </div>
       </form>
 
       {/* Add MealList component */}
+
+      <MealList />
       <button
         type="button"
         onClick={(e) => history.push('/dashboard')}
