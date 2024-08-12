@@ -52,39 +52,45 @@ function MealHome() {
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
-      
-        <h2>New Trip Details</h2>
-        <label htmlFor="entrypoint">Add Paddlers</label>
-        <br />
-        <form>
+
+      <h2>New Trip Details</h2>
+      <label htmlFor="entrypoint">Add Paddlers</label>
+      <br />
+      <form>
         <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
         <br />
-        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>      
+        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>
         <br />
-        <input placeholder="Meal" onChange={(event) => setMeal(event.target.value)}></input>      
+        <select placeholder="Meal" name="Meal" id="cars" onChange={(event) => setMeal(event.target.value)}>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snack">Snack</option>
+        </select>
+        {/* <input placeholder="Meal" onChange={(event) => setMeal(event.target.value)}></input> */}
         <br />
-        <input placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>      
+        <input placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
         <br />
-        <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>      
+        <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>
         <br />
-      <div className='toPaddlers'>
-        <button
-          type="button"
-          onClick={(e) => handleSubmit(e)}
-        >Add Paddler
-        </button>        
-      </div> 
+        <div className='toPaddlers'>
+          <button
+            type="button"
+            onClick={(e) => handleSubmit(e)}
+          >Add to List
+          </button>
+        </div>
       </form>
 
-{/* Add MealList component */}
+      {/* Add MealList component */}
       <button
-          type="button"
-          onClick= {(e) => history.push('/dashboard')}
+        type="button"
+        onClick={(e) => history.push('/dashboard')}
 
-        >Return to Dashboard
-        </button>  
+      >Return to Dashboard
+      </button>
     </div>
-   
+
   );
 }
 

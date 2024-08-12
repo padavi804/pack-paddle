@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
   let buy = meals.buy;
   let paddler = meals.paddlerid
 
-  let queryText = `INSERT INTO meallist (item, quantity, meal, buy, paddler) VALUES ($1, $2, $3, $4, $5);`;
+  let queryText = `INSERT INTO meallist (item, quantity, meal, buy, paddlerid) VALUES ($1, $2, $3, $4, $5);`;
 
   pool.query(queryText, [item, quantity, meal, buy, paddler])
     .then(dbResult => {

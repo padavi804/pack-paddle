@@ -30,7 +30,7 @@ function GearHome() {
         item: item,
         quantity: quantity,
         buy: buy,
-        paddler: paddler
+        paddlerid: paddler
       }
     })
       .then((response) => {
@@ -50,9 +50,8 @@ function GearHome() {
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
       
-        <h2>New Trip Details</h2>
-        <label htmlFor="entrypoint">Add Paddlers</label>
-        <br />
+        <h2>Add Gear</h2>
+       
         <form>
         <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
         <br />
@@ -66,7 +65,7 @@ function GearHome() {
         <button
           type="button"
           onClick={(e) => handleSubmit(e)}
-        >Add Paddler
+        >Add to Pack
         </button>        
       </div> 
       </form>

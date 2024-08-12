@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
   let buy = gear.buy;
   let paddler = gear.paddlerid;
 
-  let queryText = `INSERT INTO gearlist (item, quantity, buy, paddler) VALUES ($1, $2, $3, $4);`;
+  let queryText = `INSERT INTO gearlist (item, quantity, buy, paddlerid) VALUES ($1, $2, $3, $4);`;
 
   pool.query(queryText, [item, quantity, buy, paddler])
     .then(dbResult => {
