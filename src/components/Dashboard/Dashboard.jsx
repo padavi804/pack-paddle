@@ -20,16 +20,23 @@ function Dashboard() {
   const [lastName, setLastName] = useState('');
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_TRIPS' });
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_TRIPS' });
+  }, [dispatch]);
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Dashboard</h2>
-      <h2>{trips.entrydate}</h2>
+      <div className="past-trips" key={trips.id}>       
+        {trips.map(trip => {
+          return <div className="list" key={trip.id}>
+            <p>{trip.entry_point}</p>
+            <p>{trip.entry_date}</p>            
+            </div>
+        })}
+      </div>
 
       <br />
 

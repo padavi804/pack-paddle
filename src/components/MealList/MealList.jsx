@@ -19,21 +19,21 @@ function Dashboard() {
       url: 'api/meallist'
     })
       .then((response) => {
-        console.log(response.data);
+        console.log('Meal data from db', response.data);
         setMealArray(response.data);
       })
       .catch((error) => {
         console.log('error fetching list', error);
       });
   }
-  useEffect(fetchMeal, []); 
+  useEffect(fetchMeal, []);
 
   const toggleBuy = (id) => {
     console.log('toggling buy/bought status', id);
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/buy/${id}`
+      url: `/api/meallist/toggle/${id}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
@@ -44,7 +44,7 @@ function Dashboard() {
       })
   }
 
- const deleteItem = (id) => {
+  const deleteItem = (id) => {
     axios({
       method: 'DELETE',
       url: `/api/meallist/${id}`
@@ -60,27 +60,29 @@ function Dashboard() {
 
   return (
     <div className="container">
-      
-        <h2>Meal List</h2>
+
+      <h2>Meal List</h2>
       <table>
         <tbody>
           {mealArray.map((meal) => {
             return (
               <tr key={meal.id}
-              //  className={meal.buy ? 'true' : 'false'}
-               >
-                <td>{meal.item} {meal.quantity} {meal.meal}
-                   {meal.buy} 
-                   {meal.paddlerid}</td>
-                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td>
+                // className={meal.buy ? 'true' : 'false'}
+              >
+                <td>{meal.item}</td>
+                <td>{meal.quantity}</td>
+                <td>{meal.meal}</td>
+                <td>{meal.buy}</td>
+                <td>{meal.paddlerid}</td>
+                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td> */}
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
-                </tr>);
+              </tr>);
           })
           }
         </tbody>
       </table>
     </div>
-   
+
   );
 }
 

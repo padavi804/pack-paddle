@@ -62,6 +62,7 @@ function MealHome() {
         <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>
         <br />
         <select placeholder="Meal" name="Meal" id="cars" onChange={(event) => setMeal(event.target.value)}>
+        <option value="select">Select a meal</option>
           <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
           <option value="dinner">Dinner</option>
@@ -69,7 +70,8 @@ function MealHome() {
         </select>
         {/* <input placeholder="Meal" onChange={(event) => setMeal(event.target.value)}></input> */}
         <br />
-        <input placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
+        <p>Need to buy</p>
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
         <br />
         <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>
         <br />

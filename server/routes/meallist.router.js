@@ -23,7 +23,7 @@ router.put('/toggle/:id', (req, res) => {
   console.log(req.body);
   let { id } = req.params;
 
-  const queryText = `UPDATE "gearlist" SET "buy" = NOT "false" WHERE "id" = $1;`;
+  const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 
 
   pool.query(queryText, [id])

@@ -9,9 +9,9 @@ function Trips() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS' });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_TRIPS' });
+  // }, [dispatch]);
 
 // useEffect(() => {
 //   fetchTrips();

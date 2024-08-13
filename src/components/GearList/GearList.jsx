@@ -13,6 +13,7 @@ function GearList() {
   const history = useHistory();
 
   let [gearArray, setGearArray] = useState([]);
+  let [buy, setBuy] = useState('')
 
   const fetchGear = () => {
     axios({
@@ -70,7 +71,10 @@ function GearList() {
               <tr key={gear.id}
               //  className={gear.buy ? 'true' : 'false'}
                >
-                <td>{gear.item} {gear.quantity} {gear.buy} {gear.paddlerid}</td>
+                <td>{gear.item}</td>
+                <td>{gear.quantity}</td>
+                <td>{gear.buy}</td>
+                <td>{gear.paddlerid}</td>
                 <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td>
                 <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td>
                 </tr>);
