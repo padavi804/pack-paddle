@@ -17,7 +17,7 @@ function GearList() {
   const fetchGear = () => {
     axios({
       method: 'GET',
-      url: 'api/gear'
+      url: 'api/gearlist'
     })
       .then((response) => {
         console.log(response.data);
@@ -34,10 +34,10 @@ function GearList() {
 
     axios({
       method: 'PUT',
-      url: `/api/gear/buy/${id}`
+      url: `/api/gearlist/buy/${id}`
     })
       .then((response) => {
-        console.log('complete toggle successful', response);
+        console.log('buy toggle successful', response);
         fetchGear();
       })
       .catch(function (error) {
@@ -48,7 +48,7 @@ function GearList() {
  const deleteItem = (id) => {
     axios({
       method: 'DELETE',
-      url: `/api/gear/${id}`
+      url: `/api/gearlist/${id}`
     })
       .then((response) => {
         console.log('delete item worked', response)
@@ -71,7 +71,7 @@ function GearList() {
               //  className={gear.buy ? 'true' : 'false'}
                >
                 <td>{gear.item} {gear.quantity} {gear.buy} {gear.paddlerid}</td>
-                <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Mark Complete </button> </td>
+                <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td>
                 <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td>
                 </tr>);
           })

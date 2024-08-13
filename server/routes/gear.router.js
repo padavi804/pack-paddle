@@ -3,19 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 /**
- * GET route
- */
-router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM gearlist';
-  pool.query(queryText).then((result) => {
-    res.send(result.rows);
-  }).catch((error) => {
-    console.log(error);
-    res.sendStatus(500);
-  });
-});
-
-/**
  * POST route
  */
 router.post('/', (req, res) => {

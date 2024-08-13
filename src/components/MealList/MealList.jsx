@@ -16,7 +16,7 @@ function Dashboard() {
   const fetchMeal = () => {
     axios({
       method: 'GET',
-      url: 'api/meal'
+      url: 'api/meallist'
     })
       .then((response) => {
         console.log(response.data);
@@ -33,7 +33,7 @@ function Dashboard() {
 
     axios({
       method: 'PUT',
-      url: `/api/meal/buy/${id}`
+      url: `/api/meallist/buy/${id}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
@@ -47,7 +47,7 @@ function Dashboard() {
  const deleteItem = (id) => {
     axios({
       method: 'DELETE',
-      url: `/api/meal/${id}`
+      url: `/api/meallist/${id}`
     })
       .then((response) => {
         console.log('delete item worked', response)
@@ -69,8 +69,10 @@ function Dashboard() {
               <tr key={meal.id}
               //  className={meal.buy ? 'true' : 'false'}
                >
-                <td>{meal.item} {meal.quantity} {meal.meal} {meal.buy} {meal.paddlerid}</td>
-                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Mark Complete </button> </td>
+                <td>{meal.item} {meal.quantity} {meal.meal}
+                   {meal.buy} 
+                   {meal.paddlerid}</td>
+                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td>
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
                 </tr>);
           })
