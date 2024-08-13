@@ -19,6 +19,15 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Trips from '../Trips/Trips';
+import NewTrip from '../NewTrip/NewTrip';
+import Paddlers from '../Paddlers/Paddlers';
+import GearList from '../GearList/GearList';
+import MealList from '../MealList/MealList';
+import Dashboard from '../Dashboard/Dashboard';
+import GearHome from '../GearHome/GearHome';
+import MealHome from '../MealHome/MealHome';
+
 
 import './App.css';
 
@@ -58,6 +67,70 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/trips"
+          >
+            <Trips />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/newtrip"
+          >
+            <NewTrip />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/paddlers"
+          >
+            <Paddlers />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/dashboard"
+          >
+            <Dashboard />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/gear"
+          >
+            <GearHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/meal"
+          >
+            <MealHome />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/gearlist"
+          >
+            <GearList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/meallist"
+          >
+            <MealList />
           </ProtectedRoute>
 
           <ProtectedRoute
