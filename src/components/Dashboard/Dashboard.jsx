@@ -1,8 +1,9 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
@@ -17,17 +18,18 @@ function Dashboard() {
   const [entryPoint, setEntryPoint] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   fetchPaddlers();
-  // }, []);
+  //   dispatch({ type: 'FETCH_TRIPS' });
+  // }, [dispatch]);
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Dashboard</h2>
-      <h2>{trips.entry_point}</h2>
+      <h2>{trips.entrydate}</h2>
 
       <br />
 

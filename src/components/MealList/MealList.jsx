@@ -69,8 +69,8 @@ function Dashboard() {
               <tr key={meal.id}
               //  className={meal.buy ? 'true' : 'false'}
                >
-                <td>{meal.item} {meal.quantity} {meal.buy} {meal.paddlerid}</td>
-                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Mark Complete </button> </td> */}
+                <td>{meal.item} {meal.quantity} {meal.meal} {meal.buy} {meal.paddlerid}</td>
+                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Mark Complete </button> </td>
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
                 </tr>);
           })
