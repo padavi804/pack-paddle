@@ -12,7 +12,6 @@ function NewTrip() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
   const [entryPoints, setEntryPoints] = useState([]);
-  // const [newEntryPoint, setNewEntryPoint] = useState('');
   const [newEntryDate, setNewEntryDate] = useState('');
   const [entryPointId, setEntryPointId] = useState(0);
 
@@ -21,9 +20,11 @@ function NewTrip() {
     fetchEntryPoint();
   }, []);
 
+  
+
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       setEntryPoints(response.data);
     }).catch((error) => {
       console.log(error);
@@ -35,13 +36,13 @@ function NewTrip() {
     e.preventDefault();
     console.log('comment submitted');
 
-    console.log(entryPointId)
+      // console.log(entryPointId)
     axios({
       method: 'POST',
       url: '/api/newtrip',
       data: {
+        userid: user.id,
         entryid: entryPointId,
-        // entry_point: newEntryPoint,
         entry_date: newEntryDate
       }
     })
@@ -57,11 +58,7 @@ function NewTrip() {
     // history.push('/paddlers');
   }
 
-  // const callSetters = (id, value) => {
-  //   setEntryPointId(id);
-  //   setNewEntryPoint(value);
-  // // onChange={(evt) => callSetters(entryPoint.id, evt.target.value)
-  // }
+
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
@@ -72,7 +69,6 @@ function NewTrip() {
       <form>
         <select name='entrypoint' id='entrypoint' 
         onChange={(evt) => setEntryPointId(evt.target.value)}
-        // onChange={(evt) => callSetters(entryPointId, evt.target.value)}
         value={entryPointId}>
           <option value={0}>Select an entry point</option>
           {entryPoints.map((entryPoint) => (

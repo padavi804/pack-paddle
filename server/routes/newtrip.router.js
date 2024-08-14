@@ -21,12 +21,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   console.log('POST req.body', req.body);
   let newTrip = req.body;
+  let userid = newTrip.userid;
   let entryid = newTrip.entryid;
   let entry_date = newTrip.entry_date;
 
-  let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO trips (userid, entryid, entry_date) VALUES ($1, $2, $3);`;
 
-  pool.query(queryText, [entryid, entry_date])
+  pool.query(queryText, [userid, entryid, entry_date])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);

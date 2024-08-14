@@ -33,7 +33,8 @@ function Dashboard() {
         {trips.map(trip => {
           return <div className="list" key={trip.id}>
             <p>{trip.entry_point}</p>
-            <p>{trip.entry_date}</p>            
+            <p>{trip.entry_date}</p>
+            <p>{trip.id}</p>            
             </div>
         })}
       </div>
