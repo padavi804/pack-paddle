@@ -55,7 +55,7 @@ function NewTrip() {
       .catch((error) => {
         console.log('post failed', error)
       })
-    // history.push('/paddlers');
+    history.push('/paddlers');
   }
 
 
