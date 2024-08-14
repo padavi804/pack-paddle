@@ -11,7 +11,6 @@ import GearList from '../GearList/GearList';
 
 
 function Dashboard() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const trips = useSelector((store) => store.trips)
   const history = useHistory();

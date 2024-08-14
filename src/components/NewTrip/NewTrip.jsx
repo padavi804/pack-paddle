@@ -74,7 +74,7 @@ function NewTrip() {
           {entryPoints.map((entryPoint) => (
             <option key={entryPoint.id}
               value={entryPoint.id}>
-              {entryPoint.entry_number}. {entryPoint.entry_point} {entryPoint.id}
+              {entryPoint.entry_number}. {entryPoint.entry_point}
             </option>
           ))}
         </select>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function Trips() {
@@ -8,10 +8,11 @@ function Trips() {
   const trips = useSelector((store) => store.trips);
   const history = useHistory();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS' });
-  }, [dispatch]);
+    dispatch({ type: 'FETCH_TRIPS', payload: id });
+  }, []);
 
 // useEffect(() => {
 //   fetchTrips();
@@ -26,16 +27,22 @@ function Trips() {
 //   });
 // }
 
+const handleClick = (id) => {
+  console.log(trips.id)
+  history.push(`/dashboard/${id}`);
+};
+
+
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
       <div className="past-trips" key={trips.id}>
         <h2>Past Trips</h2>
         {trips.map(trip => {
-          return <div className="list" key={trip.id}>
+          return <div className="list" key={trip.id} >
             <p>{trip.entry_point}</p>
-            <p>{trip.entry_date}</p>            
+            <p>{trip.entry_date}</p> 
+            <button onClick={handleClick}>Visit Trip </button>          
             </div>
         })}
       </div>

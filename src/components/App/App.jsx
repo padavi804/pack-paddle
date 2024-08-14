@@ -70,74 +70,47 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/trips"
-          >
+            exact path="/trips">
             <Trips />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/newtrip"
-          >
+            exact path="/newtrip">
             <NewTrip />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/paddlers"
-          >
+            exact path="/paddlers">
             <Paddlers />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/dashboard"
-          >
+            exact path="/dashboard/:id">
             <Dashboard />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/gear"
-          >
+            exact path="/gear">
             <GearHome />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/meal"
-          >
+            exact path="/meal"          >
             <MealHome />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/gearlist"
-          >
+            exact path="/gearlist">
             <GearList />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/meallist"
-          >
+            exact path="/meallist">
             <MealList />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
+            exact path="/info">
             <InfoPage />
           </ProtectedRoute>
 
