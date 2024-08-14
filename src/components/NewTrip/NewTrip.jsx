@@ -11,9 +11,11 @@ function NewTrip() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
-  const [entryPoint, setEntryPoint] = useState([]);
-  const [newEntryPoint, setNewEntryPoint] = useState('');
+  const [entryPoints, setEntryPoints] = useState([]);
+  // const [newEntryPoint, setNewEntryPoint] = useState('');
   const [newEntryDate, setNewEntryDate] = useState('');
+  const [entryPointId, setEntryPointId] = useState(0);
+
 
   useEffect(() => {
     fetchEntryPoint();
@@ -21,7 +23,8 @@ function NewTrip() {
 
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
-      setEntryPoint(response.data);
+      console.log(response.data)
+      setEntryPoints(response.data);
     }).catch((error) => {
       console.log(error);
       alert('Something went wrong getting the entry points.');
@@ -32,26 +35,33 @@ function NewTrip() {
     e.preventDefault();
     console.log('comment submitted');
 
+    console.log(entryPointId)
     axios({
       method: 'POST',
       url: '/api/newtrip',
       data: {
-        entryPoint: newEntryPoint,
-        entryDate: newEntryDate
+        entryid: entryPointId,
+        // entry_point: newEntryPoint,
+        entry_date: newEntryDate
       }
     })
       .then((response) => {
         console.log('successful post', response);
         fetchEntryPoint();
-        setNewEntryPoint('');
+        setEntryPointId(0);
         setNewEntryDate('');
       })
       .catch((error) => {
         console.log('post failed', error)
       })
-    history.push('/paddlers');
+    // history.push('/paddlers');
   }
 
+  // const callSetters = (id, value) => {
+  //   setEntryPointId(id);
+  //   setNewEntryPoint(value);
+  // // onChange={(evt) => callSetters(entryPoint.id, evt.target.value)
+  // }
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
@@ -60,11 +70,15 @@ function NewTrip() {
       <label htmlFor="entrypoint">Choose Entry Point</label>
       <br />
       <form>
-        <select name='entrypoint' id='entrypoint'>
-          <option value="">Select an entry point</option>
-          {entryPoint.map((trip) => (
-            <option key={trip.id} onChange={(evt) => setNewEntryPoint(evt.target.value)} value={trip.entry_point}>
-              {trip.entry_number}. {trip.entry_point}
+        <select name='entrypoint' id='entrypoint' 
+        onChange={(evt) => setEntryPointId(evt.target.value)}
+        // onChange={(evt) => callSetters(entryPointId, evt.target.value)}
+        value={entryPointId}>
+          <option value={0}>Select an entry point</option>
+          {entryPoints.map((entryPoint) => (
+            <option key={entryPoint.id}
+              value={entryPoint.id}>
+              {entryPoint.entry_number}. {entryPoint.entry_point} {entryPoint.id}
             </option>
           ))}
         </select>

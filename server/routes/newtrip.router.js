@@ -19,11 +19,10 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
   console.log('POST req.body', req.body);
   let newTrip = req.body;
-  let entryid = newTrip.entryPoint;
-  let entry_date = newTrip.entryDate;
+  let entryid = newTrip.entryid;
+  let entry_date = newTrip.entry_date;
 
   let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
 
