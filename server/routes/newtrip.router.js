@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 
   pool.query(queryText, [userid, entryid, entry_date])
     .then(dbResult => {
-      console.log('dbResult.rows', dbResult.rows);
+      console.log('dbResult.rows Post Successful', dbResult.rows);
       res.sendStatus(201);
     })
     .catch(dbError => {

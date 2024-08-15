@@ -1,6 +1,6 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -10,11 +10,13 @@ import * as React from 'react';
 function NewTrip() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const paddlers = useSelector((store) => store.paddlers)
   const history = useHistory();
   const [entryPoints, setEntryPoints] = useState([]);
   const [newEntryDate, setNewEntryDate] = useState('');
   const [entryPointId, setEntryPointId] = useState(0);
-
+  const [tripid, setTripid] = useState(0);
+  const id = paddlers.tripid
 
   useEffect(() => {
     fetchEntryPoint();
@@ -55,7 +57,8 @@ function NewTrip() {
       .catch((error) => {
         console.log('post failed', error)
       })
-    history.push('/paddlers');
+    history.push(`/paddlers/${id}`);
+   
   }
 
 

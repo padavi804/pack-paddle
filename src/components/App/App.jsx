@@ -80,7 +80,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path="/paddlers">
+            exact path="/paddlers/:id">
             <Paddlers />
           </ProtectedRoute>
 

@@ -8,8 +8,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
   let queryText = `SELECT * FROM paddlers
 JOIN trips on paddlers.tripid = trips.id
-WHERE trips.id = $1;`;
-  pool.query(queryText).then((result) => {
+;`;
+  pool.query(queryText)
+  .then((result) => {
+    console.log('paddlers get', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);
