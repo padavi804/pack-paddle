@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -13,34 +13,48 @@ import DetailTrips from '../DetailTrips/DetailTrips';
 function Dashboard() {
   const user = useSelector((store) => store.user);
   const trips = useSelector((store) => store.trips)
+  const detail = useSelector((store) => store.detail)
   const history = useHistory();
-  const [entryPoint, setEntryPoint] = useState([]);
+  const { id } = useParams();
+
+  const [details, setDetails] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS' });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_TRIPS' });
+  // }, [dispatch]);
+
+  const getTrip = () => {
+    axios({
+      method: 'GET',
+      url: `api/trips/detail/${id}`
+    })
+      .then((response) => {
+        console.log('detail data', response.data);
+        setDetails(response.data);
+      })
+      .catch((error) => {
+        console.log('error fetching list', error);
+      });
+  }
+  useEffect(getTrip, []);
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
-
       <h2>Dashboard</h2>
-      <div className="past-trips" key={trips.id}>       
-        {/* {trips.map(trip => {
-          return <div className="list" key={trip.id}>
-            <p>{trip.entry_point}</p>
-            <p>{trip.entry_date}</p>
-            <p>{trip.id}</p>            
-            </div>
-        })} */}
-        <DetailTrips />
-      </div>
-
+{details.map((detail) => {
+  return (
+    <div key={detail.id}>
+      <p>{detail.entry_point}</p>
+      <p>{detail.entry_date}</p>
+    </div>
+  )
+})} 
+        {/* <DetailTrips /> */}
       <br />
-
       <div className='toGear'>
         <button
           type="button"

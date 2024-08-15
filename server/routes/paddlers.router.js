@@ -17,15 +17,15 @@ WHERE trips.id = $1;`;
   });
 });
 
-router.get('/initials', (req, res) => {
-  let queryText = 'SELECT * FROM paddlers ';
-  pool.query(queryText).then((result) => {
-    res.send(result.rows);
-  }).catch((error) => {
-    console.log(error);
-    res.sendStatus(500);
-  });
-});
+// router.get('/initials', (req, res) => {
+//   let queryText = 'SELECT * FROM paddlers ';
+//   pool.query(queryText).then((result) => {
+//     res.send(result.rows);
+//   }).catch((error) => {
+//     console.log(error);
+//     res.sendStatus(500);
+//   });
+// });
 
 /**
  * POST route template
@@ -36,10 +36,11 @@ router.post('/', (req, res) => {
   let paddlers = req.body;
   let firstName = paddlers.first_name;
   let lastName = paddlers.last_name;
+  let tripid = paddlers.tripid;
 
-  let queryText = `INSERT INTO paddlers (first_name, last_name) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO paddlers (first_name, last_name, tripid) VALUES ($1, $2, $3);`;
 
-  pool.query(queryText, [firstName, lastName])
+  pool.query(queryText, [firstName, lastName, tripid])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);

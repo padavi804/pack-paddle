@@ -47,20 +47,16 @@ function DetailTrips() {
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Detailed Trip</h2>
-      {detail.map((details) => {
+      {details.map((detail) => {
         return (
-          <div key={details.id}>
-            <p>{details.entry_point}</p>
-            <p>{details.entry_date}</p>
+          <div key={detail.id}>
+            <p>{detail.entry_point}</p>
+            <p>{detail.entry_date}</p>
           </div>
         )
-      })}
+      })} 
 
-      {/* <div className="past-trips" key={trips.id} >        */}
-
-      {/* </div> */}
-
-      <p>End of DetailTrips</p>
+      <h5>End of DetailTrips</h5>
     </div>
   );
 }

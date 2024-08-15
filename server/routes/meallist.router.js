@@ -6,7 +6,10 @@ const router = express.Router();
  * GET route
  */
 router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM meallist';
+let queryText = 'SELECT * FROM meallist;';
+
+//   let queryText = `SELECT item, meal, quantity, buy, paddlerid, tripid FROM meallist
+// JOIN paddlers ON meallist.paddlerid = paddlers.tripid WHERE paddlers.tripid = $1;`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   }).catch((error) => {

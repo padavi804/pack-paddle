@@ -30,7 +30,7 @@ function Trips() {
 
 const handleClick = (id) => {
   console.log(id)
-  history.push(`/detail/${id}`);
+  history.push(`/dashboard/${id}`);
 };
 
 
