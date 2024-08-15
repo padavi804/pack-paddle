@@ -22,17 +22,17 @@ function DetailTrips() {
   const [lon, setLon] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'SET_DETAIL', payload: id });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_DETAIL', payload: id });
+  // }, [dispatch]);
 
   const getTrip = () => {
     axios({
       method: 'GET',
-      url: 'api/trips/detail/:id'
+      url: `api/trips/detail/${id}`
     })
       .then((response) => {
-        console.log('Meal data from db', response.data);
+        console.log('detail data', response.data);
         setDetails(response.data);
       })
       .catch((error) => {
@@ -41,13 +41,23 @@ function DetailTrips() {
   }
   useEffect(getTrip, []);
 
+
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Detailed Trip</h2>
+      {detail.map((details) => {
+        return (
+          <div key={details.id}>
+            <p>{details.entry_point}</p>
+            <p>{details.entry_date}</p>
+          </div>
+        )
+      })}
+
       {/* <div className="past-trips" key={trips.id} >        */}
-       
+
       {/* </div> */}
 
       <p>End of DetailTrips</p>
