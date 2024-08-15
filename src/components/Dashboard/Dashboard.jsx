@@ -1,4 +1,3 @@
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -7,6 +6,7 @@ import axios from 'axios';
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
+import DetailTrips from '../DetailTrips/DetailTrips';
 
 
 
@@ -29,13 +29,14 @@ function Dashboard() {
 
       <h2>Dashboard</h2>
       <div className="past-trips" key={trips.id}>       
-        {trips.map(trip => {
+        {/* {trips.map(trip => {
           return <div className="list" key={trip.id}>
             <p>{trip.entry_point}</p>
             <p>{trip.entry_date}</p>
             <p>{trip.id}</p>            
             </div>
-        })}
+        })} */}
+        <DetailTrips />
       </div>
 
       <br />

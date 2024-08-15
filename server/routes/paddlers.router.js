@@ -6,7 +6,19 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM paddlers';
+  let queryText = `SELECT * FROM paddlers
+JOIN trips on paddlers.tripid = trips.id
+WHERE trips.id = $1;`;
+  pool.query(queryText).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});
+
+router.get('/initials', (req, res) => {
+  let queryText = 'SELECT * FROM paddlers ';
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   }).catch((error) => {

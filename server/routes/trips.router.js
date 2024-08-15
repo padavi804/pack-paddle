@@ -5,9 +5,26 @@ const router = express.Router();
 /**
  * GET route template
  */
+// router.get('/', (req, res) => {
+  
+//   let queryText = 'SELECT id, userid, entry_date, entry_point FROM trips JOIN entrypoints ON trips.entryid = entrypoints.id;';
+//   pool.query(queryText).then((result) => {
+//     console.log('Trips results', result.rows)
+//     res.send(result.rows);
+//   }).catch((error) => {
+//     console.log(error);
+//     res.sendStatus(500);
+//   });
+// });
+
 router.get('/', (req, res) => {
-  console.log('reqparams', req.params)
-  let queryText = 'SELECT userid, entry_date, entry_point FROM trips JOIN entrypoints ON trips.entryid = entrypoints.id;';
+  
+  let queryText = `SELECT entry_date, entry_point, tripid FROM trips
+                  JOIN entrypoints ON trips.entryid = entrypoints.id
+                  JOIN paddlers ON paddlers.tripid = trips.id;`
+//   `SELECT userid, entry_date, entry_point, longitude, latitude, tripid FROM trips 
+// JOIN entrypoints ON trips.entryid = entrypoints.id
+// JOIN paddlers ON paddlers.tripid = trips.id;`;
   pool.query(queryText).then((result) => {
     console.log('Trips results', result.rows)
     res.send(result.rows);
@@ -17,10 +34,25 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/dashboard/:id', (req, res) => {
-  let queryText = 'SELECT userid, entry_date, entry_point FROM trips JOIN entrypoints ON trips.entryid = entrypoints.id; WHERE trips.entryid = $1';
-  pool.query(queryText).then((result) => {
-    console.log('Trips results', result.rows)
+router.get('/detail/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams id is:', req.params.id);
+  const queryText = `
+  SELECT 
+    trips.userid, 
+    trips.entry_date, 
+    entrypoints.entry_point, 
+    entrypoints.longitude, 
+    entrypoints.latitude, 
+    trips.id AS tripid
+  FROM trips
+  JOIN entrypoints ON trips.entryid = entrypoints.id
+  JOIN paddlers ON paddlers.tripid = trips.id
+  WHERE paddlers.tripid = $1;
+`;
+  pool.query(queryText, [tripId])
+  .then((result) => {
+    console.log('Detail trip results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);
