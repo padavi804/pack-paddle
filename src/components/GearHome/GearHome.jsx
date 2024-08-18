@@ -1,6 +1,6 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -14,11 +14,13 @@ function GearHome() {
   const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
+
   // const [paddlers, setPaddlers] = useState([]);
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState('');
   const [buy, setBuy] = useState('');
-  const [paddler, setPaddler] = useState('');
+  const [paddlerid, setPaddlerid] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ function GearHome() {
         item: item,
         quantity: quantity,
         buy: buy,
-        paddlerid: paddler
+        paddlerid: paddlerid
       }
     })
       .then((response) => {
@@ -40,7 +42,7 @@ function GearHome() {
         setItem('');
         setQuantity('');
         setBuy('');
-        setPaddler('');
+        setPaddlerid('');
       })
       .catch((error) => {
         console.log('post failed', error)
@@ -61,7 +63,7 @@ function GearHome() {
         <p>Need to buy</p>
         <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>      
         <br />
-        <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>      
+        <input placeholder="Paddler" onChange={(event) => setPaddlerid(event.target.value)}></input>      
         <br />
       <div className='toPaddlers'>
         <button
@@ -73,10 +75,10 @@ function GearHome() {
       </form>
 
 {/* Add Gear List component */}
-<GearList />
+<GearList tripid = {id}/>
       <button
           type="button"
-          onClick= {(e) => history.push('/dashboard')}
+          onClick= {(e) => history.push(`/dashboard/${id}`)}
 
         >Return to Dashboard
         </button>  

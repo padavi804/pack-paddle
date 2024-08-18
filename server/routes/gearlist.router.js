@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('reqparams id is:', req.params.id);
   let queryText = `SELECT item, quantity, buy, paddlerid, tripid FROM gearlist 
-                  JOIN paddlers ON paddlers.tripid = gearlist.paddlerid WHERE paddlers.tripid = $1;`;
+                  JOIN paddlers ON paddlers.id = gearlist.paddlerid WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId]).then((result) => {
     console.log('GearList results', result.rows)
     res.send(result.rows);
@@ -22,18 +22,18 @@ router.get('/:id', (req, res) => {
 /**
  * POST route
  */
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
 
   console.log('POST req.body', req.body);
   let gear = req.body;
   let item = gear.item;
   let quantity = gear.quantity;
   let buy = gear.buy;
-  let paddler = gear.paddlerid;
+  let paddlerid = gear.paddlerid;
 
-  let queryText = `INSERT INTO gearlist (item, quantity, buy, paddler) VALUES ($1, $2, $3, $4);`;
+  let queryText = `INSERT INTO gearlist (item, quantity, buy, paddlerid) VALUES ($1, $2, $3, $4);`;
 
-  pool.query(queryText, [item, quantity, buy, paddler])
+  pool.query(queryText, [item, quantity, buy, paddlerid])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);
