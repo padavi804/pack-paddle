@@ -20,6 +20,24 @@ router.get('/:id', (req, res) => {
 });
 
 /**
+ * GET names route
+ */
+router.get('/names/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams id is:', req.params.id);
+  let queryText = `SELECT * FROM paddlers 
+                  WHERE tripid = $1;`;
+  pool.query(queryText, [tripId]).then((result) => {
+    console.log('GearList results', result.rows)
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});
+
+
+/**
  * POST route
  */
 router.post('/:id', (req, res) => {

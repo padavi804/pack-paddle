@@ -19,6 +19,23 @@ JOIN trips ON paddlers.tripid = trips.id
   });
 });
 
+
+/**
+ * GET names route
+ */
+router.get('/names/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams id is:', req.params.id);
+  let queryText = `SELECT * FROM paddlers 
+                  WHERE tripid = $1;`;
+  pool.query(queryText, [tripId]).then((result) => {
+    console.log('GearList results', result.rows)
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});
 // router.get('/initials', (req, res) => {
 //   let queryText = 'SELECT * FROM paddlers ';
 //   pool.query(queryText).then((result) => {

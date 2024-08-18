@@ -16,7 +16,6 @@ function NewTrip() {
   const [newEntryDate, setNewEntryDate] = useState('');
   const [entryPointId, setEntryPointId] = useState(0);
   const [tripid, setTripid] = useState(0);
-  const id = paddlers.tripid
 
   useEffect(() => {
     fetchEntryPoint();
