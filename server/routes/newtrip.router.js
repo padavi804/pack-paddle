@@ -25,11 +25,13 @@ router.post('/', (req, res) => {
   let entryid = newTrip.entryid;
   let entry_date = newTrip.entry_date;
 
-  let queryText = `INSERT INTO trips (userid, entryid, entry_date) VALUES ($1, $2, $3);`;
+  let queryText = `INSERT INTO trips (userid, entryid, entry_date) VALUES ($1, $2, $3) RETURNING id;`;
 
   pool.query(queryText, [userid, entryid, entry_date])
     .then(dbResult => {
       console.log('dbResult.rows Post Successful', dbResult.rows);
+      // const tripid = dbResult.rows[0];
+      // res.send(tripid);
       res.sendStatus(201);
     })
     .catch(dbError => {

@@ -5,9 +5,13 @@ const router = express.Router();
 /**
  * GET route
  */
-router.get('/', (req, res) => {
-  let queryText = 'SELECT * FROM gearlist';
-  pool.query(queryText).then((result) => {
+router.get('/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams id is:', req.params.id);
+  let queryText = `SELECT item, quantity, buy, paddlerid, tripid FROM gearlist 
+                  JOIN paddlers ON paddlers.tripid = gearlist.paddlerid WHERE paddlers.tripid = $1;`;
+  pool.query(queryText, [tripId]).then((result) => {
+    console.log('GearList results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);

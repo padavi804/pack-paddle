@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   let queryText = `SELECT * FROM paddlers
-JOIN trips on paddlers.tripid = trips.id
+JOIN trips ON paddlers.tripid = trips.id
 ;`;
   pool.query(queryText)
   .then((result) => {

@@ -40,6 +40,7 @@ function Dashboard() {
       });
   }
   useEffect(getTrip, []);
+  console.log({id})
 
   return (
     <div className="container">
@@ -70,8 +71,8 @@ function Dashboard() {
         >Add to Meal List
         </button>
       </div>
-      <GearList />
-      <MealList />
+      <GearList tripid = {id}/>
+      <MealList tripid = {id}/>
     </div>
   );
 }

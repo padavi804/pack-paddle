@@ -105,7 +105,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path="/gearlist">
+            exact path="/gearlist/:id">
             <GearList />
           </ProtectedRoute>
 

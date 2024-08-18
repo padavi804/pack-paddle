@@ -1,6 +1,6 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -11,24 +11,33 @@ function GearList() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  const { id } = useParams();
 
   let [gearArray, setGearArray] = useState([]);
   let [buy, setBuy] = useState('')
 
-  const fetchGear = () => {
-    axios({
-      method: 'GET',
-      url: 'api/gearlist'
-    })
+  const fetchGear = (id) => {
+    axios.get(`/api/gearlist/${id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log('Fetched gear data',response.data);
         setGearArray(response.data);
       })
       .catch((error) => {
         console.log('error fetching list', error);
       });
   }
-  useEffect(fetchGear, []); 
+  useEffect(() => fetchGear(id), [id]); 
+
+  // useEffect(() => {
+  //   axios.get(`/api/gearlist/${id}`)
+  //     .then(response => {
+  //       console.log('Fetched gear list:', response.data);
+  //       setGearArray(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching gear list:', error);
+  //     });
+  // }, [id]);
 
   const toggleBuy = (id) => {
     console.log('toggling buy/bought status', id);
