@@ -19,7 +19,7 @@ function MealHome() {
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState('');
   const [meal, setMeal] = useState('');
-  const [buy, setBuy] = useState('');
+  const [buy, setBuy] = useState(false);
   const [paddlerid, setPaddlerid] = useState('');
 
 

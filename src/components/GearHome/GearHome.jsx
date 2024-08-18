@@ -19,7 +19,7 @@ function GearHome() {
   const [paddlers, setPaddlers] = useState([]);
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [buy, setBuy] = useState('');
+  const [buy, setBuy] = useState(false);
   const [paddlerid, setPaddlerid] = useState('');
 
  
