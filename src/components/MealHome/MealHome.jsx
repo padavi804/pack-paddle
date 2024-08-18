@@ -20,7 +20,7 @@ function MealHome() {
   const [quantity, setQuantity] = useState('');
   const [meal, setMeal] = useState('');
   const [buy, setBuy] = useState('');
-  const [paddler, setPaddler] = useState('');
+  const [paddlerid, setPaddlerid] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ function MealHome() {
         quantity: quantity,
         meal: meal,
         buy: buy,
-        paddler: paddler
+        paddlerid: paddlerid
       }
     })
       .then((response) => {
@@ -43,11 +43,11 @@ function MealHome() {
         setItem('');
         setQuantity('');
         setMeal('');
-        setBuy('');
-        setPaddler('');
+        setBuy(false);
+        setPaddlerid('');
       })
       .catch((error) => {
-        console.log('post failed', error)
+        console.log('meal post failed', error)
       })
   }
 
@@ -73,7 +73,7 @@ function MealHome() {
         <p>Need to buy</p>
         <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
         <br />
-        <input placeholder="Paddler" onChange={(event) => setPaddler(event.target.value)}></input>
+        <input placeholder="Paddler"  onChange={(event) => setPaddlerid(event.target.value)}></input>
         <br />
         <div className='toPaddlers'>
           <button

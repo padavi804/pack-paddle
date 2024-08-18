@@ -22,7 +22,7 @@ JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
 /**
  * POST route
  */
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
   // POST route code here
   console.log('POST req.body', req.body);
   let meals = req.body;
@@ -30,11 +30,11 @@ router.post('/:id', (req, res) => {
   let quantity = meals.quantity;
   let meal = meals.meal;
   let buy = meals.buy;
-  let paddler = meals.paddlerid
+  let paddlerid = meals.paddlerid
 
   let queryText = `INSERT INTO meallist (item, quantity, meal, buy, paddlerid) VALUES ($1, $2, $3, $4, $5);`;
 
-  pool.query(queryText, [item, quantity, meal, buy, paddler])
+  pool.query(queryText, [item, quantity, meal, buy, paddlerid])
     .then(dbResult => {
       console.log('dbResult.rows', dbResult.rows);
       res.sendStatus(201);

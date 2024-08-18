@@ -6,7 +6,7 @@ const router = express.Router();
 /**
  * POST route
  */
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
   // POST route code here
   console.log('POST req.body', req.body);
   let meals = req.body;
