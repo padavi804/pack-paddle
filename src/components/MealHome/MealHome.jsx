@@ -1,6 +1,6 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -13,6 +13,8 @@ function MealHome() {
   const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
+
 
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -26,7 +28,7 @@ function MealHome() {
 
     axios({
       method: 'POST',
-      url: '/api/meal',
+      url: '/api/meallist',
       data: {
         item: item,
         quantity: quantity,
@@ -54,8 +56,6 @@ function MealHome() {
       <h2>Greetings, {user.username}!</h2>
 
       <h2>Add to Meals</h2>
-      <label htmlFor="entrypoint">Add Paddlers</label>
-      <br />
       <form>
         <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
         <br />
@@ -84,12 +84,10 @@ function MealHome() {
         </div>
       </form>
 
-      {/* Add MealList component */}
-
-      <MealList />
+      <MealList tripid = {id}/>
       <button
         type="button"
-        onClick={(e) => history.push('/dashboard')}
+        onClick={(e) => history.push(`/dashboard/${id}`)}
 
       >Return to Dashboard
       </button>

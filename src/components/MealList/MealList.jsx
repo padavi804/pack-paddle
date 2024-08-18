@@ -1,32 +1,30 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
 
 
 
-function Dashboard() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+function MealList() {
   const user = useSelector((store) => store.user);
-  const history = useHistory();
+  const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
+  let [buy, setBuy] = useState('')
 
-  const fetchMeal = () => {
-    axios({
-      method: 'GET',
-      url: 'api/meallist'
-    })
+
+  const fetchMeal = (id) => {
+    axios.get(`/api/meallist/${id}`)
       .then((response) => {
-        console.log('Meal data from db', response.data);
+        console.log('Fetched meal data',response.data);
         setMealArray(response.data);
       })
       .catch((error) => {
         console.log('error fetching list', error);
       });
   }
-  useEffect(fetchMeal, []);
+  useEffect(() => fetchMeal(id), [id]); 
 
   const toggleBuy = (id) => {
     console.log('toggling buy/bought status', id);
@@ -74,7 +72,7 @@ function Dashboard() {
                 <td>{meal.meal}</td>
                 <td>{meal.buy}</td>
                 <td>{meal.paddlerid}</td>
-                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td> */}
+                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td>
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
               </tr>);
           })
@@ -86,4 +84,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default MealList;

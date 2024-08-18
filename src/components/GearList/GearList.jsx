@@ -8,11 +8,8 @@ import * as React from 'react';
 
 
 function GearList() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  const history = useHistory();
   const { id } = useParams();
-
   let [gearArray, setGearArray] = useState([]);
   let [buy, setBuy] = useState('')
 
@@ -27,17 +24,6 @@ function GearList() {
       });
   }
   useEffect(() => fetchGear(id), [id]); 
-
-  // useEffect(() => {
-  //   axios.get(`/api/gearlist/${id}`)
-  //     .then(response => {
-  //       console.log('Fetched gear list:', response.data);
-  //       setGearArray(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching gear list:', error);
-  //     });
-  // }, [id]);
 
   const toggleBuy = (id) => {
     console.log('toggling buy/bought status', id);

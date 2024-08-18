@@ -5,17 +5,44 @@ const router = express.Router();
 /**
  * GET route
  */
-router.get('/', (req, res) => {
-let queryText = 'SELECT * FROM meallist;';
-
-//   let queryText = `SELECT item, meal, quantity, buy, paddlerid, tripid FROM meallist
-// JOIN paddlers ON meallist.paddlerid = paddlers.tripid WHERE paddlers.tripid = $1;`;
-  pool.query(queryText).then((result) => {
+router.get('/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams is:', req.params);
+  let queryText = `SELECT item, meal, quantity, buy, paddlerid, tripid FROM meallist
+JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
+  pool.query(queryText, [tripId]).then((result) => {
+    console.log('MealList results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);
     res.sendStatus(500);
   });
+});
+
+/**
+ * POST route
+ */
+router.post('/:id', (req, res) => {
+  // POST route code here
+  console.log('POST req.body', req.body);
+  let meals = req.body;
+  let item = meals.item;
+  let quantity = meals.quantity;
+  let meal = meals.meal;
+  let buy = meals.buy;
+  let paddler = meals.paddlerid
+
+  let queryText = `INSERT INTO meallist (item, quantity, meal, buy, paddlerid) VALUES ($1, $2, $3, $4, $5);`;
+
+  pool.query(queryText, [item, quantity, meal, buy, paddler])
+    .then(dbResult => {
+      console.log('dbResult.rows', dbResult.rows);
+      res.sendStatus(201);
+    })
+    .catch(dbError => {
+      console.log('dberror', dbError);
+      res.sendStatus(500);
+    })
 });
 
 /**

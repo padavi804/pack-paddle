@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -100,7 +99,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path="/meal"          >
+            exact path="/meal/:id"          >
             <MealHome />
           </ProtectedRoute>
 
@@ -110,13 +109,8 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path="/meallist">
+            exact path="/meallist/:id">
             <MealList />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            exact path="/info">
-            <InfoPage />
           </ProtectedRoute>
 
           <Route

@@ -74,7 +74,6 @@ function GearHome() {
       </div> 
       </form>
 
-{/* Add Gear List component */}
 <GearList tripid = {id}/>
       <button
           type="button"

@@ -32,7 +32,7 @@ function Dashboard() {
       url: `api/trips/detail/${id}`
     })
       .then((response) => {
-        console.log('detail data', response.data);
+        // console.log('detail data', response.data);
         setDetails(response.data);
       })
       .catch((error) => {
@@ -40,7 +40,7 @@ function Dashboard() {
       });
   }
   useEffect(getTrip, []);
-  console.log({id})
+  // console.log(id)
 
   return (
     <div className="container">
@@ -59,7 +59,7 @@ function Dashboard() {
       <div className='toGear'>
         <button
           type="button"
-          onClick={() => history.push('/gear')}
+          onClick={() => history.push(`/gear/${id}`)}
         >Add to Gear List
         </button>
       </div>
@@ -67,7 +67,7 @@ function Dashboard() {
       <div className='toMeal'>
         <button
           type="button"
-          onClick={() => history.push('/meal')}
+          onClick={() => history.push(`/meal/${id}`)}
         >Add to Meal List
         </button>
       </div>
