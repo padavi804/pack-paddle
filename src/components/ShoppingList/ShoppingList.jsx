@@ -10,80 +10,111 @@ import * as React from 'react';
 function ShoppingList() {
   const user = useSelector((store) => store.user);
   const { id } = useParams();
-  let [shopArray, setShopArray] = useState([]);
+  let [mealArray, setMealArray] = useState([]);
+  let [gearArray, setGearArray] = useState([]);
   let [buy, setBuy] = useState('')
 
 
-  const fetchShop = (id) => {
-    axios.get(`/api/shoppinglist/${id}`)
+  const fetchMeal = (id) => {
+    axios.get(`/api/meallist/${id}`)
       .then((response) => {
         console.log('Fetched meal data',response.data);
-        setShopArray(response.data);
+        setMealArray(response.data);
       })
       .catch((error) => {
         console.log('error fetching list', error);
       });
   }
-  useEffect(() => fetchShop(id), [id]); 
+  useEffect(() => fetchMeal(id), [id]); 
 
-  const toggleBuy = (buyid) => {
-    console.log('toggling buy/bought status', buyid);
+  const fetchGear = (id) => {
+    axios.get(`/api/gearlist/${id}`)
+      .then((response) => {
+        console.log('Fetched gear data',response.data);
+        setGearArray(response.data);
+      })
+      .catch((error) => {
+        console.log('error fetching list', error);
+      });
+  }
+  useEffect(() => fetchGear(id), [id]); 
+
+  const toggleMealBuy = (mealid) => {
+    console.log('toggling buy/bought status', mealid);
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/toggle/${buyid}`
+      url: `/api/meallist/toggle/${mealid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
-        fetchShop(id);
+        fetchMeal(id);
       })
       .catch(function (error) {
         console.log(error)
       })
   }
 
-  const deleteItem = (deleteid) => {
+  const toggleGearBuy = (gearid) => {
+    console.log('toggling buy/bought status', gearid);
+
     axios({
-      method: 'DELETE',
-      url: `/api/meallist/${deleteid}`
+      method: 'PUT',
+      url: `/api/gearlist/buy/${gearid}`
     })
       .then((response) => {
-        console.log('delete item worked', response)
-        fetchShop(id);
+        console.log('buy toggle successful', response);
+        fetchGear(id);
       })
       .catch(function (error) {
         console.log(error)
       })
   }
 
+const filteredMeal = mealArray.filter(meal => meal.buy = true);
+const filteredGear = gearArray.filter(gear => gear.buy = true);
   return (
     <div className="container">
 
-      <h2>Meal List</h2>
+      <h2>Shopping List</h2>
       <table>
         <tbody>
-          {shopArray.map((meal) => {
+          {filteredMeal.map((meal) => {
             return (
               <tr key={meal.id}
                 // className={meal.buy ? 'true' : 'false'}
               >
                 <td>{meal.item}</td>
                 <td>{meal.quantity}</td>
-                <td>{meal.meal}</td>
+                {/* <td>{meal.meal}</td> */}
                 <td>{meal.buy}</td>
                 <td>{meal.paddlerid}</td>
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleMealBuy(meal.id)}/></td>
+                {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
+              </tr>);
+          })
+          }          
+          {filteredGear.map((gear) => {
+            return (
+              <tr key={gear.id}
+               className={gear.buy ? 'true' : 'false'}
+               >
+                <td>{gear.item}</td>
+                <td>{gear.quantity}</td>
+                <td>{gear.buy}</td>
+                <td>{gear.paddlerid}</td>
+
                 <td>
                 <input
                   type="checkbox"
-                  checked={meal.buy}
-                  onChange={() => toggleBuy(meal.id)}
+                  checked={gear.buy}
+                  onChange={() => toggleGearBuy(gear.id)}
                   className="buyCheckbox"
                 />
               </td>
-
-                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td> */}
-                <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
-              </tr>);
+                {/* <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td> */}
+                {/* <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td> */}
+                </tr>);
           })
           }
         </tbody>

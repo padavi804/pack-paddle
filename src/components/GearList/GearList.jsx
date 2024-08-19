@@ -37,12 +37,12 @@ function GearList() {
   }
   useEffect(() => fetchInitials(id), [id]);
 
-  const toggleBuy = (buyid) => {
-    console.log('toggling buy/bought status', buyid);
+  const toggleBuy = (gearid) => {
+    console.log('toggling buy/bought status', gearid);
 
     axios({
       method: 'PUT',
-      url: `/api/gearlist/buy/${buyid}`
+      url: `/api/gearlist/buy/${gearid}`
     })
       .then((response) => {
         console.log('buy toggle successful', response);

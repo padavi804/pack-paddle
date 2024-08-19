@@ -40,7 +40,7 @@ router.get('/names/:id', (req, res) => {
 /**
  * POST route
  */
-router.post('/:id', (req, res) => {
+router.post('/', (req, res) => {
 
   console.log('POST req.body', req.body);
   let gear = req.body;
@@ -65,10 +65,10 @@ router.post('/:id', (req, res) => {
 /**
  * PUT route
  */
-router.put('/buy/:buyid', (req, res) => {
+router.put('/buy/:gearid', (req, res) => {
   console.log('req params',req.params);
   console.log('req body',req.body);
-  let id= req.params.buyid;
+  let id= req.params.gearid;
 
   const queryText = `UPDATE gearlist SET buy = NOT buy WHERE id = $1;`;
 

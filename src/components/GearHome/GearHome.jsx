@@ -43,7 +43,7 @@ function GearHome() {
 
     axios({
       method: 'POST',
-      url: '/api/gear',
+      url: '/api/gearlist',
       data: {
         item: item,
         quantity: quantity,

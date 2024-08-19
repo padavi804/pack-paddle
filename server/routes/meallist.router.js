@@ -48,10 +48,10 @@ router.post('/', (req, res) => {
 /**
  * PUT route
  */
-router.put('/toggle/:buyid', (req, res) => {
+router.put('/toggle/:mealid', (req, res) => {
   console.log(req.params);
   console.log(req.body);
-  let id= req.params.buyid;
+  let id= req.params.mealid;
 
   const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 

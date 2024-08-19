@@ -19,7 +19,6 @@ function* fetchTrips(action) {
 function* setDetail(action) {
   console.log('action payload set details', action.payload)
   try{
-    // Get the chosen movie details:
     const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
     console.log('detail:', detailResponse);
 

@@ -26,12 +26,12 @@ function MealList() {
   }
   useEffect(() => fetchMeal(id), [id]); 
 
-  const toggleBuy = (buyid) => {
-    console.log('toggling buy/bought status', buyid);
+  const toggleBuy = (mealid) => {
+    console.log('toggling buy/bought status', mealid);
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/toggle/${buyid}`
+      url: `/api/meallist/toggle/${mealid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
@@ -72,16 +72,7 @@ function MealList() {
                 <td>{meal.meal}</td>
                 <td>{meal.buy}</td>
                 <td>{meal.paddlerid}</td>
-                <td>
-                <input
-                  type="checkbox"
-                  checked={meal.buy}
-                  onChange={() => toggleBuy(meal.id)}
-                  className="buyCheckbox"
-                />
-              </td>
-
-                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td> */}
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)}/></td>
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
               </tr>);
           })
