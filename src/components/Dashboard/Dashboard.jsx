@@ -34,7 +34,7 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h2>Greetings, {user.username}!</h2>
+      <h2>Your trip awaits, {user.username}!</h2>
       <h2>Dashboard</h2>
 {details.map((detail) => {
   return (
@@ -63,6 +63,7 @@ function Dashboard() {
       <ShoppingList tripid = {id}/>
       <GearList tripid = {id}/>
       <MealList tripid = {id}/>
+      <p>"A towel, it says, is about the most massively useful thing an interstellar hitchhiker can have"</p>
     </div>
   );
 }

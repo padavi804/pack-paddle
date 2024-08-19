@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('reqparams is:', req.params);
-  let queryText = `SELECT meallist.id, item, meal, quantity, buy, paddlerid, tripid FROM meallist
+  let queryText = `SELECT meallist.id, item, meal, quantity, buy, paddlerid, tripid, first_name, last_name FROM meallist
 JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId])
   .then((result) => {
