@@ -26,30 +26,30 @@ function MealList() {
   }
   useEffect(() => fetchMeal(id), [id]); 
 
-  const toggleBuy = (id) => {
-    console.log('toggling buy/bought status', id);
+  const toggleBuy = (buyid) => {
+    console.log('toggling buy/bought status', buyid);
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/toggle/${id}`
+      url: `/api/meallist/toggle/${buyid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
-        fetchMeal();
+        fetchMeal(id);
       })
       .catch(function (error) {
         console.log(error)
       })
   }
 
-  const deleteItem = (id) => {
+  const deleteItem = (deleteid) => {
     axios({
       method: 'DELETE',
-      url: `/api/meallist/${id}`
+      url: `/api/meallist/${deleteid}`
     })
       .then((response) => {
         console.log('delete item worked', response)
-        fetchMeal();
+        fetchMeal(id);
       })
       .catch(function (error) {
         console.log(error)
@@ -72,7 +72,16 @@ function MealList() {
                 <td>{meal.meal}</td>
                 <td>{meal.buy}</td>
                 <td>{meal.paddlerid}</td>
-                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td>
+                <td>
+                <input
+                  type="checkbox"
+                  checked={meal.buy}
+                  onChange={() => toggleBuy(meal.id)}
+                  className="buyCheckbox"
+                />
+              </td>
+
+                {/* <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Buy </button> </td> */}
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
               </tr>);
           })

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('reqparams is:', req.params);
-  let queryText = `SELECT item, meal, quantity, buy, paddlerid, tripid FROM meallist
+  let queryText = `SELECT meallist.id, item, meal, quantity, buy, paddlerid, tripid FROM meallist
 JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId]).then((result) => {
     console.log('MealList results', result.rows)
@@ -48,10 +48,10 @@ router.post('/', (req, res) => {
 /**
  * PUT route
  */
-router.put('/toggle/:id', (req, res) => {
+router.put('/toggle/:buyid', (req, res) => {
   console.log(req.params);
   console.log(req.body);
-  let { id } = req.params;
+  let id= req.params.buyid;
 
   const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 
@@ -71,20 +71,18 @@ router.put('/toggle/:id', (req, res) => {
 /**
  * DELETE route
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:deleteid', (req, res) => {
 
   console.log('req.params', req.params);
-  let idToDelete = req.params.id
-
-  console.log('typeof idToDelete', typeof idToDelete);
+  let id = req.params.deleteid
 
   let queryText = `DELETE FROM "meallist" WHERE id = $1;`;
 
   // send it to the database
-  pool.query(queryText, [idToDelete])
+  pool.query(queryText, [id])
       .then(dbResult => {
           // unpack the results
-          console.log(dbResult);
+          console.log('Database results', dbResult);
           // send the client a response, based on the results.
           res.sendStatus(200);
       })

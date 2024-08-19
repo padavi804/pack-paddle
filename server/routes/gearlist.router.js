@@ -65,15 +65,15 @@ router.post('/:id', (req, res) => {
 /**
  * PUT route
  */
-router.put('/buy/:id', (req, res) => {
+router.put('/buy/:buyid', (req, res) => {
   console.log('req params',req.params);
   console.log('req body',req.body);
-  let { buyid } = req.params;
+  let id= req.params.buyid;
 
   const queryText = `UPDATE gearlist SET buy = NOT buy WHERE id = $1;`;
 
 
-  pool.query(queryText, [buyid])
+  pool.query(queryText, [id])
       .then(dbResult => {
           console.log(`Got stuff back from the database`, dbResult);
           res.sendStatus(200);
@@ -88,17 +88,16 @@ router.put('/buy/:id', (req, res) => {
 /**
  * DELETE route
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:deleteid', (req, res) => {
 
   console.log('req.params', req.params);
-  let idToDelete = req.params.id
+  let id = req.params.deleteid
 
-  console.log('typeof idToDelete', typeof idToDelete);
 
   let queryText = `DELETE FROM "gearlist" WHERE id = $1;`;
 
   // send it to the database
-  pool.query(queryText, [idToDelete])
+  pool.query(queryText, [id])
       .then(dbResult => {
           // unpack the results
           console.log(dbResult);
