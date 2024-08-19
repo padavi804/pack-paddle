@@ -36,15 +36,23 @@ router.get('/names/:id', (req, res) => {
     res.sendStatus(500);
   });
 });
-// router.get('/initials', (req, res) => {
-//   let queryText = 'SELECT * FROM paddlers ';
-//   pool.query(queryText).then((result) => {
-//     res.send(result.rows);
-//   }).catch((error) => {
-//     console.log(error);
-//     res.sendStatus(500);
-//   });
-// });
+
+router.get('/initials/:id', (req, res) => {
+  const tripId = req.params.id;
+  let queryText = `SELECT
+    tripid,
+    first_name,
+    last_name,
+    LEFT(first_name, 1) AS first_name_initial,
+    LEFT(last_name, 1) AS last_name_initial
+    FROM paddlers WHERE tripid = $1;`;
+  pool.query(queryText, [tripId]).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
+});
 
 /**
  * POST route template

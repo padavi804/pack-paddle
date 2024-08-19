@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('reqparams id is:', req.params.id);
-  let queryText = `SELECT item, quantity, buy, paddlerid, tripid FROM gearlist 
+  let queryText = `SELECT gearlist.id, item, quantity, buy, paddlerid, tripid FROM gearlist 
                   JOIN paddlers ON paddlers.id = gearlist.paddlerid WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId]).then((result) => {
     console.log('GearList results', result.rows)
@@ -65,18 +65,18 @@ router.post('/:id', (req, res) => {
 /**
  * PUT route
  */
-router.put('/toggle/:id', (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  let { id } = req.params;
+router.put('/buy/:id', (req, res) => {
+  console.log('req params',req.params);
+  console.log('req body',req.body);
+  let { buyid } = req.params;
 
-  const queryText = `UPDATE "gearlist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
+  const queryText = `UPDATE gearlist SET buy = NOT buy WHERE id = $1;`;
 
 
-  pool.query(queryText, [id])
+  pool.query(queryText, [buyid])
       .then(dbResult => {
           console.log(`Got stuff back from the database`, dbResult);
-          res.sendStatus(201);
+          res.sendStatus(200);
 
       })
       .catch(dbError => {
@@ -84,6 +84,7 @@ router.put('/toggle/:id', (req, res) => {
           res.sendStatus(500);
       })
 });
+
 /**
  * DELETE route
  */
@@ -102,7 +103,7 @@ router.delete('/:id', (req, res) => {
           // unpack the results
           console.log(dbResult);
           // send the client a response, based on the results.
-          res.sendStatus(200);
+          res.sendStatus(201);
       })
       .catch(dbError => {
           // do error things
