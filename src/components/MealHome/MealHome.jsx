@@ -81,12 +81,10 @@ function MealHome() {
           <option value="dinner">Dinner</option>
           <option value="snack">Snack</option>
         </select>
-        {/* <input placeholder="Meal" onChange={(event) => setMeal(event.target.value)}></input> */}
         <br />
         <p>Need to buy</p>
         <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
         <br />
-        {/* <input placeholder="Paddler"  onChange={(event) => setPaddlerid(event.target.value)}></input> */}
         <select name='entrypoint' id='entrypoint' 
         onChange={(evt) => setPaddlerid(evt.target.value)}
         value={paddlerid}>
@@ -108,11 +106,11 @@ function MealHome() {
         </div>
       </form>
 
+{/* MealList Component Displayed */}
       <MealList tripid = {id}/>
       <button
         type="button"
         onClick={(e) => history.push(`/dashboard/${id}`)}
-
       >Return to Dashboard
       </button>
     </div>

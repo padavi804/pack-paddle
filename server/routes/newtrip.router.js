@@ -30,9 +30,8 @@ router.post('/', (req, res) => {
   pool.query(queryText, [userid, entryid, entry_date])
     .then(dbResult => {
       console.log('dbResult.rows Post Successful', dbResult.rows);
-      // const tripid = dbResult.rows[0];
-      // res.send(tripid);
-      res.sendStatus(201);
+      const tripid = dbResult.rows[0];
+      res.status(201).send({ id: tripid });
     })
     .catch(dbError => {
       console.log('dberror', dbError);

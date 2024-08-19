@@ -46,7 +46,8 @@ function NewTrip() {
     })
       .then((response) => {
         console.log('successful post', response);
-        console.log('New trip ID:', response.data.tripid);       
+        console.log('New trip ID:', response.data.id.id);
+        setTripid(response.data.id.id)       
         fetchEntryPoint();
         setEntryPointId(0);
         setNewEntryDate('');
@@ -54,7 +55,7 @@ function NewTrip() {
       .catch((error) => {
         console.log('post failed', error)
       })
-    // history.push(`/paddlers/${id}`);
+    history.push(`/paddlers/${tripid}`);
    
   }
 

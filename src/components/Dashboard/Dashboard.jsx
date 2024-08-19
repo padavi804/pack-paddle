@@ -6,25 +6,15 @@ import axios from 'axios';
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
-import DetailTrips from '../DetailTrips/DetailTrips';
-
+import ShoppingList from '../ShoppingList/ShoppingList';
 
 
 function Dashboard() {
   const user = useSelector((store) => store.user);
-  const trips = useSelector((store) => store.trips)
-  const detail = useSelector((store) => store.detail)
   const history = useHistory();
   const { id } = useParams();
 
   const [details, setDetails] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_TRIPS' });
-  // }, [dispatch]);
 
   const getTrip = () => {
     axios({
@@ -54,7 +44,6 @@ function Dashboard() {
     </div>
   )
 })} 
-        {/* <DetailTrips /> */}
       <br />
       <div className='toGear'>
         <button
@@ -71,6 +60,7 @@ function Dashboard() {
         >Add to Meal List
         </button>
       </div>
+      <ShoppingList tripid = {id}/>
       <GearList tripid = {id}/>
       <MealList tripid = {id}/>
     </div>
