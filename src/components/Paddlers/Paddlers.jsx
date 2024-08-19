@@ -8,9 +8,7 @@ import * as React from 'react';
 
 
 function Paddlers() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  // const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -19,23 +17,17 @@ function Paddlers() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_PADDLERS' });
-  // }, [dispatch]);
-
-  // Create route for paddlers
-
-  const fetchPaddlers = () => {
-    axios.get(`/api/paddlers/`)
+  const fetchPaddlers = (id) => {
+    axios.get(`/api/paddlers/${id}`)
     .then((response) => {
       console.log('paddlers get response data:', response.data)
       setPaddlers(response.data);
     }).catch((error) => {
       console.log(error);
-      alert('Something went wrong getting the paddlers.');
+      // alert('Something went wrong getting the paddlers.');
     });
   }
-  useEffect(fetchPaddlers, []); 
+  useEffect(() => {fetchPaddlers(id);}, [id]); 
 
 
   const handleSubmit = (e) => {
@@ -53,7 +45,7 @@ function Paddlers() {
     })
       .then((response) => {
         console.log('successful post', response);
-        fetchPaddlers();
+        fetchPaddlers(id);
         setFirstName('');
         setLastName('');
       })
@@ -95,7 +87,7 @@ function Paddlers() {
 
       <button
           type="button"
-          onClick= {(e) => history.push('/dashboard')}
+          onClick= {(e) => history.push(`/dashboard/${id}`)}
 
         >Start Packing
         </button>  

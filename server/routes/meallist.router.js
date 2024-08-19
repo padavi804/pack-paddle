@@ -10,7 +10,8 @@ router.get('/:id', (req, res) => {
   console.log('reqparams is:', req.params);
   let queryText = `SELECT meallist.id, item, meal, quantity, buy, paddlerid, tripid FROM meallist
 JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
-  pool.query(queryText, [tripId]).then((result) => {
+  pool.query(queryText, [tripId])
+  .then((result) => {
     console.log('MealList results', result.rows)
     res.send(result.rows);
   }).catch((error) => {

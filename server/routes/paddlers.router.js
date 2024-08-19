@@ -5,11 +5,12 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('reqparams is:', req.params);
   let queryText = `SELECT * FROM paddlers
-JOIN trips ON paddlers.tripid = trips.id
-;`;
-  pool.query(queryText)
+JOIN trips ON paddlers.tripid = trips.id WHERE paddlers.tripid = $1;`;
+  pool.query(queryText, [tripId])
   .then((result) => {
     console.log('paddlers get', result.rows)
     res.send(result.rows);
