@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 /**
  * PUT route
  */
-router.put('/toggle/:mealid', (req, res) => {
+router.put('/buy/:mealid', (req, res) => {
   console.log(req.params);
   console.log(req.body);
   let id= req.params.mealid;

@@ -44,7 +44,7 @@ function ShoppingList() {
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/toggle/${mealid}`
+      url: `/api/meallist/buy/${mealid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
@@ -71,8 +71,9 @@ function ShoppingList() {
       })
   }
 
-const filteredMeal = mealArray.filter(meal => meal.buy = true);
-const filteredGear = gearArray.filter(gear => gear.buy = true);
+const filteredMeal = mealArray.filter(meal => meal.buy);
+const filteredGear = gearArray.filter(gear => gear.buy);
+
   return (
     <div className="container">
 

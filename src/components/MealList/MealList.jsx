@@ -31,7 +31,7 @@ function MealList() {
 
     axios({
       method: 'PUT',
-      url: `/api/meallist/toggle/${mealid}`
+      url: `/api/meallist/buy/${mealid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
