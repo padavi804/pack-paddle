@@ -8,20 +8,13 @@ import * as React from 'react';
 
 
 function NewTrip() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const paddlers = useSelector((store) => store.paddlers)
   const history = useHistory();
   const [entryPoints, setEntryPoints] = useState([]);
   const [newEntryDate, setNewEntryDate] = useState('');
   const [entryPointId, setEntryPointId] = useState(0);
-  const [tripid, setTripid] = useState(0);
-
-  useEffect(() => {
-    fetchEntryPoint();
-  }, []);
-
-  
+  const [tripid, setTripid] = useState(0);  
 
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
@@ -32,6 +25,10 @@ function NewTrip() {
       alert('Something went wrong getting the entry points.');
     });
   }
+
+  useEffect(() => {
+    fetchEntryPoint();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +46,7 @@ function NewTrip() {
     })
       .then((response) => {
         console.log('successful post', response);
-        const tripid = response.data
+        console.log('New trip ID:', response.data.tripid);       
         fetchEntryPoint();
         setEntryPointId(0);
         setNewEntryDate('');
