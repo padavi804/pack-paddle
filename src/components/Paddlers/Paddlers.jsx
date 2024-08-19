@@ -1,6 +1,6 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -8,29 +8,27 @@ import * as React from 'react';
 
 
 function Paddlers() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
   const history = useHistory();
-  // const [paddlers, setPaddlers] = useState([]);
+  const { id } = useParams();
+
+  const [paddlers, setPaddlers] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_PADDLERS' });
-  }, [dispatch]);
+  const fetchPaddlers = (id) => {
+    axios.get(`/api/paddlers/${id}`)
+    .then((response) => {
+      console.log('paddlers get response data:', response.data)
+      setPaddlers(response.data);
+    }).catch((error) => {
+      console.log(error);
+      // alert('Something went wrong getting the paddlers.');
+    });
+  }
+  useEffect(() => {fetchPaddlers(id);}, [id]); 
 
-  // Create route for paddlers
-
-  // const fetchPaddlers = () => {
-  //   axios.get('/api/paddlers').then((response) => {
-  //     setPaddlers(response.data);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     alert('Something went wrong getting the paddlers.');
-  //   });
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,12 +39,13 @@ function Paddlers() {
       url: '/api/paddlers',
       data: {
         first_name: firstName,
-        last_name: lastName
+        last_name: lastName,
+        tripid: id
       }
     })
       .then((response) => {
         console.log('successful post', response);
-        // fetchPaddlers();
+        fetchPaddlers(id);
         setFirstName('');
         setLastName('');
       })
@@ -88,7 +87,7 @@ function Paddlers() {
 
       <button
           type="button"
-          onClick= {(e) => history.push('/dashboard')}
+          onClick= {(e) => history.push(`/dashboard/${id}`)}
 
         >Start Packing
         </button>  

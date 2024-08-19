@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -27,7 +26,8 @@ import MealList from '../MealList/MealList';
 import Dashboard from '../Dashboard/Dashboard';
 import GearHome from '../GearHome/GearHome';
 import MealHome from '../MealHome/MealHome';
-
+import DetailTrips from '../DetailTrips/DetailTrips';
+import ShoppingList from '../ShoppingList/ShoppingList';
 
 import './App.css';
 
@@ -70,75 +70,53 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/trips"
-          >
+            exact path="/trips">
             <Trips />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/newtrip"
-          >
+            exact path="/newtrip">
             <NewTrip />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/paddlers"
-          >
+            exact path="/paddlers/:id">
             <Paddlers />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/dashboard"
-          >
+            exact path="/dashboard/:id">
             <Dashboard />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/gear"
-          >
+            exact path="/detail/:id">
+            <DetailTrips />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path="/gear/:id">
             <GearHome />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/meal"
-          >
+            exact path="/meal/:id"          >
             <MealHome />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/gearlist"
-          >
+            exact path="/shoppinglist/:id">
+            <ShoppingList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact path="/gearlist/:id">
             <GearList />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/meallist"
-          >
+            exact path="/meallist/:id">
             <MealList />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
           </ProtectedRoute>
 
           <Route

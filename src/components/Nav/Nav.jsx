@@ -29,11 +29,7 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/trips">
-             Past trips
-            </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
+              Past trips
             </Link>
 
             <LogOutButton className="navLink" />

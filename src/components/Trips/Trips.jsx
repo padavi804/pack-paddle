@@ -1,16 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function Trips() {
   const user = useSelector((store) => store.user);
-  const trips = useSelector((store) => store.trips);
+  const detail = useSelector((store) => store.detail);
+  const trips = useSelector((store) => store.trips)
   const history = useHistory();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS' });
+    dispatch({ type: 'FETCH_TRIPS'});
   }, [dispatch]);
 
 // useEffect(() => {
@@ -26,19 +28,28 @@ function Trips() {
 //   });
 // }
 
+const handleClick = (id) => {
+  console.log(id)
+  history.push(`/dashboard/${id}`);
+};
+
+
   return (
     <div className="container">
       <h2>Ahoy, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <div className="past-trips" key={trips.id}>
+      
         <h2>Past Trips</h2>
         {trips.map(trip => {
-          return <div className="list" key={trip.id}>
+          return <div className="list" key={trip.id} >
             <p>{trip.entry_point}</p>
-            <p>{trip.entry_date}</p>            
+            <p>{trip.entry_date}</p>
+            <p>{trip.tripid}</p> 
+            <button 
+            onClick={() => handleClick(trip.tripid)}
+            >Visit Trip </button>          
             </div>
         })}
-      </div>
+     
       <br/>
       <div className='newTrip'>
       <button

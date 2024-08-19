@@ -19,18 +19,19 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
   console.log('POST req.body', req.body);
   let newTrip = req.body;
-  let entryid = newTrip.entryPoint;
-  let entry_date = newTrip.entryDate;
+  let userid = newTrip.userid;
+  let entryid = newTrip.entryid;
+  let entry_date = newTrip.entry_date;
 
-  let queryText = `INSERT INTO trips (entryid, entry_date) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO trips (userid, entryid, entry_date) VALUES ($1, $2, $3) RETURNING id;`;
 
-  pool.query(queryText, [entryid, entry_date])
+  pool.query(queryText, [userid, entryid, entry_date])
     .then(dbResult => {
-      console.log('dbResult.rows', dbResult.rows);
-      res.sendStatus(201);
+      console.log('dbResult.rows Post Successful', dbResult.rows);
+      const tripid = dbResult.rows[0];
+      res.status(201).send({ id: tripid });
     })
     .catch(dbError => {
       console.log('dberror', dbError);

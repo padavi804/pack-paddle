@@ -1,57 +1,55 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
 
 
 
-function Dashboard() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+function MealList() {
   const user = useSelector((store) => store.user);
-  const history = useHistory();
+  const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
+  let [buy, setBuy] = useState('')
 
-  const fetchMeal = () => {
-    axios({
-      method: 'GET',
-      url: 'api/meal'
-    })
+
+  const fetchMeal = (id) => {
+    axios.get(`/api/meallist/${id}`)
       .then((response) => {
-        console.log(response.data);
+        console.log('Fetched meal data',response.data);
         setMealArray(response.data);
       })
       .catch((error) => {
         console.log('error fetching list', error);
       });
   }
-  useEffect(fetchMeal, []); 
+  useEffect(() => fetchMeal(id), [id]); 
 
-  const toggleBuy = (id) => {
-    console.log('toggling buy/bought status', id);
+  const toggleBuy = (mealid) => {
+    console.log('toggling buy/bought status', mealid);
 
     axios({
       method: 'PUT',
-      url: `/api/meal/buy/${id}`
+      url: `/api/meallist/buy/${mealid}`
     })
       .then((response) => {
         console.log('complete toggle successful', response);
-        fetchMeal();
+        fetchMeal(id);
       })
       .catch(function (error) {
         console.log(error)
       })
   }
 
- const deleteItem = (id) => {
+  const deleteItem = (deleteid) => {
     axios({
       method: 'DELETE',
-      url: `/api/meal/${id}`
+      url: `/api/meallist/${deleteid}`
     })
       .then((response) => {
         console.log('delete item worked', response)
-        fetchMeal();
+        fetchMeal(id);
       })
       .catch(function (error) {
         console.log(error)
@@ -60,26 +58,30 @@ function Dashboard() {
 
   return (
     <div className="container">
-      
-        <h2>Meal List</h2>
+
+      <h2>Meal List</h2>
       <table>
         <tbody>
           {mealArray.map((meal) => {
             return (
               <tr key={meal.id}
-              //  className={meal.buy ? 'true' : 'false'}
-               >
-                <td>{meal.item} {meal.quantity} {meal.meal} {meal.buy} {meal.paddlerid}</td>
-                <td><button className="buyButton" onClick={() => toggleBuy(meal.id)}> Mark Complete </button> </td>
+                // className={meal.buy ? 'true' : 'false'}
+              >
+                <td>{meal.item}</td>
+                <td>{meal.quantity}</td>
+                <td>{meal.meal}</td>
+                <td>{meal.buy}</td>
+                <td>{meal.paddlerid}</td>
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)}/></td>
                 <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
-                </tr>);
+              </tr>);
           })
           }
         </tbody>
       </table>
     </div>
-   
+
   );
 }
 
-export default Dashboard;
+export default MealList;

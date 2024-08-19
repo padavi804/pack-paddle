@@ -6,15 +6,25 @@ import axios from 'axios';
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
-import ShoppingList from '../ShoppingList/ShoppingList';
 
 
-function Dashboard() {
+
+function DetailTrips() {
   const user = useSelector((store) => store.user);
+  const detail = useSelector((store) => store.detail)
   const history = useHistory();
   const { id } = useParams();
 
   const [details, setDetails] = useState([]);
+  const [entryPoint, setEntryPoint] = useState('');
+  const [entryDate, setEntryDate] = useState('');
+  const [lat, setLat] = useState('');
+  const [lon, setLon] = useState('');
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_DETAIL', payload: id });
+  // }, [dispatch]);
 
   const getTrip = () => {
     axios({
@@ -22,7 +32,7 @@ function Dashboard() {
       url: `api/trips/detail/${id}`
     })
       .then((response) => {
-        // console.log('detail data', response.data);
+        console.log('detail data', response.data);
         setDetails(response.data);
       })
       .catch((error) => {
@@ -30,41 +40,25 @@ function Dashboard() {
       });
   }
   useEffect(getTrip, []);
-  // console.log(id)
+
 
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
-      <h2>Dashboard</h2>
-{details.map((detail) => {
-  return (
-    <div key={detail.id}>
-      <p>{detail.entry_point}</p>
-      <p>{detail.entry_date}</p>
-    </div>
-  )
-})} 
-      <br />
-      <div className='toGear'>
-        <button
-          type="button"
-          onClick={() => history.push(`/gear/${id}`)}
-        >Add to Gear List
-        </button>
-      </div>
-      <br />
-      <div className='toMeal'>
-        <button
-          type="button"
-          onClick={() => history.push(`/meal/${id}`)}
-        >Add to Meal List
-        </button>
-      </div>
-      <ShoppingList tripid = {id}/>
-      <GearList tripid = {id}/>
-      <MealList tripid = {id}/>
+
+      <h2>Detailed Trip</h2>
+      {details.map((detail) => {
+        return (
+          <div key={detail.id}>
+            <p>{detail.entry_point}</p>
+            <p>{detail.entry_date}</p>
+          </div>
+        )
+      })} 
+
+      <h5>End of DetailTrips</h5>
     </div>
   );
 }
 
-export default Dashboard;
+export default DetailTrips;
