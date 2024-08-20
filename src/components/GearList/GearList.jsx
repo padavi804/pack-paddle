@@ -81,7 +81,7 @@ function GearList() {
                 <td>{gear.item}</td>
                 <td>{gear.quantity}</td>
                 <td>{gear.buy}</td>
-                <td>{gear.paddlerid}</td>
+                <td>{gear.first_name}</td>
 
                 <td>
                 <input

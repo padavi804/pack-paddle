@@ -14,7 +14,7 @@ function NewTrip() {
   const [entryPoints, setEntryPoints] = useState([]);
   const [newEntryDate, setNewEntryDate] = useState('');
   const [entryPointId, setEntryPointId] = useState(0);
-  const [tripid, setTripid] = useState(0);  
+  // const [tripid, setTripid] = useState(0);  
 
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
@@ -34,7 +34,6 @@ function NewTrip() {
     e.preventDefault();
     console.log('comment submitted');
 
-      // console.log(entryPointId)
     axios({
       method: 'POST',
       url: '/api/newtrip',
@@ -47,18 +46,15 @@ function NewTrip() {
       .then((response) => {
         console.log('successful post', response);
         console.log('New trip ID:', response.data.id.id);
-        setTripid(response.data.id.id)       
-        fetchEntryPoint();
+        const tripid = response.data.id.id;
         setEntryPointId(0);
         setNewEntryDate('');
+        history.push(`/paddlers/${tripid}`);
       })
       .catch((error) => {
         console.log('post failed', error)
       })
-    history.push(`/paddlers/${tripid}`);
-   
   }
-
 
   return (
     <div className="container">
@@ -68,9 +64,9 @@ function NewTrip() {
       <label htmlFor="entrypoint">Choose Entry Point</label>
       <br />
       <form>
-        <select name='entrypoint' id='entrypoint' 
-        onChange={(evt) => setEntryPointId(evt.target.value)}
-        value={entryPointId}>
+        <select name='entrypoint' id='entrypoint'
+          onChange={(evt) => setEntryPointId(evt.target.value)}
+          value={entryPointId}>
           <option value={0}>Select an entry point</option>
           {entryPoints.map((entryPoint) => (
             <option key={entryPoint.id}

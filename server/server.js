@@ -12,8 +12,6 @@ const userRouter = require('./routes/user.router');
 const tripsRouter = require('./routes/trips.router');
 const newTripRouter = require('./routes/newtrip.router');
 const paddlersRouter = require('./routes/paddlers.router');
-const gearRouter = require('./routes/gear.router');
-const mealRouter = require('./routes/meal.router');
 const gearListRouter = require('./routes/gearlist.router');
 const mealListRouter = require('./routes/meallist.router');
 
@@ -34,8 +32,6 @@ app.use('/api/user', userRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/newtrip', newTripRouter);
 app.use('/api/paddlers', paddlersRouter);
-app.use('/api/gear', gearRouter);
-app.use('/api/meal', mealRouter);
 app.use('/api/gearlist', gearListRouter);
 app.use('/api/meallist', mealListRouter);
 
