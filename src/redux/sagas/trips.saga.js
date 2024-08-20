@@ -3,11 +3,12 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* fetchTrips(action) {
-  console.log("fetching past trips, due to action:", action);
+  console.log("fetching past trips, due to action:", action.payload);
 
   try {
-    const tripsResponse = yield axios.get('/api/trips');
+    const tripsResponse = yield axios.get(`/api/trips/${action.payload}`);
     console.log('serverResponse:', tripsResponse);
+    console.log('action payload:', action.payload);
 
 
     yield put({ type: 'SET_TRIPS', payload: tripsResponse.data });
