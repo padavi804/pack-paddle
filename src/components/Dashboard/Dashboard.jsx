@@ -23,6 +23,7 @@ function Dashboard() {
     })
       .then((response) => {
         // console.log('detail data', response.data);
+        console.log('details response', response.data);
         setDetails(response.data);
       })
       .catch((error) => {

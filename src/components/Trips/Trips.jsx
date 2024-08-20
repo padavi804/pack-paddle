@@ -12,7 +12,7 @@ function Trips() {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS'});
+    dispatch({ type: 'FETCH_TRIPS', payload: user.id});
   }, [dispatch]);
 
 // useEffect(() => {
