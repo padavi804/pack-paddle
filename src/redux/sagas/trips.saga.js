@@ -8,7 +8,7 @@ function* fetchTrips(action) {
   try {
     const tripsResponse = yield axios.get(`/api/trips/${action.payload}`);
     console.log('serverResponse:', tripsResponse);
-    console.log('action payload:', action.payload)
+    console.log('action payload:', action.payload);
 
 
     yield put({ type: 'SET_TRIPS', payload: tripsResponse.data });

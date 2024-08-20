@@ -13,7 +13,7 @@ function Trips() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_TRIPS', payload: user.id});
-  }, [dispatch]);
+  }, []);
 
 // useEffect(() => {
 //   fetchTrips();
@@ -43,9 +43,9 @@ const handleClick = (id) => {
           return <div className="list" key={trip.id} >
             <p>{trip.entry_point}</p>
             <p>{trip.entry_date}</p>
-            <p>{trip.tripid}</p> 
+            <p>{trip.id}</p> 
             <button 
-            onClick={() => handleClick(trip.tripid)}
+            onClick={() => handleClick(trip.id)}
             >Visit Trip </button>          
             </div>
         })}
