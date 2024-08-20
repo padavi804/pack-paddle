@@ -13,7 +13,7 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      {/* <LogOutButton className="btn" /> */}
       <button
           type="button"
           onClick={() => {
