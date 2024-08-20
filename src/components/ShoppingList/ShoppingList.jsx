@@ -12,7 +12,7 @@ function ShoppingList() {
   const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
   let [gearArray, setGearArray] = useState([]);
-  let [buy, setBuy] = useState('')
+  let [update, setUpdate] = useState(false)
 
 
   const fetchMeal = (id) => {
@@ -49,6 +49,7 @@ function ShoppingList() {
       .then((response) => {
         console.log('complete toggle successful', response);
         fetchMeal(id);
+        setUpdate(!update);
       })
       .catch(function (error) {
         console.log(error)
