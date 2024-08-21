@@ -88,7 +88,7 @@ function MealHome() {
         </select>
         <br />
         <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.checked)} checked={buy} value={buy}></input>
         <br />
         <select name='entrypoint' id='entrypoint' 
         onChange={(evt) => setPaddlerid(evt.target.value)}

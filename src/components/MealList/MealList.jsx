@@ -64,7 +64,7 @@ function MealList({mealUpdate}) {
           {mealArray.map((meal) => {
             return (
               <tr key={meal.id}
-                // className={meal.buy ? 'true' : 'false'}
+                className={meal.buy ? 'true' : 'false'}
               >
                 <td>{meal.item}</td>
                 <td>{meal.quantity}</td>

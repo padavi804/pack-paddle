@@ -79,7 +79,7 @@ function GearHome() {
         <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity}></input>      
         <br />
         <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>      
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.checked)} checked={buy} value={buy}></input>      
         <br />
         {/* <input placeholder="Paddler" onChange={(event) => setPaddlerid(event.target.value)}></input>       */}
         <select name='entrypoint' id='entrypoint' 
