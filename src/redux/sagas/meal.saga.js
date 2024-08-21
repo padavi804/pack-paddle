@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
 
 function* fetchMeal(action) {
@@ -32,15 +32,23 @@ function* setMeal(action) {
     }
 }
 
-function deleteMeal(action) {
-  
+function* deleteMeal(action) {
+  console.log('deleting meal list item', action);
+
+  try {
+    const mealResponse = yield axios.delete(`/api/meallist/${action.payload}`);
+    console.log('delete meal response', mealResponse);
+    yield put({type: 'FETCH_MEALS'});
+  }
+  catch(error){
+    console.log('Error deleting meal item from the server');
+  }
 }
 
 function* mealSaga() {
-  yield takeLatest('FETCH_MEAL', fetchMeal);
-  yield takeLatest('SET_MEAL', setMeal);
+  yield takeEvery('FETCH_MEAL', fetchMeal);
+  yield takeEvery('SET_MEAL', setMeal);
+  yield takeEvery('REMOVE_MEAL', deleteMeal);
 }
 
 export default mealSaga;
-
-

@@ -1,5 +1,5 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -9,21 +9,28 @@ import * as React from 'react';
 
 function MealList({mealUpdate}) {
   const user = useSelector((store) => store.user);
+  const meals = useSelector((store) => store.meal);
+  const dispatch = useDispatch();
   const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
 
 
-  const fetchMeal = (id) => {
-    axios.get(`/api/meallist/${id}`)
-      .then((response) => {
-        console.log('Fetched meal data',response.data);
-        setMealArray(response.data);
-      })
-      .catch((error) => {
-        console.log('error fetching list', error);
-      });
-  }
-  useEffect(() => fetchMeal(id), [id, mealUpdate]); 
+  // const fetchMeal = (id) => {
+  //   axios.get(`/api/meallist/${id}`)
+  //     .then((response) => {
+  //       console.log('Fetched meal data',response.data);
+  //       setMealArray(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('error fetching list', error);
+  //     });
+  // }
+  // useEffect(() => fetchMeal(id), [id, mealUpdate]); 
+
+
+useEffect(() => {
+  dispatch({ type: 'FETCH_MEAL', payload: id });
+}, [])
 
   const toggleBuy = (mealid) => {
     console.log('toggling buy/bought status', mealid);
@@ -61,7 +68,7 @@ function MealList({mealUpdate}) {
       <h2>Meal List</h2>
       <table>
         <tbody>
-          {mealArray.map((meal) => {
+          {meals.map((meal) => {
             return (
               <tr key={meal.id}
                 // className={meal.buy ? 'true' : 'false'}
