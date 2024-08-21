@@ -21,8 +21,9 @@ function GearHome() {
   const [quantity, setQuantity] = useState('');
   const [buy, setBuy] = useState(false);
   const [paddlerid, setPaddlerid] = useState('');
-
+  const [gearUpdate, setGearUpdate] = useState(false);
  
+// Generate paddler list for select input
 
   const fetchPaddlers = (id) => {
     axios.get(`/api/paddlers/names/${id}`).then((response) => {
@@ -36,6 +37,7 @@ function GearHome() {
 
   useEffect(() => fetchPaddlers(id), [id]); 
 
+  // Handles sending the input information to the database
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +50,7 @@ function GearHome() {
         item: item,
         quantity: quantity,
         buy: buy,
-        paddlerid: paddlerid
+        paddlerid: paddlerid,
       }
     })
       .then((response) => {
@@ -58,6 +60,7 @@ function GearHome() {
         setQuantity('');
         setBuy(false);
         setPaddlerid('');
+        setGearUpdate(!gearUpdate);
       })
       .catch((error) => {
         console.log('post failed', error)
@@ -71,12 +74,12 @@ function GearHome() {
         <h2>Add Gear</h2>
        
         <form>
-        <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
+        <input placeholder="Item" onChange={(event) => setItem(event.target.value)} value={item}></input>
         <br />
-        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>      
+        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity}></input>      
         <br />
         <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>      
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>      
         <br />
         {/* <input placeholder="Paddler" onChange={(event) => setPaddlerid(event.target.value)}></input>       */}
         <select name='entrypoint' id='entrypoint' 
@@ -100,7 +103,7 @@ function GearHome() {
       </div> 
       </form>
 
-<GearList tripid = {id}/>
+<GearList tripid = {id} gearUpdate={gearUpdate}/>
       <button
           type="button"
           onClick= {(e) => history.push(`/dashboard/${id}`)}

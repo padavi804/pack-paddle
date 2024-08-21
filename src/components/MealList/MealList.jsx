@@ -7,11 +7,10 @@ import * as React from 'react';
 
 
 
-function MealList() {
+function MealList({mealUpdate}) {
   const user = useSelector((store) => store.user);
   const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
-  let [buy, setBuy] = useState('')
 
 
   const fetchMeal = (id) => {
@@ -24,7 +23,7 @@ function MealList() {
         console.log('error fetching list', error);
       });
   }
-  useEffect(() => fetchMeal(id), [id]); 
+  useEffect(() => fetchMeal(id), [id, mealUpdate]); 
 
   const toggleBuy = (mealid) => {
     console.log('toggling buy/bought status', mealid);

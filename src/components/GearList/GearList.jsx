@@ -7,11 +7,10 @@ import * as React from 'react';
 
 
 
-function GearList() {
+function GearList({gearUpdate}) {
   const user = useSelector((store) => store.user);
   const { id } = useParams();
   let [gearArray, setGearArray] = useState([]);
-  let [initials, setInitials] = useState([]);
 
   const fetchGear = (id) => {
     axios.get(`/api/gearlist/${id}`)
@@ -23,19 +22,19 @@ function GearList() {
         console.log('error fetching list', error);
       });
   }
-  useEffect(() => fetchGear(id), [id]); 
+  useEffect(() => fetchGear(id), [id, gearUpdate]); 
 
-  const fetchInitials = (id) => {
-    axios.get(`/api/paddlers/initials/${id}`)
-      .then((response) => {
-        console.log('Fetched initials data',response.data);
-        setInitials(response.data);
-      })
-      .catch((error) => {
-        console.log('error fetching list', error);
-      });
-  }
-  useEffect(() => fetchInitials(id), [id]);
+  // const fetchInitials = (id) => {
+  //   axios.get(`/api/paddlers/initials/${id}`)
+  //     .then((response) => {
+  //       console.log('Fetched initials data',response.data);
+  //       setInitials(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('error fetching list', error);
+  //     });
+  // }
+  // useEffect(() => fetchInitials(id), [id]);
 
   const toggleBuy = (gearid) => {
     console.log('toggling buy/bought status', gearid);

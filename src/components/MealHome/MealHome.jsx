@@ -21,8 +21,9 @@ function MealHome() {
   const [meal, setMeal] = useState('');
   const [buy, setBuy] = useState(false);
   const [paddlerid, setPaddlerid] = useState('');
+  const [mealUpdate, setMealUpdate] = useState(false);
 
-
+// Generate paddler list for select input
   const fetchPaddlers = (id) => {
     axios.get(`/api/paddlers/names/${id}`).then((response) => {
       console.log(response.data)
@@ -34,6 +35,9 @@ function MealHome() {
   }
 
   useEffect(() => fetchPaddlers(id), [id]); 
+
+  // Handles sending the input information to the database
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,6 +62,7 @@ function MealHome() {
         setMeal('');
         setBuy(false);
         setPaddlerid('');
+        setMealUpdate(!mealUpdate);
       })
       .catch((error) => {
         console.log('meal post failed', error)
@@ -70,11 +75,11 @@ function MealHome() {
 
       <h2>Add to Meals</h2>
       <form>
-        <input placeholder="Item" onChange={(event) => setItem(event.target.value)}></input>
+        <input placeholder="Item" onChange={(event) => setItem(event.target.value)} value={item}></input>
         <br />
-        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)}></input>
+        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity} ></input>
         <br />
-        <select placeholder="Meal" name="Meal" id="cars" onChange={(event) => setMeal(event.target.value)}>
+        <select placeholder="Meal" name="Meal" id="cars" onChange={(event) => setMeal(event.target.value)} value={meal}>
         <option value="select">Select a meal</option>
           <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
@@ -83,7 +88,7 @@ function MealHome() {
         </select>
         <br />
         <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)}></input>
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>
         <br />
         <select name='entrypoint' id='entrypoint' 
         onChange={(evt) => setPaddlerid(evt.target.value)}
@@ -107,7 +112,7 @@ function MealHome() {
       </form>
 
 {/* MealList Component Displayed */}
-      <MealList tripid = {id}/>
+      <MealList tripid = {id} mealUpdate={mealUpdate}/>
       <button
         type="button"
         onClick={(e) => history.push(`/dashboard/${id}`)}
