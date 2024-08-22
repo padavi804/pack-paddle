@@ -91,7 +91,7 @@ function MealList({tripid}) {
                 <td>{meal.quantity}</td>
                 <td>{meal.meal}</td>
                 <td>{meal.first_name}</td>
-                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)} /></td>
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(tripid, meal.id)} /></td>
                 {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
               </tr>);
           })

@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 router.put('/buy/:mealid', (req, res) => {
   console.log('router PUT req params are:',req.params);
   console.log('router PUT req body is', req.body);
-  let id= req.body.id;
+  let id= req.params.mealid;
 
   const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 
