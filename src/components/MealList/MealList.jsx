@@ -7,13 +7,13 @@ import * as React from 'react';
 
 
 
-function MealList({mealUpdate}) {
+function MealList() {
   const user = useSelector((store) => store.user);
   const meals = useSelector((store) => store.meal);
   const dispatch = useDispatch();
   const { id } = useParams();
   let [mealArray, setMealArray] = useState([]);
-
+  let [buy, setBuy] = useState(false)
 
   // const fetchMeal = (id) => {
   //   axios.get(`/api/meallist/${id}`)
@@ -28,39 +28,65 @@ function MealList({mealUpdate}) {
   // useEffect(() => fetchMeal(id), [id, mealUpdate]); 
 
 
-useEffect(() => {
-  dispatch({ type: 'FETCH_MEAL', payload: id });
-}, [])
 
-  const toggleBuy = (mealid) => {
-    console.log('toggling buy/bought status', mealid);
+  // Redux Saga Fetch
+  useEffect(() => {
+    dispatch({ type: 'FETCH_MEAL', payload: id });
+  }, []);
 
-    axios({
-      method: 'PUT',
-      url: `/api/meallist/buy/${mealid}`
-    })
-      .then((response) => {
-        console.log('complete toggle successful', response);
-        fetchMeal(id);
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
+  // Redux Saga Update
 
-  const deleteItem = (deleteid) => {
-    axios({
-      method: 'DELETE',
-      url: `/api/meallist/${deleteid}`
-    })
-      .then((response) => {
-        console.log('delete item worked', response)
-        fetchMeal(id);
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
+  const toggleBuy = ( tripdid, id, currentBuyStatus) => {
+    console.log('Toggling buy/bought status for meal:', currentBuyStatus, id);
+
+    // Dispatch action to update the meal with the new buy status
+    dispatch({ 
+      type: 'UPDATE_MEAL', 
+      payload: { 
+        // tripid: tripid,      
+        id: id, 
+        buy: !currentBuyStatus 
+      } 
+    });
+  };
+
+
+//   const toggleBuy = (() => {setBuy(!buy )
+//     console.log('toggling buy/bought status', );
+// })
+
+
+//     useEffect(() => {
+//       dispatch({ type: 'UPDATE_MEAL', payload: { id, buy: buy} });
+//     }, []);
+
+  
+  //   axios({
+  //     method: 'PUT',
+  //     url: `/api/meallist/buy/${mealid}`
+  //   })
+  //     .then((response) => {
+  //       console.log('complete toggle successful', response);
+  //       fetchMeal(id);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error)
+  //     })
+
+
+  // const deleteItem = (deleteid) => {
+  //   axios({
+  //     method: 'DELETE',
+  //     url: `/api/meallist/${deleteid}`
+  //   })
+  //     .then((response) => {
+  //       console.log('delete item worked', response)
+  //       fetchMeal(id);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error)
+  //     })
+  // }
 
   return (
     <div className="container">
@@ -70,16 +96,13 @@ useEffect(() => {
         <tbody>
           {meals.map((meal) => {
             return (
-              <tr key={meal.id}
-                // className={meal.buy ? 'true' : 'false'}
-              >
+              <tr key={meal.id}>
                 <td>{meal.item}</td>
                 <td>{meal.quantity}</td>
                 <td>{meal.meal}</td>
-                <td>{meal.buy}</td>
                 <td>{meal.first_name}</td>
-                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)}/></td>
-                <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} value={meal.buy} onChange={() => toggleBuy(meal.id, meal.buy)} /></td>
+                {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
               </tr>);
           })
           }

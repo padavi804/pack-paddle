@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 
 function* fetchMeal(action) {
@@ -17,19 +17,35 @@ function* fetchMeal(action) {
   }
 }
 
-function* setMeal(action) {
-  console.log('action payload set details', action.payload)
-  try{
-    const mealResponse = yield axios.get(`/api/meallist`);
-    console.log('detail:', mealResponse);
+// Update, Create, ==> include fetch meal saga
 
-    yield put ({
-      type:'SET_MEAL',
-      payload: mealResponse.data,
-    });
-    } catch (error) {
-      console.log('fecthMeal error:', error);
-    }
+// function* createMeal(action) {
+//   console.log('updating meal list', action);
+
+//   try {
+//     const mealResponse = axios.post(`/api/meallist`);
+//     console.log('create/post meal response', mealResponse);
+
+//     yield put({type: 'FETCH_MEAL', payload: action});
+//   }
+//   catch(error) {
+//     console.log('Error updating meal to the server')
+//   }
+// }
+
+function* updateMeal(action) {
+  console.log('updating meal list', action);
+
+  try {
+    const { id, buy } = action.payload;
+    const mealResponse = yield axios({method: 'PUT', url:`/api/meallist/buy/${action.payload}`, data: { id: id, buy: buy}});
+    console.log('update/put meal response', mealResponse);
+
+    yield put({type: 'FETCH_MEAL' });
+  }
+  catch(error) {
+    console.log('Error updating meal to the server')
+  }
 }
 
 function* deleteMeal(action) {
@@ -38,7 +54,7 @@ function* deleteMeal(action) {
   try {
     const mealResponse = yield axios.delete(`/api/meallist/${action.payload}`);
     console.log('delete meal response', mealResponse);
-    yield put({type: 'FETCH_MEALS'});
+    yield put({type: 'FETCH_MEAL', payload: action });  // Don't forget the payload with the tripId
   }
   catch(error){
     console.log('Error deleting meal item from the server');
@@ -47,7 +63,8 @@ function* deleteMeal(action) {
 
 function* mealSaga() {
   yield takeEvery('FETCH_MEAL', fetchMeal);
-  yield takeEvery('SET_MEAL', setMeal);
+  // yield takeEvery('CREATE_MEAL', createMeal);
+  yield takeEvery('UPDATE_MEAL', updateMeal);
   yield takeEvery('REMOVE_MEAL', deleteMeal);
 }
 

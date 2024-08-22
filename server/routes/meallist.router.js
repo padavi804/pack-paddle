@@ -7,12 +7,12 @@ const router = express.Router();
  */
 router.get('/:id', (req, res) => {
   const tripId = req.params.id;
-  console.log('reqparams is:', req.params);
+  console.log('GET reqparams are:', req.params);
   let queryText = `SELECT meallist.id, item, meal, quantity, buy, paddlerid, tripid, first_name, last_name FROM meallist
 JOIN paddlers ON meallist.paddlerid = paddlers.id WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId])
   .then((result) => {
-    console.log('MealList results', result.rows)
+    // console.log('MealList results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);
@@ -50,9 +50,9 @@ router.post('/', (req, res) => {
  * PUT route
  */
 router.put('/buy/:mealid', (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  let id= req.params.mealid;
+  console.log('router PUT req params are:',req.params);
+  console.log('router PUT req body is', req.body);
+  let id= req.params.id;
 
   const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 
