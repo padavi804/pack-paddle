@@ -33,15 +33,15 @@ function* fetchMeal(action) {
 //   }
 // }
 
-function* updateMeal(action) {
+function* updateMeal(action, mealId) {
   console.log('updating meal list', action);
 
   try {
-    const { tripid, buy, mealId } = action.payload;
-    const mealResponse = yield axios({method: 'PUT', url:`/api/meallist/buy/${action.payload}`, data: { tripid, buy, mealId}});
+    const { tripid, mealId } = action.payload;
+    const mealResponse = yield axios({method: 'PUT', url:`/api/meallist/buy/${action.payload}`, data: { tripid, mealId}});
     console.log('update/put meal response', mealResponse);
 
-    yield put({type: 'FETCH_MEAL' , payload: tripid});
+    yield put({type: 'FETCH_MEAL' , payload: mealId });
   }
   catch(error) {
     console.log('Error updating meal to the server')

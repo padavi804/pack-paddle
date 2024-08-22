@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 router.put('/buy/:mealid', (req, res) => {
   console.log('router PUT req params are:',req.params);
   console.log('router PUT req body is', req.body);
-  let id= req.params.id;
+  let id= req.body.id;
 
   const queryText = `UPDATE "meallist" SET "buy" = NOT "buy" WHERE "id" = $1;`;
 
@@ -61,7 +61,6 @@ router.put('/buy/:mealid', (req, res) => {
       .then(dbResult => {
           console.log(`Got stuff back from the database`, dbResult);
           res.sendStatus(201);
-
       })
       .catch(dbError => {
           console.log(`Error making database query ${queryText}`, dbError);

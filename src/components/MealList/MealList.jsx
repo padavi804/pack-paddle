@@ -36,15 +36,14 @@ function MealList({tripid}) {
 
   // Redux Saga Update
 
-  const toggleBuy = ( mealId, buyStatus) => {
-    console.log('Toggling buy/bought status for meal:', tripid, buyStatus, mealId);
+  const toggleBuy = ( tripid, mealId ) => {
+    console.log('Toggling buy/bought status for meal:', tripid, mealId);
 
       dispatch({ 
       type: 'UPDATE_MEAL', 
       payload: { 
         tripid: tripid,      
-        id: mealId, 
-        buy: buyStatus 
+        mealId: mealId 
       } 
     });
   };
@@ -92,7 +91,7 @@ function MealList({tripid}) {
                 <td>{meal.quantity}</td>
                 <td>{meal.meal}</td>
                 <td>{meal.first_name}</td>
-                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={(e) => toggleBuy(meal.id, e.target.checked)} /></td>
+                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)} /></td>
                 {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
               </tr>);
           })
