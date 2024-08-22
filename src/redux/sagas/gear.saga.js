@@ -33,6 +33,8 @@ function* fetchGear(action) {
 //   }
 // }
 
+
+// Update Saga
 function* updateGear(action) {
   console.log('updating gear list', action);
 
@@ -48,13 +50,17 @@ function* updateGear(action) {
   }
 }
 
+
+// Delete Saga
 function* deleteGear(action) {
   console.log('deleting gear list item', action);
 
   try {
-    const gearResponse = yield axios.delete(`/api/gearlist/${action.payload}`);
-    console.log('delete gear response', gearResponse);
-    yield put({type: 'FETCH_GEAR', payload: action });  // Don't forget the payload with the tripId
+    const { tripid, gearId } = action.payload;
+    const gearResponse = yield axios({method: 'DELETE', url:`/api/gearlist/${gearId}`, data: { tripid }});
+    console.log('update/put gear response', gearResponse);
+
+    yield put({type: 'FETCH_GEAR' , payload: tripid });
   }
   catch(error){
     console.log('Error deleting gear item from the server');
@@ -65,7 +71,7 @@ function* gearSaga() {
   yield takeEvery('FETCH_GEAR', fetchGear);
   // yield takeEvery('CREATE_GEAR', createGear);
   yield takeEvery('UPDATE_GEAR', updateGear);
-  yield takeEvery('REMOVE_GEAR', deleteGear);
+  yield takeEvery('DELETE_GEAR', deleteGear);
 }
 
 export default gearSaga;

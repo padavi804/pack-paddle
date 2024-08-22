@@ -33,7 +33,7 @@ useEffect(() => {
 // Redux Saga Update
 
 const toggleBuy = ( tripid, gearId ) => {
-  console.log('Toggling buy/bought status for meal:', tripid, gearId);
+  console.log('Toggling buy/bought status for gear:', tripid, gearId);
 
     dispatch({ 
     type: 'UPDATE_GEAR', 
@@ -44,7 +44,19 @@ const toggleBuy = ( tripid, gearId ) => {
   });
 };
 
+// Redux Saga Remove
 
+const deleteGear = ( tripid, gearId ) => {
+  console.log('Deleting piece of gear from list:', tripid, gearId);
+
+    dispatch({ 
+    type: 'DELETE_GEAR', 
+    payload: { 
+      tripid: tripid,      
+      gearId: gearId 
+    } 
+  });
+};
 
   // const toggleBuy = (gearid) => {
   //   console.log('toggling buy/bought status', gearid);
@@ -98,7 +110,7 @@ const toggleBuy = ( tripid, gearId ) => {
                 />
               </td>
                 {/* <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td> */}
-                {/* <td><button className="deleteButton" onClick={() => deleteItem(gear.id)}>Remove</button></td> */}
+                <td><button className="deleteButton" onClick={() => deleteGear(tripid, gear.id)}>Remove</button></td>
                 </tr>);
           })
           }

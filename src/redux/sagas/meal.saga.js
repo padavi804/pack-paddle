@@ -52,9 +52,11 @@ function* deleteMeal(action) {
   console.log('deleting meal list item', action);
 
   try {
-    const mealResponse = yield axios.delete(`/api/meallist/${action.payload}`);
-    console.log('delete meal response', mealResponse);
-    yield put({type: 'FETCH_MEAL', payload: action });  // Don't forget the payload with the tripId
+    const { tripid, mealId } = action.payload;
+    const mealResponse = yield axios({method: 'DELETE', url:`/api/meallist/${mealId}`, data: { tripid }});
+    console.log('update/put meal response', mealResponse);
+
+    yield put({type: 'FETCH_MEAL' , payload: tripid });
   }
   catch(error){
     console.log('Error deleting meal item from the server');
@@ -65,7 +67,7 @@ function* mealSaga() {
   yield takeEvery('FETCH_MEAL', fetchMeal);
   // yield takeEvery('CREATE_MEAL', createMeal);
   yield takeEvery('UPDATE_MEAL', updateMeal);
-  yield takeEvery('REMOVE_MEAL', deleteMeal);
+  yield takeEvery('DELETE_MEAL', deleteMeal);
 }
 
 export default mealSaga;

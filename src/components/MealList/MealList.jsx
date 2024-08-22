@@ -45,7 +45,19 @@ function MealList({ tripid }) {
     });
   };
 
+  // Redux Saga Delete
 
+  const deleteMeal = (tripid, mealId) => {
+    console.log('Deleting piece of food from list:', tripid, mealId);
+
+    dispatch({
+      type: 'DELETE_MEAL',
+      payload: {
+        tripid: tripid,
+        mealId: mealId
+      }
+    });
+  };
 
 
   //   axios({
@@ -93,7 +105,7 @@ function MealList({ tripid }) {
                   checked={meal.buy}
                   onChange={() => toggleBuy(tripid, meal.id)}
                 /></td>
-                {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
+                <td><button className="deleteButton" onClick={() => deleteMeal(tripid, meal.id)}>Remove</button></td>
               </tr>);
           })
           }

@@ -12,7 +12,7 @@ router.get('/:id', (req, res) => {
                   JOIN paddlers ON paddlers.id = gearlist.paddlerid WHERE paddlers.tripid = $1;`;
   pool.query(queryText, [tripId])
   .then((result) => {
-    console.log('GearList results', result.rows)
+    // console.log('GearList results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
     console.log(error);
