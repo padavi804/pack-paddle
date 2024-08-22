@@ -39,8 +39,10 @@ const handleClick = (id) => {
       <h2>Ahoy, {user.username}!</h2>
       
         <h2>Past Trips</h2>
-        {trips.map(trip => {
-          return <div className="list" key={trip.id} >
+        {trips.map((trip) => {
+          return (
+          
+          <div className="list" key={trip.id} >
             <p>{trip.entry_point}</p>
             <p>{trip.entry_date}</p>
             <p>{trip.id}</p> 
@@ -48,7 +50,7 @@ const handleClick = (id) => {
             onClick={() => handleClick(trip.id)}
             >Visit Trip </button>          
             </div>
-        })}
+        )})}
      
       <br/>
       <div className='newTrip'>
