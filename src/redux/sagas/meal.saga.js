@@ -37,11 +37,11 @@ function* updateMeal(action) {
   console.log('updating meal list', action);
 
   try {
-    const { id, buy } = action.payload;
-    const mealResponse = yield axios({method: 'PUT', url:`/api/meallist/buy/${action.payload}`, data: { id: id, buy: buy}});
+    const { tripid, buy, mealId } = action.payload;
+    const mealResponse = yield axios({method: 'PUT', url:`/api/meallist/buy/${action.payload}`, data: { tripid, buy, mealId}});
     console.log('update/put meal response', mealResponse);
 
-    yield put({type: 'FETCH_MEAL' });
+    yield put({type: 'FETCH_MEAL' , payload: tripid});
   }
   catch(error) {
     console.log('Error updating meal to the server')
