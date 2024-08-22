@@ -12,8 +12,8 @@ function Trips() {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_TRIPS'});
-  }, [dispatch]);
+    dispatch({ type: 'FETCH_TRIPS', payload: user.id});
+  }, []);
 
 // useEffect(() => {
 //   fetchTrips();
@@ -39,16 +39,18 @@ const handleClick = (id) => {
       <h2>Ahoy, {user.username}!</h2>
       
         <h2>Past Trips</h2>
-        {trips.map(trip => {
-          return <div className="list" key={trip.id} >
+        {trips.map((trip) => {
+          return (
+          
+          <div className="list" key={trip.id} >
             <p>{trip.entry_point}</p>
             <p>{trip.entry_date}</p>
-            <p>{trip.tripid}</p> 
+            <p>{trip.id}</p> 
             <button 
-            onClick={() => handleClick(trip.tripid)}
+            onClick={() => handleClick(trip.id)}
             >Visit Trip </button>          
             </div>
-        })}
+        )})}
      
       <br/>
       <div className='newTrip'>

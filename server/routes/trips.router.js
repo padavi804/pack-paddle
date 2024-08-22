@@ -17,15 +17,14 @@ const router = express.Router();
 //   });
 // });
 
-router.get('/', (req, res) => {
-  
-  let queryText = `SELECT entry_date, entry_point, tripid FROM trips
-                  JOIN entrypoints ON trips.entryid = entrypoints.id
-                  JOIN paddlers ON paddlers.tripid = trips.id;`
-//   `SELECT userid, entry_date, entry_point, longitude, latitude, tripid FROM trips 
-// JOIN entrypoints ON trips.entryid = entrypoints.id
-// JOIN paddlers ON paddlers.tripid = trips.id;`;
-  pool.query(queryText).then((result) => {
+router.get('/:id', (req, res) => {
+  const userid = req.params.id
+  console.log('reqparams id:', req.params.id);
+  let queryText = `SELECT entry_date, entry_point, trips.id, userid FROM trips
+                  JOIN entrypoints ON trips.entryid = entrypoints.id                                   
+                  WHERE userid = $1;`;
+  pool.query(queryText, [userid])
+  .then((result) => {
     console.log('Trips results', result.rows)
     res.send(result.rows);
   }).catch((error) => {
@@ -33,6 +32,11 @@ router.get('/', (req, res) => {
     res.sendStatus(500);
   });
 });
+
+//   `SELECT userid, entry_date, entry_point, longitude, latitude, tripid FROM trips 
+// JOIN entrypoints ON trips.entryid = entrypoints.id
+// JOIN paddlers ON paddlers.tripid = trips.id;`;
+
 
 router.get('/detail/:id', (req, res) => {
   const tripId = req.params.id;
@@ -47,8 +51,8 @@ router.get('/detail/:id', (req, res) => {
     trips.id AS tripid
   FROM trips
   JOIN entrypoints ON trips.entryid = entrypoints.id
-  JOIN paddlers ON paddlers.tripid = trips.id
-  WHERE paddlers.tripid = $1;
+
+  WHERE trips.id = $1;
 `;
   pool.query(queryText, [tripId])
   .then((result) => {

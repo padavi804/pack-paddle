@@ -1,5 +1,5 @@
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -7,54 +7,41 @@ import * as React from 'react';
 
 
 
-function MealList() {
-  const user = useSelector((store) => store.user);
+function MealList({ tripid }) {
+  const meals = useSelector((store) => store.meal);
+  const dispatch = useDispatch();
   const { id } = useParams();
-  let [mealArray, setMealArray] = useState([]);
-  let [buy, setBuy] = useState('')
 
+  // Redux Saga Fetch
+  useEffect(() => {
+    dispatch({ type: 'FETCH_MEAL', payload: id });
+  }, []);
 
-  const fetchMeal = (id) => {
-    axios.get(`/api/meallist/${id}`)
-      .then((response) => {
-        console.log('Fetched meal data',response.data);
-        setMealArray(response.data);
-      })
-      .catch((error) => {
-        console.log('error fetching list', error);
-      });
-  }
-  useEffect(() => fetchMeal(id), [id]); 
+  // Redux Saga Update
+  const toggleBuy = (tripid, mealId) => {
+    console.log('Toggling buy/bought status for meal:', tripid, mealId);
 
-  const toggleBuy = (mealid) => {
-    console.log('toggling buy/bought status', mealid);
+    dispatch({
+      type: 'UPDATE_MEAL',
+      payload: {
+        tripid: tripid,
+        mealId: mealId
+      }
+    });
+  };
 
-    axios({
-      method: 'PUT',
-      url: `/api/meallist/buy/${mealid}`
-    })
-      .then((response) => {
-        console.log('complete toggle successful', response);
-        fetchMeal(id);
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
+  // Redux Saga Delete
+  const deleteMeal = (tripid, mealId) => {
+    console.log('Deleting piece of food from list:', tripid, mealId);
 
-  const deleteItem = (deleteid) => {
-    axios({
-      method: 'DELETE',
-      url: `/api/meallist/${deleteid}`
-    })
-      .then((response) => {
-        console.log('delete item worked', response)
-        fetchMeal(id);
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
+    dispatch({
+      type: 'DELETE_MEAL',
+      payload: {
+        tripid: tripid,
+        mealId: mealId
+      }
+    });
+  };
 
   return (
     <div className="container">
@@ -62,18 +49,19 @@ function MealList() {
       <h2>Meal List</h2>
       <table>
         <tbody>
-          {mealArray.map((meal) => {
+          {meals.map((meal) => {
             return (
-              <tr key={meal.id}
-                // className={meal.buy ? 'true' : 'false'}
-              >
+              <tr key={meal.id}>
                 <td>{meal.item}</td>
                 <td>{meal.quantity}</td>
                 <td>{meal.meal}</td>
-                <td>{meal.buy}</td>
                 <td>{meal.first_name}</td>
-                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(meal.id)}/></td>
-                <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td>
+                <td><input type="checkbox"
+                  className="buyCheckbox"
+                  checked={meal.buy}
+                  onChange={() => toggleBuy(tripid, meal.id)}
+                /></td>
+                <td><button className="deleteButton" onClick={() => deleteMeal(tripid, meal.id)}>Remove</button></td>
               </tr>);
           })
           }
