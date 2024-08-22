@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
+// Redux Saga Fetch
 function* fetchGear(action) {
   console.log("fetching gear list, due to action:", action.payload);
 
@@ -16,23 +16,6 @@ function* fetchGear(action) {
     console.log('gear get request failed', error);
   }
 }
-
-// Update, Create, ==> include fetch GEAR saga
-
-// function* createGear(action) {
-//   console.log('updating gear list', action);
-
-//   try {
-//     const gearResponse = axios.post(`/api/gearlist`);
-//     console.log('create/post gear response', gearResponse);
-
-//     yield put({type: 'FETCH_GEAR', payload: action});
-//   }
-//   catch(error) {
-//     console.log('Error creating gear to the server')
-//   }
-// }
-
 
 // Update Saga
 function* updateGear(action) {
@@ -49,7 +32,6 @@ function* updateGear(action) {
     console.log('Error updating gear to the server')
   }
 }
-
 
 // Delete Saga
 function* deleteGear(action) {
@@ -69,7 +51,6 @@ function* deleteGear(action) {
 
 function* gearSaga() {
   yield takeEvery('FETCH_GEAR', fetchGear);
-  // yield takeEvery('CREATE_GEAR', createGear);
   yield takeEvery('UPDATE_GEAR', updateGear);
   yield takeEvery('DELETE_GEAR', deleteGear);
 }
