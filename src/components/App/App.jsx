@@ -70,7 +70,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            exact path="/trips">
+            exact path="/trips/:id">
             <Trips />
           </ProtectedRoute>
 

@@ -17,24 +17,24 @@ function* fetchTrips(action) {
   }
 }
 
-function* setDetail(action) {
-  console.log('action payload set details', action.payload)
-  try{
-    const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
-    console.log('detail:', detailResponse);
+// function* setDetail(action) {
+//   console.log('action payload set details', action.payload)
+//   try{
+//     const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
+//     console.log('detail:', detailResponse);
 
-    yield put ({
-      type:'SET_DETAIL',
-      payload: detailResponse.data,
-    });
-    } catch (error) {
-      console.log('fecthDetails error:', error);
-    }
-}
+//     yield put ({
+//       type:'SET_DETAIL',
+//       payload: detailResponse.data,
+//     });
+//     } catch (error) {
+//       console.log('fecthDetails error:', error);
+//     }
+// }
 
 function* tripsSaga() {
   yield takeLatest('FETCH_TRIPS', fetchTrips);
-  yield takeLatest('SET_DETAIL', setDetail);
+  // yield takeLatest('SET_DETAIL', setDetail);
 }
 
 export default tripsSaga;

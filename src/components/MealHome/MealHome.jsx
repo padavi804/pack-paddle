@@ -69,6 +69,8 @@ function MealHome() {
       })
   }
 
+
+  
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
