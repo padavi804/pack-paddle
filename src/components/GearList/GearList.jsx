@@ -7,11 +7,10 @@ import * as React from 'react';
 
 
 
-function GearList({tripid}) {
+function GearList({ tripid }) {
   const gears = useSelector((store) => store.gear);
   const dispatch = useDispatch();
   const { id } = useParams();
-  let [gearArray, setGearArray] = useState([]);
 
   // const fetchGear = (id) => {
   //   axios.get(`/api/gearlist/${id}`)
@@ -25,38 +24,36 @@ function GearList({tripid}) {
   // }
   // useEffect(() => fetchGear(id), [id, gearUpdate]); 
 
-// Redux Saga Fetch
-useEffect(() => {
-  dispatch({ type: 'FETCH_GEAR', payload: id });
-}, []);
+  // Redux Saga Fetch
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GEAR', payload: id });
+  }, []);
 
-// Redux Saga Update
+  // Redux Saga Update
+  const toggleBuy = (tripid, gearId) => {
+    console.log('Toggling buy/bought status for gear:', tripid, gearId);
 
-const toggleBuy = ( tripid, gearId ) => {
-  console.log('Toggling buy/bought status for gear:', tripid, gearId);
+    dispatch({
+      type: 'UPDATE_GEAR',
+      payload: {
+        tripid: tripid,
+        gearId: gearId
+      }
+    });
+  };
 
-    dispatch({ 
-    type: 'UPDATE_GEAR', 
-    payload: { 
-      tripid: tripid,      
-      gearId: gearId 
-    } 
-  });
-};
+  // Redux Saga Remove
+  const deleteGear = (tripid, gearId) => {
+    console.log('Deleting piece of gear from list:', tripid, gearId);
 
-// Redux Saga Remove
-
-const deleteGear = ( tripid, gearId ) => {
-  console.log('Deleting piece of gear from list:', tripid, gearId);
-
-    dispatch({ 
-    type: 'DELETE_GEAR', 
-    payload: { 
-      tripid: tripid,      
-      gearId: gearId 
-    } 
-  });
-};
+    dispatch({
+      type: 'DELETE_GEAR',
+      payload: {
+        tripid: tripid,
+        gearId: gearId
+      }
+    });
+  };
 
   // const toggleBuy = (gearid) => {
   //   console.log('toggling buy/bought status', gearid);
@@ -74,24 +71,24 @@ const deleteGear = ( tripid, gearId ) => {
   //     })
   // }
 
-//  const deleteItem = (deleteid) => {
-//     axios({
-//       method: 'DELETE',
-//       url: `/api/gearlist/${deleteid}`
-//     })
-//       .then((response) => {
-//         console.log('delete item worked', response)
-//         fetchGear(id);
-//       })
-//       .catch(function (error) {
-//         console.log(error)
-//       })
-//   }
+  //  const deleteItem = (deleteid) => {
+  //     axios({
+  //       method: 'DELETE',
+  //       url: `/api/gearlist/${deleteid}`
+  //     })
+  //       .then((response) => {
+  //         console.log('delete item worked', response)
+  //         fetchGear(id);
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error)
+  //       })
+  //   }
 
   return (
     <div className="container">
-    
-        <h2>Gear List</h2>
+
+      <h2>Gear List</h2>
       <table>
         <tbody>
           {gears.map((gear) => {
@@ -102,22 +99,22 @@ const deleteGear = ( tripid, gearId ) => {
                 <td>{gear.buy}</td>
                 <td>{gear.first_name}</td>
                 <td>
-                <input
-                  type="checkbox"
-                  className="buyCheckbox"
-                  checked={gear.buy}
-                  onChange={() => toggleBuy(tripid, gear.id)}                  
-                />
-              </td>
+                  <input
+                    type="checkbox"
+                    className="buyCheckbox"
+                    checked={gear.buy}
+                    onChange={() => toggleBuy(tripid, gear.id)}
+                  />
+                </td>
                 {/* <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td> */}
                 <td><button className="deleteButton" onClick={() => deleteGear(tripid, gear.id)}>Remove</button></td>
-                </tr>);
+              </tr>);
           })
           }
         </tbody>
       </table>
     </div>
-   
+
   );
 }
 

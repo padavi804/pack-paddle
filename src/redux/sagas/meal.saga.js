@@ -33,6 +33,8 @@ function* fetchMeal(action) {
 //   }
 // }
 
+
+// Redux Saga Update
 function* updateMeal(action) {
   console.log('updating meal list', action);
 
@@ -48,6 +50,7 @@ function* updateMeal(action) {
   }
 }
 
+// Redux Saga Remove
 function* deleteMeal(action) {
   console.log('deleting meal list item', action);
 

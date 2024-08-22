@@ -12,27 +12,12 @@ function MealList({ tripid }) {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // const fetchMeal = (id) => {
-  //   axios.get(`/api/meallist/${id}`)
-  //     .then((response) => {
-  //       console.log('Fetched meal data',response.data);
-  //       setMealArray(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log('error fetching list', error);
-  //     });
-  // }
-  // useEffect(() => fetchMeal(id), [id, mealUpdate]); 
-
-
-
   // Redux Saga Fetch
   useEffect(() => {
     dispatch({ type: 'FETCH_MEAL', payload: id });
   }, []);
 
   // Redux Saga Update
-
   const toggleBuy = (tripid, mealId) => {
     console.log('Toggling buy/bought status for meal:', tripid, mealId);
 
@@ -46,7 +31,6 @@ function MealList({ tripid }) {
   };
 
   // Redux Saga Delete
-
   const deleteMeal = (tripid, mealId) => {
     console.log('Deleting piece of food from list:', tripid, mealId);
 
@@ -58,34 +42,6 @@ function MealList({ tripid }) {
       }
     });
   };
-
-
-  //   axios({
-  //     method: 'PUT',
-  //     url: `/api/meallist/buy/${mealid}`
-  //   })
-  //     .then((response) => {
-  //       console.log('complete toggle successful', response);
-  //       fetchMeal(id);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-
-
-  // const deleteItem = (deleteid) => {
-  //   axios({
-  //     method: 'DELETE',
-  //     url: `/api/meallist/${deleteid}`
-  //   })
-  //     .then((response) => {
-  //       console.log('delete item worked', response)
-  //       fetchMeal(id);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // }
 
   return (
     <div className="container">
