@@ -4,7 +4,8 @@ import user from './user.reducer';
 import trips from './trips.reducer';
 import paddlers from './paddlers.reducer';
 import detail from './detail.reducer';
-import meal from './meal.reducer'
+import meal from './meal.reducer';
+import gear from './gear.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   trips,
   paddlers,
   detail,
-  meal
+  meal,
+  gear
 });
 
 export default rootReducer;

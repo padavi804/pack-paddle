@@ -7,13 +7,10 @@ import * as React from 'react';
 
 
 
-function MealList({tripid}) {
-  const user = useSelector((store) => store.user);
+function MealList({ tripid }) {
   const meals = useSelector((store) => store.meal);
   const dispatch = useDispatch();
   const { id } = useParams();
-  let [mealArray, setMealArray] = useState([]);
-  let [buy, setBuy] = useState(false)
 
   // const fetchMeal = (id) => {
   //   axios.get(`/api/meallist/${id}`)
@@ -36,21 +33,21 @@ function MealList({tripid}) {
 
   // Redux Saga Update
 
-  const toggleBuy = ( tripid, mealId ) => {
+  const toggleBuy = (tripid, mealId) => {
     console.log('Toggling buy/bought status for meal:', tripid, mealId);
 
-      dispatch({ 
-      type: 'UPDATE_MEAL', 
-      payload: { 
-        tripid: tripid,      
-        mealId: mealId 
-      } 
+    dispatch({
+      type: 'UPDATE_MEAL',
+      payload: {
+        tripid: tripid,
+        mealId: mealId
+      }
     });
   };
 
 
 
-  
+
   //   axios({
   //     method: 'PUT',
   //     url: `/api/meallist/buy/${mealid}`
@@ -91,7 +88,11 @@ function MealList({tripid}) {
                 <td>{meal.quantity}</td>
                 <td>{meal.meal}</td>
                 <td>{meal.first_name}</td>
-                <td><input type="checkbox" className="buyCheckbox" checked={meal.buy} onChange={() => toggleBuy(tripid, meal.id)} /></td>
+                <td><input type="checkbox"
+                  className="buyCheckbox"
+                  checked={meal.buy}
+                  onChange={() => toggleBuy(tripid, meal.id)}
+                /></td>
                 {/* <td><button className="deleteButton" onClick={() => deleteItem(meal.id)}>Remove</button></td> */}
               </tr>);
           })
