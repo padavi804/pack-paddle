@@ -37,9 +37,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
   return (
     <div className="container">
-      <h2>Ahoy, {user.username}!</h2>
-      
-        <h2>Past Trips</h2>
+      <box className='bx'>
+        <h1>Past Trips</h1>
+      </box>
+        
       
         <Box sx={{ width: '100%' }}>
         <Stack spacing={1} >
@@ -60,18 +61,6 @@ const Item = styled(Paper)(({ theme }) => ({
           })}
         </Stack>
       </Box>
-        
-          
-          
-          {/* <div className="list"  >
-            <p>{trip.id}. {trip.entry_point}</p>
-            <p>{formattedDate}</p>
-            <p></p> 
-            <button
-            onClick={() => handleClick(trip.id)}
-            >Visit Trip </button>          
-            </div> */}
-        
      
       <br/>
       <div className='newTrip'>

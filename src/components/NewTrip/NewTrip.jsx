@@ -58,8 +58,6 @@ function NewTrip() {
 
   return (
     <div className="container">
-      <h2>Ahoy, {user.username}!</h2>
-
       <h2>New Trip Details</h2>
       <label htmlFor="entrypoint">Choose Entry Point</label>
       <br />

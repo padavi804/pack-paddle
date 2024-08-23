@@ -7,7 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-image: url('../../../documentation/images/topo.png');
+  background-image: url('../../../documentation/images/topo2.png');
 }
 
 img {
@@ -30,11 +30,11 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #1c1f18;
+  border-color: #332d22;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #718060;
-  color: #f8f8f8;
+  background-color: #ab9571;
+  color: #332d22;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
