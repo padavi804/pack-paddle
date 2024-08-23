@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+
 import axios from 'axios';
 import * as React from 'react';
 import './NewTrip.css'
@@ -60,38 +61,60 @@ function NewTrip() {
 
   return (
     <div className="container">
-      <h1>New Trip Details</h1>      
+      <h1>New Trip Details</h1>
       <br />
-      
-        <label htmlFor="entrypoint">Choose Entry Point</label>
-      
-        
-        <div className="inputs">
-      <form>
-         <select className='dropdown' name='entrypoint' id='entrypoint'
+
+      <label htmlFor="entrypoint">Choose Entry Point</label>
+      <div className='inputs'>
+        <Autocomplete
+          disablePortal
+          id="entryPoints"
+          options={entryPoints}
+          getOptionLabel={(option) => `${option.entry_number}. ${option.entry_point}`}
+          sx={{ width: 300 }}
+          onChange={(event, newValue) => {
+            setEntryPointId(newValue ? newValue.id : null);
+          }}
+          renderInput={(params) => <TextField {...params} label="Entry Point" />}
+        />
+      </div>
+      {/* <Autocomplete
+  disablePortal
+  id="combo-box-demo"
+  options={entryPoints}
+  sx={{ width: 300 }}
+  renderInput={(params) => <TextField {...params} {entryPoints.map((entryPoint) => (
+            <p key={entryPoint.id}
+              value={entryPoint.id}>
+              {entryPoint.entry_number}. {entryPoint.entry_point}
+            </p>
+          ))}label="Entrypoints" />}
+/> */}
+
+      <div className="inputs">
+        <form>
+
+        {/* <DatePicker label="Basic date picker" /> */}
+  
+          {/* <select className='dropdown' name='entrypoint' id='entrypoint'
           onChange={(evt) => setEntryPointId(evt.target.value)}
           value={entryPointId}>
           <option value={0}>Select an entry point</option>
-          {entryPoints.map((entryPoint) => (
-            <option key={entryPoint.id}
-              value={entryPoint.id}>
-              {entryPoint.entry_number}. {entryPoint.entry_point}
-            </option>
-          ))}
-        </select>
-        <br />
-        <div className='dateSelection'>
-          <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
-        </div>
-        <br />
-        <div className='toPaddlers'>
-          <button
-            type="button"
-            onClick={(e) => handleSubmit(e)}
-          >Add Paddlers
-          </button>
-        </div>
-      </form>
+          
+        </select> */}
+          <br />
+          <div className='dateSelection'>
+            <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
+          </div>
+          <br />
+          <div className='toPaddlers'>
+            <button
+              type="button"
+              onClick={(e) => handleSubmit(e)}
+            >Add Paddlers
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 

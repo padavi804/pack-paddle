@@ -2,7 +2,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Button from '@mui/material/Button';
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
@@ -35,8 +40,7 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <h2>Your trip awaits, {user.username}!</h2>
-      <h2>Dashboard</h2>
+      <h1>Dashboard</h1>
 {details.map((detail) => {
   return (
     <div key={detail.id}>
