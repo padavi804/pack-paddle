@@ -2,9 +2,11 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
 import * as React from 'react';
-
+import './NewTrip.css'
 
 
 function NewTrip() {
@@ -58,11 +60,15 @@ function NewTrip() {
 
   return (
     <div className="container">
-      <h2>New Trip Details</h2>
-      <label htmlFor="entrypoint">Choose Entry Point</label>
+      <h1>New Trip Details</h1>      
       <br />
+      
+        <label htmlFor="entrypoint">Choose Entry Point</label>
+      
+        
+        <div className="inputs">
       <form>
-        <select name='entrypoint' id='entrypoint'
+         <select className='dropdown' name='entrypoint' id='entrypoint'
           onChange={(evt) => setEntryPointId(evt.target.value)}
           value={entryPointId}>
           <option value={0}>Select an entry point</option>
@@ -73,13 +79,10 @@ function NewTrip() {
             </option>
           ))}
         </select>
-
         <br />
         <div className='dateSelection'>
           <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
         </div>
-
-
         <br />
         <div className='toPaddlers'>
           <button
@@ -89,6 +92,7 @@ function NewTrip() {
           </button>
         </div>
       </form>
+      </div>
     </div>
 
   );

@@ -35,11 +35,47 @@ Button
     text-decoration: none;
   }
 
+/* --------------------------------------------------------------------------------
+Text by size
+-------------------------------------------------------------------------------- */
+
   h1 {
     color:#ab9571;
     background-color: #332d22;
+    border-radius: 5px;
   }
 
   p {
     color: #332d22;
   }
+
+  /* --------------------------------------------------------------------------------
+Container
+-------------------------------------------------------------------------------- */
+.inputs {
+    width: auto;
+    height: autp;
+    background-color: #f1f2ef;
+    opacity: .9;
+    border-radius: 5px;
+    display: flex;
+  place-content: center;
+  align-items: center; 
+}
+
+label {
+    width: auto;
+    height: autp;
+    background-color: #f1f2ef;
+    opacity: .9;
+    border-radius: 5px;
+    display: flex;
+  place-content: center;
+  align-items: center; 
+  padding: 10px;
+}
+
+  /* --------------------------------------------------------------------------------
+Select Dropdown
+-------------------------------------------------------------------------------- */
+
