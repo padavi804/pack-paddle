@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 
 function* fetchTrips(action) {
@@ -17,24 +17,24 @@ function* fetchTrips(action) {
   }
 }
 
-// function* setDetail(action) {
-//   console.log('action payload set details', action.payload)
-//   try{
-//     const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
-//     console.log('detail:', detailResponse);
+function* fetchDetail(action) {
+  console.log('action payload set details', action.payload)
+  try{
+    const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
+    console.log('detail:', detailResponse);
 
-//     yield put ({
-//       type:'SET_DETAIL',
-//       payload: detailResponse.data,
-//     });
-//     } catch (error) {
-//       console.log('fecthDetails error:', error);
-//     }
-// }
+    yield put ({
+      type:'SET_DETAIL',
+      payload: detailResponse.data,
+    });
+    } catch (error) {
+      console.log('fecthDetails error:', error);
+    }
+}
 
 function* tripsSaga() {
-  yield takeLatest('FETCH_TRIPS', fetchTrips);
-  // yield takeLatest('SET_DETAIL', setDetail);
+  yield takeEvery('FETCH_TRIPS', fetchTrips);
+  yield takeEvery('FETCH_DETAIL', fetchDetail);
 }
 
 export default tripsSaga;

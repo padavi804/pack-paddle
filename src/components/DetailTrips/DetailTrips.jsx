@@ -2,16 +2,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+i
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
 
 
 
-function DetailTrips() {
+function DetailTrips({tripid}) {
   const user = useSelector((store) => store.user);
-  const detail = useSelector((store) => store.detail)
+  const trips = useSelector((store) => store.trips)
   const history = useHistory();
   const { id } = useParams();
 
@@ -22,9 +22,13 @@ function DetailTrips() {
   const [lon, setLon] = useState('');
   const dispatch = useDispatch();
 
+
+
   // useEffect(() => {
   //   dispatch({ type: 'SET_DETAIL', payload: id });
-  // }, [dispatch]);
+  // }, [dispatch, id]);
+
+  // console.log('trips from store:', trips)
 
   const getTrip = () => {
     axios({
@@ -46,12 +50,17 @@ function DetailTrips() {
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
+
+
       <h2>Detailed Trip</h2>
       {details.map((detail) => {
         return (
           <div key={detail.id}>
             <p>{detail.entry_point}</p>
             <p>{detail.entry_date}</p>
+            <p>{detail.longitude}</p>
+            <p>{detail.latitude}</p>
+
           </div>
         )
       })} 
