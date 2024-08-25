@@ -42,3 +42,11 @@ Button
     background-color: #8d9980;
     text-decoration: none;
   }
+
+  .text {
+    background-color: #f8f8f8;
+    width: auto;
+    border-radius: 5px;
+    padding: 5px;
+    opacity: .9;
+  }

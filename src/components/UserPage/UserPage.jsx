@@ -11,14 +11,17 @@ function UserPage() {
 
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
+      <h1>Welcome, {user.username}!</h1>
+      <div className="text">
       <p>Your ID is: {user.id}</p>
       <p>Click on the trips button below to being planning your adventure!</p>
+      </div> 
+      <br/>
       <button className="btn" variant="contained" type="button" 
           onClick={() => {
             history.push(`/trips/${user.id}`);
           }}>Trips
-          </button>     
+          </button>    
     </div>
   );
 }
