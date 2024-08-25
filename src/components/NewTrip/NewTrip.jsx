@@ -4,7 +4,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import axios from 'axios';
 import * as React from 'react';
 import './NewTrip.css'
@@ -71,6 +74,13 @@ function NewTrip() {
 
       <div className="inputs">
         <form>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker label="Basic date picker" />
+      </DemoContainer>
+    </LocalizationProvider>
+
+
 
         <select className='dropdown' name='entrypoint' id='entrypoint'
           onChange={(evt) => setEntryPointId(evt.target.value)}
