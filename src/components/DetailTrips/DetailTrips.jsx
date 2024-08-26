@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Loader } from "@googlemaps/js-api-loader"
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
@@ -41,7 +41,11 @@ function DetailTrips() {
   }
   useEffect(getTrip, []);
 
+    apiKey: "process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
 
+ 
+
+  
   return (
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
@@ -55,7 +59,6 @@ function DetailTrips() {
           </div>
         )
       })} 
-
       <h5>End of DetailTrips</h5>
     </div>
   );
