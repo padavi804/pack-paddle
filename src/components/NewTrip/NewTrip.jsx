@@ -75,9 +75,7 @@ function NewTrip() {
       <div className="inputs">
         <form>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
         <DatePicker label="Basic date picker" />
-      </DemoContainer>
     </LocalizationProvider>
 
 

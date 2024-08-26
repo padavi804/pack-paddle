@@ -113,7 +113,7 @@ function ShoppingList({tripid}) {
   return (
     <div className="container">
 
-      <h2>Shopping List</h2>
+      {/* <h2>Shopping List</h2> */}
       <table>
         <tbody>
           {filteredMeal.map((meal) => {

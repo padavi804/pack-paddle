@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-i
+
 import * as React from 'react';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
@@ -50,7 +50,7 @@ function DetailTrips({tripid}) {
     <div className="container">
       <h2>Greetings, {user.username}!</h2>
 
-
+<img url="https://www.bwca.com/index.cfm?fuseaction=maps.entrydetail&olon=-92.3220&olat=47.9144&nlon=-92.3220&nlat=47.9144&zoom=14&size=500&locid=1&ft=e&locname=Trout%20Lake&maptype=2"/>
 
       <h2>Detailed Trip</h2>
       {details.map((detail) => {
