@@ -4,7 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 
 function Paddlers() {
@@ -61,11 +62,26 @@ function Paddlers() {
         <h2>New Trip Details</h2>
         <label htmlFor="entrypoint">Add Paddlers</label>
         <br />
+        <div className='names'>
         <form>
-        <input placeholder="First Name" onChange={(event) => setFirstName(event.target.value)}></input>
-        <br />
-        <input placeholder="Last Name" onChange={(event) => setLastName(event.target.value)}></input>      
+        <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="outlined-basic" label="First Name" variant="outlined" onChange={(event) => setFirstName(event.target.value)}/>
       <br />
+      <TextField id="outlined-basic" label="Last Name" variant="outlined" onChange={(event) => setLastName(event.target.value)}/>
+      </Box>
+        {/* <input placeholder="First Name" onChange={(event) => setFirstName(event.target.value)}></input>
+        <br />
+        <input placeholder="Last Name" onChange={(event) => setLastName(event.target.value)}></input>       */}
+    
+      <br />
+      
       <div className='toPaddlers'>
         <button
           type="button"
@@ -73,7 +89,10 @@ function Paddlers() {
         >Add Paddler
         </button>        
       </div> 
-      </form>
+        </form>
+      </div>
+
+      <div>
 <ul>
 <div className="past-trips" key={paddlers.id}>
         <h2>Paddlers</h2>
@@ -92,7 +111,7 @@ function Paddlers() {
         >Start Packing
         </button>  
     </div>
-   
+   </div>
   );
 }
 
