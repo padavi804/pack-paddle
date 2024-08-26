@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
 import ShoppingList from '../ShoppingList/ShoppingList';
-import './Dashboard.css'
+import './Dashboard.css';
 
 function Dashboard() {
   const user = useSelector((store) => store.user);
@@ -91,6 +91,7 @@ function Dashboard() {
             </AccordionSummary>
           <AccordionDetails>
           <button
+          className='btn'
           type="button"
           onClick={() => history.push(`/meal/${id}`)}
         >Add to Meal List
@@ -109,6 +110,7 @@ function Dashboard() {
             </AccordionSummary>
           <AccordionDetails>
           <button
+           className='btn'
           type="button"
           onClick={() => history.push(`/gear/${id}`)}
         >Add to Gear List

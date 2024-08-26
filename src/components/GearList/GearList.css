@@ -1,6 +1,3 @@
-.accordian {
-    opacity: .5;
-}
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -51,3 +48,18 @@ Text by size
   p {
     color: #332d22;
   }
+
+
+
+
+.container {
+    max-width: fit-content;
+    height: autp;
+    margin-inline: auto;
+    background-color: #f1f2ef;
+    opacity: .9;
+    border-radius: 5px;
+    padding: 15px;
+  place-content: center;
+  align-items: center;
+}

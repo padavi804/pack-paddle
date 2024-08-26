@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Autocomplete from '@mui/material/Autocomplete';
 
+
 import GearList from '../GearList/GearList';
 import './GearHome.css'
 
@@ -76,8 +77,8 @@ function GearHome() {
   return (
     <div className="container">
 
-      <h2>Add Gear</h2>
-
+      <h1>Add Gear</h1>
+<div className='inputs'>
       <form>
         <Box
           component="form"
@@ -126,7 +127,6 @@ function GearHome() {
 
 
 
-
         {/* <select name='paddlers' id='paddlers'
           onChange={(evt) => setPaddlerid(evt.target.value)}
           value={paddlerid}>
@@ -141,15 +141,18 @@ function GearHome() {
         <br />
         <div className='toPaddlers'>
           <button
+          className='btn'
             type="button"
             onClick={(e) => handleSubmit(e)}
           >Add to Pack
           </button>
         </div>
       </form>
+</div>
 
       <GearList tripid={id} gearUpdate={gearUpdate} />
       <button
+      className='btn'
         type="button"
         onClick={(e) => history.push(`/dashboard/${id}`)}
 
