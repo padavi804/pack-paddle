@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
 import ShoppingList from '../ShoppingList/ShoppingList';
-
+import './Dashboard.css'
 
 function Dashboard() {
   const user = useSelector((store) => store.user);
@@ -50,7 +50,7 @@ function Dashboard() {
         )
       })}
       <br />
-      <div className='toGear'>
+      {/* <div className='toGear'>
         <button
           type="button"
           onClick={() => history.push(`/gear/${id}`)}
@@ -64,56 +64,59 @@ function Dashboard() {
           onClick={() => history.push(`/meal/${id}`)}
         >Add to Meal List
         </button>
-      </div>
+      </div> */}
 
-      <div>
+      <div className='accordion'>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            Shopping List
+            <h3>Shopping List</h3>
             </AccordionSummary>
           <AccordionDetails>
-        <ShoppingList />
+        <ShoppingList tripid={id}/>
           </AccordionDetails>
         </Accordion>
+
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"
-            ShoppingList >
-
-          </AccordionSummary>
+            >
+              
+            <h3>Meal List</h3>
+            </AccordionSummary>
           <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          <button
+          type="button"
+          onClick={() => history.push(`/meal/${id}`)}
+        >Add to Meal List
+        </button>
+            <MealList tripid={id}/>
           </AccordionDetails>
         </Accordion>
+
         <Accordion defaultExpanded>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel3-content"
             id="panel3-header"
           >
-            Accordion Actions
-          </AccordionSummary>
+            <h3>Gear List</h3>
+            </AccordionSummary>
           <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </AccordionDetails>
-          <AccordionActions>
-            <Button>Cancel</Button>
-            <Button>Agree</Button>
-          </AccordionActions>
+          <button
+          type="button"
+          onClick={() => history.push(`/gear/${id}`)}
+        >Add to Gear List
+        </button>
+        <GearList tripid={id}/>
+          </AccordionDetails> 
         </Accordion>
       </div>
-      <ShoppingList tripid={id} />
-      <GearList tripid={id} />
-      <MealList tripid={id} />
-      <p>"A towel, it says, is about the most massively useful thing an interstellar hitchhiker can have"</p>
     </div>
   );
 }

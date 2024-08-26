@@ -46,7 +46,6 @@ function MealList({ tripid }) {
   return (
     <div className="container">
 
-      <h2>Meal List</h2>
       <table>
         <tbody>
           {meals.map((meal) => {

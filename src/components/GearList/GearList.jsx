@@ -88,7 +88,6 @@ function GearList({ tripid }) {
   return (
     <div className="container">
 
-      <h2>Gear List</h2>
       <table>
         <tbody>
           {gears.map((gear) => {
