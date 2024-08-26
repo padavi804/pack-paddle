@@ -18,9 +18,11 @@ function NewTrip() {
   const paddlers = useSelector((store) => store.paddlers)
   const history = useHistory();
   const [entryPoints, setEntryPoints] = useState([]);
-  const [newEntryDate, setNewEntryDate] = useState('');
+  const [newEntryDate, setNewEntryDate] = useState(null);
   const [entryPointId, setEntryPointId] = useState(0);
   // const [tripid, setTripid] = useState(0);  
+
+
 
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
@@ -69,18 +71,50 @@ function NewTrip() {
 
       <label htmlFor="entrypoint">Choose Entry Point</label>
       <div className='inputs'>
-        
+
       </div>
 
       <div className="inputs">
         <form>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker label="Basic date picker" />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={entryPoints}
+            getOptionLabel={(option) => `${option.entry_number}. ${option.entry_point}`}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Entry Point" />}
+            onChange={(event, value) => {
+              setEntryPointId(value ? value.id : '');
+            }}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+          />
+
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs} >
+            <DemoContainer components={['DatePicker']}>
+              <DatePicker label="Basic date picker"
+                sx={{ width: 300 }}
+                value={newEntryDate}
+                onChange={(evt) => setNewEntryDate(evt.target.value)}
+              />
+            </DemoContainer>
+          </LocalizationProvider> */}
+
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker
+          label="Basic date picker"
+          sx={{ width: 300 }}
+          value={newEntryDate}
+          onChange={(date) => setNewEntryDate(date)}
+          // renderInput={(params) => <TextField {...params} />}
+        />
+      </DemoContainer>
     </LocalizationProvider>
 
 
 
-        <select className='dropdown' name='entrypoint' id='entrypoint'
+
+          {/* <select className='dropdown' name='entrypoint' id='entrypoint'
           onChange={(evt) => setEntryPointId(evt.target.value)}
           value={entryPointId}>
           <option value={0}>Select an entry point</option>
@@ -95,7 +129,7 @@ function NewTrip() {
           <div className='dateSelection'>
             <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
           </div>
-          <br />
+          <br /> */}
           <div className='toPaddlers'>
             <button
               type="button"

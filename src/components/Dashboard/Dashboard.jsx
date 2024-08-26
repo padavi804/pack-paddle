@@ -99,7 +99,7 @@ function Dashboard() {
           </AccordionDetails>
         </Accordion>
 
-        <Accordion defaultExpanded>
+        <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel3-content"
