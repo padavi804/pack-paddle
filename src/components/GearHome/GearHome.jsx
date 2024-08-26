@@ -117,7 +117,7 @@ function GearHome() {
             id="combo-box-demo"
             options={paddlers}
             getOptionLabel={(option) => `${option.first_name}. ${option.last_name}`}
-            sx={{ width: 300 }}
+            sx={{ width: 250 }}
             renderInput={(params) => <TextField {...params} label="Who is responsible for this?" />}
             onChange={(event, value) => {
               setPaddlerid(value ? value.id : '');

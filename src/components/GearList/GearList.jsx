@@ -62,6 +62,7 @@ function GearList({ tripid }) {
     });
   };
 
+  // Generate Avatar Letters
   function stringToColor(string) {
     let hash = 0;
     let i;
@@ -91,36 +92,7 @@ function GearList({ tripid }) {
     };
   }
 
-  // let name = `${gears.first_name} ${gears.last_name}`
-  // const toggleBuy = (gearid) => {
-  //   console.log('toggling buy/bought status', gearid);
-
-  //   axios({
-  //     method: 'PUT',
-  //     url: `/api/gearlist/buy/${gearid}`
-  //   })
-  //     .then((response) => {
-  //       console.log('buy toggle successful', response);
-  //       fetchGear(id);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // }
-
-  //  const deleteItem = (deleteid) => {
-  //     axios({
-  //       method: 'DELETE',
-  //       url: `/api/gearlist/${deleteid}`
-  //     })
-  //       .then((response) => {
-  //         console.log('delete item worked', response)
-  //         fetchGear(id);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error)
-  //       })
-  //   }
+  
 
   return (
     <div className="container">
@@ -157,6 +129,7 @@ function GearList({ tripid }) {
                     onChange={() => toggleBuy(tripid, gear.id)}
                   />
             </TableCell>
+            <TableCell> <button className="deleteButton" onClick={() => deleteGear(tripid, gear.id)}>X</button></TableCell>
             </TableRow>
 
           ))}
