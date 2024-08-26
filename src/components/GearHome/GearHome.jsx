@@ -16,7 +16,6 @@ import './GearHome.css'
 
 
 function GearHome() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   // const paddlers = useSelector((store) => store.paddlers);
   const dispatch = useDispatch();
@@ -76,7 +75,6 @@ function GearHome() {
 
   return (
     <div className="container">
-      <h2>Greetings, {user.username}!</h2>
 
       <h2>Add Gear</h2>
 
