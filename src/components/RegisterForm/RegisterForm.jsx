@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import './RegisterForm.css'
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -28,7 +31,24 @@ function RegisterForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          required
+          id="outlined-required"
+          label="Username"
+          placeholder="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        /> </div></Box></div>
+        {/* <label htmlFor="username">
           Username:
           <input
             type="text"
@@ -37,10 +57,28 @@ function RegisterForm() {
             required
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-      </div>
+        </label> */}
+      
       <div>
-        <label htmlFor="password">
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          required
+          id="outlined-password-input"
+          label="Password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        /> </div></Box>
+        {/* <label htmlFor="password">
           Password:
           <input
             type="password"
@@ -49,7 +87,7 @@ function RegisterForm() {
             required
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
+        </label> */}
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />

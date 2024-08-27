@@ -2,9 +2,15 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import axios from 'axios';
 import * as React from 'react';
-
+import './NewTrip.css'
 
 
 function NewTrip() {
@@ -12,9 +18,11 @@ function NewTrip() {
   const paddlers = useSelector((store) => store.paddlers)
   const history = useHistory();
   const [entryPoints, setEntryPoints] = useState([]);
-  const [newEntryDate, setNewEntryDate] = useState('');
+  const [newEntryDate, setNewEntryDate] = useState(null);
   const [entryPointId, setEntryPointId] = useState(0);
   // const [tripid, setTripid] = useState(0);  
+
+
 
   const fetchEntryPoint = () => {
     axios.get('/api/newtrip').then((response) => {
@@ -58,39 +66,48 @@ function NewTrip() {
 
   return (
     <div className="container">
-      <h2>Ahoy, {user.username}!</h2>
+      <h1>New Trip Details</h1>
 
-      <h2>New Trip Details</h2>
-      <label htmlFor="entrypoint">Choose Entry Point</label>
-      <br />
-      <form>
-        <select name='entrypoint' id='entrypoint'
-          onChange={(evt) => setEntryPointId(evt.target.value)}
-          value={entryPointId}>
-          <option value={0}>Select an entry point</option>
-          {entryPoints.map((entryPoint) => (
-            <option key={entryPoint.id}
-              value={entryPoint.id}>
-              {entryPoint.entry_number}. {entryPoint.entry_point}
-            </option>
-          ))}
-        </select>
+      <div className='inputs'>
 
-        <br />
-        <div className='dateSelection'>
-          <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
-        </div>
+      </div>
 
+      <div className="inputs">
+        <form>
+          <Autocomplete
+            disablePortal
+            id="Entry Point"
+            options={entryPoints}
+            getOptionLabel={(option) => `${option.entry_number}. ${option.entry_point}`}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Entry Point" />}
+            onChange={(event, value) => {
+              setEntryPointId(value ? value.id : '');
+            }}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+          />
 
-        <br />
-        <div className='toPaddlers'>
-          <button
-            type="button"
-            onClick={(e) => handleSubmit(e)}
-          >Add Paddlers
-          </button>
-        </div>
-      </form>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={['DatePicker']}>
+              <DatePicker
+                label="Entry Date"
+                sx={{ width: 300 }}
+                value={newEntryDate}
+                onChange={(date) => setNewEntryDate(date)}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+          <br />
+          <div className='toPaddlers'>
+            <button
+              className='btn'
+              type="button"
+              onClick={(e) => handleSubmit(e)}
+            >Add Paddlers
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
   );

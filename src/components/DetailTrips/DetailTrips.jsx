@@ -9,11 +9,13 @@ import GearList from '../GearList/GearList';
 
 
 
-function DetailTrips() {
-//   const user = useSelector((store) => store.user);
-//   const detail = useSelector((store) => store.detail)
-//   const history = useHistory();
-//   const { id } = useParams();
+
+function DetailTrips({tripid}) {
+  const user = useSelector((store) => store.user);
+  const trips = useSelector((store) => store.trips)
+  const history = useHistory();
+  const { id } = useParams();
+
 
 //   const [details, setDetails] = useState([]);
 //   const [entryPoint, setEntryPoint] = useState('');
@@ -22,9 +24,15 @@ function DetailTrips() {
 //   const [lon, setLon] = useState('');
 //   const dispatch = useDispatch();
 
-//   // useEffect(() => {
-//   //   dispatch({ type: 'SET_DETAIL', payload: id });
-//   // }, [dispatch]);
+
+
+
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_DETAIL', payload: id });
+  // }, [dispatch, id]);
+
+  // console.log('trips from store:', trips)
+
 
 //   const getTrip = () => {
 //     axios({
@@ -45,10 +53,22 @@ function DetailTrips() {
 
  
 
-  
-//   return (
-//     <div className="container">
-//       <h2>Greetings, {user.username}!</h2>
+<img url="https://www.bwca.com/index.cfm?fuseaction=maps.entrydetail&olon=-92.3220&olat=47.9144&nlon=-92.3220&nlat=47.9144&zoom=14&size=500&locid=1&ft=e&locname=Trout%20Lake&maptype=2"/>
+
+      <h2>Detailed Trip</h2>
+      {details.map((detail) => {
+        return (
+          <div key={detail.id}>
+            <p>{detail.entry_point}</p>
+            <p>{detail.entry_date}</p>
+            <p>{detail.longitude}</p>
+            <p>{detail.latitude}</p>
+
+          </div>
+        )
+      })} 
+
+
 
 //       <h2>Detailed Trip</h2>
 //       {details.map((detail) => {

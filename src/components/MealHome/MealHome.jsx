@@ -4,8 +4,18 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as React from 'react';
-import MealList from '../MealList/MealList'
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Autocomplete from '@mui/material/Autocomplete';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MealList from '../MealList/MealList';
+import './MealHome.css';
 
 function MealHome() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -55,53 +65,88 @@ function MealHome() {
   
   return (
     <div className="container">
-      <h2>Greetings, {user.username}!</h2>
 
-      <h2>Add to Meals</h2>
+      <h2>Add Meals</h2>
+
+      <div className='inputs'>
       <form>
-        <input placeholder="Item" onChange={(event) => setItem(event.target.value)} value={item}></input>
-        <br />
-        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity} ></input>
-        <br />
-        <select placeholder="Meal" name="Meal" id="cars" onChange={(event) => setMeal(event.target.value)} value={meal}>
-        <option value="select">Select a meal</option>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-          <option value="snack">Snack</option>
-        </select>
-        <br />
-        <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.checked)} checked={buy} value={buy}></input>
-        <br />
-        <select name='entrypoint' id='entrypoint' 
-        onChange={(evt) => setPaddlerid(evt.target.value)}
-        value={paddlerid}>
-          <option value={0}>Who is responsible for this?</option>
-          {paddlers.map((paddler) => (
-            <option key={paddler.id}
-              value={paddler.id}>
-              {paddler.first_name}. {paddler.last_name}
-            </option>
-          ))}
-        </select>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" label="Item" variant="outlined" onChange={(event) => setItem(event.target.value)} value={item} />
+          <br />
+          <TextField id="outlined-basic" label="Quantity" variant="outlined" onChange={(event) => setQuantity(event.target.value)} value={quantity} />
+          <br />
+          <FormControl fullWidth>
+          <InputLabel id="meal">Meal</InputLabel>
+  <Select
+    labelId="meal"
+    placeholder="meal"
+    id="meal"
+    label="Meal"
+    onChange={(event) => setMeal(event.target.value)} 
+    value={meal}
+  >
+    <MenuItem value="Breakfast">Breakfast</MenuItem>
+    <MenuItem value="Lunch">Lunch</MenuItem>
+    <MenuItem value="Dinner">Dinner</MenuItem>
+    <MenuItem value="Snack">Snack</MenuItem>
+
+  </Select>
+  </FormControl>
+
+          <FormGroup>
+          <FormControlLabel control={<Checkbox defaultChecked />} 
+          onChange={(event) => setBuy(event.target.value)} 
+          value={buy}
+          label="Add to Shopping List"
+           />
+          </FormGroup>
+        </Box>
+       
+        <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={paddlers.id}
+            options={paddlers}
+            getOptionLabel={(option) => `${option.first_name}. ${option.last_name}`}
+            sx={{ width: 250 }}
+            renderInput={(params) => <TextField {...params} label="Who is responsible for this?" />}
+            onChange={(event, value) => {
+              setPaddlerid(value ? value.id : '');
+            }}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
+          />
+
+
         <br />
         <div className='toPaddlers'>
           <button
+          className='btn'
             type="button"
             onClick={(e) => handleSubmit(e)}
-          >Add
+          >Add to Pack
           </button>
         </div>
       </form>
+</div>
+
 
 {/* MealList Component Displayed */}
+<div className='mealComponent'>
       <MealList tripid = {id} mealUpdate={mealUpdate}/>
       <button
+        className='btn'
         type="button"
         onClick={(e) => history.push(`/dashboard/${id}`)}
       >Return to Dashboard
       </button>
+      </div>
     </div>
 
   );
