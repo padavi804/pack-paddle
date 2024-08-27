@@ -67,9 +67,7 @@ function NewTrip() {
   return (
     <div className="container">
       <h1>New Trip Details</h1>
-      <br />
 
-      <label htmlFor="entrypoint">Choose Entry Point</label>
       <div className='inputs'>
 
       </div>
@@ -78,7 +76,7 @@ function NewTrip() {
         <form>
           <Autocomplete
             disablePortal
-            id="combo-box-demo"
+            id="Entry Point"
             options={entryPoints}
             getOptionLabel={(option) => `${option.entry_number}. ${option.entry_point}`}
             sx={{ width: 300 }}
@@ -89,49 +87,20 @@ function NewTrip() {
             isOptionEqualToValue={(option, value) => option.id === value.id}
           />
 
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs} >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker']}>
-              <DatePicker label="Basic date picker"
+              <DatePicker
+                label="Entry Date"
                 sx={{ width: 300 }}
                 value={newEntryDate}
-                onChange={(evt) => setNewEntryDate(evt.target.value)}
+                onChange={(date) => setNewEntryDate(date)}
               />
             </DemoContainer>
-          </LocalizationProvider> */}
-
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker
-          label="Basic date picker"
-          sx={{ width: 300 }}
-          value={newEntryDate}
-          onChange={(date) => setNewEntryDate(date)}
-          // renderInput={(params) => <TextField {...params} />}
-        />
-      </DemoContainer>
-    </LocalizationProvider>
-
-
-
-
-          {/* <select className='dropdown' name='entrypoint' id='entrypoint'
-          onChange={(evt) => setEntryPointId(evt.target.value)}
-          value={entryPointId}>
-          <option value={0}>Select an entry point</option>
-          {entryPoints.map((entryPoint) => (
-            <option key={entryPoint.id}
-              value={entryPoint.id}>
-              {entryPoint.entry_number}. {entryPoint.entry_point}
-            </option>
-          ))}
-        </select>
+          </LocalizationProvider>
           <br />
-          <div className='dateSelection'>
-            <input type='date' placeholder='Entry Date' onChange={(evt) => setNewEntryDate(evt.target.value)}></input>
-          </div>
-          <br /> */}
           <div className='toPaddlers'>
             <button
+              className='btn'
               type="button"
               onClick={(e) => handleSubmit(e)}
             >Add Paddlers

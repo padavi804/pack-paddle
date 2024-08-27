@@ -51,33 +51,16 @@ function Dashboard() {
       {details.map((detail) => {
         return (
           <div key={detail.id}>
-            <p>{detail.entry_point}</p>
-            <p>{formatDate(detail.entry_date)}</p>
-            <iframe width="350px" height="400px" 
-            src={`https://www.paddleplanner.com/tools/embeddedmap.aspx?map=queticosuperiormap.aspx&linkoption=2&scalecontrol=true&static=false&viewoptions=n,ca,ci,cn,cqa,cqi,cqn,eppo,eppmo,epdm,epho,epqt,rs,of,fsh,poi,pt,ht,rpd,rd,crt,pmam,pmaz,bnd,ba&lakeinfo=true&lat=${detail.latitude}&lng=${detail.longitude}&zoom=12&maptype=ppterraingreen&mode=r`}
-            ></iframe>
-
+            <h3>{detail.entry_point}</h3>
+            <h3>{formatDate(detail.entry_date)}</h3>
+            
           </div>
         )
       })}
 
       </div>
       <br />
-      {/* <div className='toGear'>
-        <button
-          type="button"
-          onClick={() => history.push(`/gear/${id}`)}
-        >Add to Gear List
-        </button>
-      </div>
-      <br />
-      <div className='toMeal'>
-        <button
-          type="button"
-          onClick={() => history.push(`/meal/${id}`)}
-        >Add to Meal List
-        </button>
-      </div> */}
+     
 
       <div className='accordion'>
         <Accordion>

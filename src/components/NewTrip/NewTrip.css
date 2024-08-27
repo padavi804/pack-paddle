@@ -58,7 +58,7 @@ Container
     background-color: #f1f2ef;
     opacity: .9;
     border-radius: 5px;
-    display: flex;
+    display: block;
   place-content: center;
   align-items: center; 
 }
@@ -79,3 +79,12 @@ label {
 Select Dropdown
 -------------------------------------------------------------------------------- */
 
+.MuiAutocomplete-listbox {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto; 
+}
+
+.MuiAutocomplete-option {
+  display: block;
+}
