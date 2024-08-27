@@ -17,6 +17,19 @@ function* fetchGear(action) {
   }
 }
 
+// Redux Saga Create
+function* sendGear(action) {
+  console.log("posting gear, due to action:", action);
+
+  try {
+    const serverResponse = yield axios({ method: 'POST', url: '/api/gearlist', data: action.payload });
+    console.log('serverResponse:', serverResponse);
+    yield put({ type: 'FETCH_GEAR', payload: action.payload.tripid });
+  } catch (error) {
+    console.log("Error posting plants to the server");
+  }
+}
+
 // Update Saga
 function* updateGear(action) {
   console.log('updating gear list', action);
@@ -51,6 +64,7 @@ function* deleteGear(action) {
 
 function* gearSaga() {
   yield takeEvery('FETCH_GEAR', fetchGear);
+  yield takeEvery('SEND_GEAR', sendGear);
   yield takeEvery('UPDATE_GEAR', updateGear);
   yield takeEvery('DELETE_GEAR', deleteGear);
 }

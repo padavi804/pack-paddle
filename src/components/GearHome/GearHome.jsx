@@ -43,29 +43,37 @@ function GearHome() {
     e.preventDefault();
     console.log('comment submitted');
 
-    axios({
-      method: 'POST',
-      url: '/api/gearlist',
-      data: {
-        item: item,
-        quantity: quantity,
-        buy: buy,
-        paddlerid: paddlerid,
-      }
-    })
-      .then((response) => {
-        console.log('successful post', response);
-        // fetchPaddlers();
-        setItem('');
-        setQuantity('');
-        setBuy(false);
-        setPaddlerid('');
-        setGearUpdate(!gearUpdate);
-      })
-      .catch((error) => {
-        console.log('post failed', error)
-      })
+    dispatch({ type: 'SEND_GEAR', payload: { item, quantity, buy, paddlerid, tripid: id } });
+    // Clear out input fields
+          setItem('');
+          setQuantity('');
+          setBuy(false);
+          setPaddlerid('');
   }
+
+  //   axios({
+  //     method: 'POST',
+  //     url: '/api/gearlist',
+  //     data: {
+  //       item: item,
+  //       quantity: quantity,
+  //       buy: buy,
+  //       paddlerid: paddlerid,
+  //     }
+  //   })
+  //     .then((response) => {
+  //       console.log('successful post', response);
+  //       // fetchPaddlers();
+  //       setItem('');
+  //       setQuantity('');
+  //       setBuy(false);
+  //       setPaddlerid('');
+  //       setGearUpdate(!gearUpdate);
+  //     })
+  //     .catch((error) => {
+  //       console.log('post failed', error)
+  //     })
+  // }
 
   return (
     <div className="container">
