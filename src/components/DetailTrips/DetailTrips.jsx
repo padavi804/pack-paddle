@@ -11,27 +11,17 @@ import GearList from '../GearList/GearList';
 
 
 function DetailTrips({tripid}) {
-  const user = useSelector((store) => store.user);
   const trips = useSelector((store) => store.trips)
   const history = useHistory();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
 
-//   const [details, setDetails] = useState([]);
-//   const [entryPoint, setEntryPoint] = useState('');
-//   const [entryDate, setEntryDate] = useState('');
-//   const [lat, setLat] = useState('');
-//   const [lon, setLon] = useState('');
-//   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: 'FETCH_DETAIL', payload: id });
+  }, [dispatch, id]);
 
-
-
-
-  // useEffect(() => {
-  //   dispatch({ type: 'SET_DETAIL', payload: id });
-  // }, [dispatch, id]);
-
-  // console.log('trips from store:', trips)
+  console.log('trips from store:', trips)
 
 
 //   const getTrip = () => {
@@ -51,35 +41,24 @@ function DetailTrips({tripid}) {
 
 //     apiKey: "process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
 
- 
-
+ return ( 
+<div>
       // <h2>Detailed Trip</h2>
-      // {details.map((detail) => {
-      //   return (
-      //     <div key={detail.id}>
-      //       <p>{detail.entry_point}</p>
-      //       <p>{detail.entry_date}</p>
-      //       <p>{detail.longitude}</p>
-      //       <p>{detail.latitude}</p>
+      // {trips.map((detail) => {
+        return (
+          <div key={detail.id}>
+            <p>{detail.entry_point}</p>
+            <p>{detail.entry_date}</p>
+            <p>{detail.longitude}</p>
+            <p>{detail.latitude}</p>
 
-      //     </div>
-      //   )
-      // })} 
+          </div>
+        )
+      })} 
 
+</div>
+)
 
-
-//       <h2>Detailed Trip</h2>
-//       {details.map((detail) => {
-//         return (
-//           <div key={detail.id}>
-//             <p>{detail.entry_point}</p>
-//             <p>{detail.entry_date}</p>
-//           </div>
-//         )
-//       })} 
-//       <h5>End of DetailTrips</h5>
-//     </div>
-//   );
 }
 
 export default DetailTrips;
