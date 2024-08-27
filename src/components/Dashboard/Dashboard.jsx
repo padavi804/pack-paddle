@@ -21,6 +21,12 @@ function Dashboard() {
 
   const [details, setDetails] = useState([]);
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+  
+
   const getTrip = () => {
     axios({
       method: 'GET',
@@ -41,14 +47,21 @@ function Dashboard() {
   return (
     <div className="container">
       <h1>Dashboard</h1>
+      <div className='details'>
       {details.map((detail) => {
         return (
           <div key={detail.id}>
             <p>{detail.entry_point}</p>
-            <p>{detail.entry_date}</p>
+            <p>{formatDate(detail.entry_date)}</p>
+            <iframe width="350px" height="400px" 
+            src={`https://www.paddleplanner.com/tools/embeddedmap.aspx?map=queticosuperiormap.aspx&linkoption=2&scalecontrol=true&static=false&viewoptions=n,ca,ci,cn,cqa,cqi,cqn,eppo,eppmo,epdm,epho,epqt,rs,of,fsh,poi,pt,ht,rpd,rd,crt,pmam,pmaz,bnd,ba&lakeinfo=true&lat=${detail.latitude}&lng=${detail.longitude}&zoom=12&maptype=ppterraingreen&mode=r`}
+            ></iframe>
+
           </div>
         )
       })}
+
+      </div>
       <br />
       {/* <div className='toGear'>
         <button
