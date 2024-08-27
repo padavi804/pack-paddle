@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
+// Redux Saga Fetch
 function* fetchGear(action) {
   console.log("fetching gear list, due to action:", action.payload);
 
@@ -17,22 +17,18 @@ function* fetchGear(action) {
   }
 }
 
-// Update, Create, ==> include fetch GEAR saga
+// Redux Saga Create
+function* sendGear(action) {
+  console.log("posting gear, due to action:", action);
 
-// function* createGear(action) {
-//   console.log('updating gear list', action);
-
-//   try {
-//     const gearResponse = axios.post(`/api/gearlist`);
-//     console.log('create/post gear response', gearResponse);
-
-//     yield put({type: 'FETCH_GEAR', payload: action});
-//   }
-//   catch(error) {
-//     console.log('Error creating gear to the server')
-//   }
-// }
-
+  try {
+    const serverResponse = yield axios({ method: 'POST', url: '/api/gearlist', data: action.payload });
+    console.log('serverResponse:', serverResponse);
+    yield put({ type: 'FETCH_GEAR', payload: action.payload.tripid });
+  } catch (error) {
+    console.log("Error posting plants to the server");
+  }
+}
 
 // Update Saga
 function* updateGear(action) {
@@ -49,7 +45,6 @@ function* updateGear(action) {
     console.log('Error updating gear to the server')
   }
 }
-
 
 // Delete Saga
 function* deleteGear(action) {
@@ -69,7 +64,7 @@ function* deleteGear(action) {
 
 function* gearSaga() {
   yield takeEvery('FETCH_GEAR', fetchGear);
-  // yield takeEvery('CREATE_GEAR', createGear);
+  yield takeEvery('SEND_GEAR', sendGear);
   yield takeEvery('UPDATE_GEAR', updateGear);
   yield takeEvery('DELETE_GEAR', deleteGear);
 }

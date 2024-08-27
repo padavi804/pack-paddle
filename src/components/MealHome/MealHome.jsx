@@ -36,7 +36,7 @@ function MealHome() {
 // Generate paddler list for select input
   const fetchPaddlers = (id) => {
     axios.get(`/api/paddlers/names/${id}`).then((response) => {
-      console.log(response.data)
+      console.log("home fetch paddlers response data",response.data)
       setPaddlers(response.data);
     }).catch((error) => {
       console.log(error);
@@ -53,32 +53,14 @@ function MealHome() {
     e.preventDefault();
     console.log('comment submitted');
 
-    axios({
-      method: 'POST',
-      url: '/api/meallist',
-      data: {
-        item: item,
-        quantity: quantity,
-        meal: meal,
-        buy: buy,
-        paddlerid: paddlerid
-      }
-    })
-      .then((response) => {
-        console.log('successful post', response);
-        // fetchPaddlers();
-        setItem('');
-        setQuantity('');
-        setMeal('');
-        setBuy(false);
-        setPaddlerid('');
-        setMealUpdate(!mealUpdate);
-      })
-      .catch((error) => {
-        console.log('meal post failed', error)
-      })
+    dispatch({ type: 'SEND_MEAL', payload: { item, quantity, meal, buy, paddlerid, tripid: id } });
+    // Clear out input fields
+          setItem('');
+          setQuantity('');
+          setMeal('');
+          setBuy(false);
+          setPaddlerid('');
   }
-
 
   
   return (
@@ -140,6 +122,7 @@ function MealHome() {
             }}
             isOptionEqualToValue={(option, value) => option.id === value.id}
           />
+
 
         <br />
         <div className='toPaddlers'>
