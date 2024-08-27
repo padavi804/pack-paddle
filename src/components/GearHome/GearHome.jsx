@@ -78,24 +78,14 @@ function GearHome() {
           <TextField id="outlined-basic" label="Quantity" variant="outlined" onChange={(event) => setQuantity(event.target.value)} value={quantity} />
           <br />
           <FormGroup>
-          <FormControlLabel control={<Checkbox defaultUnchecked />} 
-          onChange={(event) => setBuy(event.target.value)} 
+          <FormControlLabel 
+          control={<Checkbox checked={buy} />}
+          onChange={(event) => setBuy(event.target.checked)} 
           value={buy}
           label="Add to Shopping List"
            />
           </FormGroup>
         </Box>
-
-
-
-        {/* <input placeholder="Item" onChange={(event) => setItem(event.target.value)} value={item}></input>
-        <br />
-        <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity}></input>       */}
-        {/* <br />
-        <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>
-
-        {/* <input placeholder="Paddler" onChange={(event) => setPaddlerid(event.target.value)}></input>       */}
 
         <Autocomplete
             disablePortal
@@ -110,19 +100,6 @@ function GearHome() {
             isOptionEqualToValue={(option, value) => option.id === value.id}
           />
 
-
-
-        {/* <select name='paddlers' id='paddlers'
-          onChange={(evt) => setPaddlerid(evt.target.value)}
-          value={paddlerid}>
-          <option value={0}>Who is responsible for this?</option>
-          {paddlers.map((paddler) => (
-            <option key={paddler.id}
-              value={paddler.id}>
-              {paddler.first_name}. {paddler.last_name}
-            </option>
-          ))}
-        </select> */}
         <br />
         <div className='toPaddlers'>
           <button
