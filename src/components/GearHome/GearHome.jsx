@@ -51,29 +51,6 @@ function GearHome() {
           setPaddlerid('');
   }
 
-  //   axios({
-  //     method: 'POST',
-  //     url: '/api/gearlist',
-  //     data: {
-  //       item: item,
-  //       quantity: quantity,
-  //       buy: buy,
-  //       paddlerid: paddlerid,
-  //     }
-  //   })
-  //     .then((response) => {
-  //       console.log('successful post', response);
-  //       // fetchPaddlers();
-  //       setItem('');
-  //       setQuantity('');
-  //       setBuy(false);
-  //       setPaddlerid('');
-  //       setGearUpdate(!gearUpdate);
-  //     })
-  //     .catch((error) => {
-  //       console.log('post failed', error)
-  //     })
-  // }
 
   return (
     <div className="container">
