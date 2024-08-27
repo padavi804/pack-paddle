@@ -53,20 +53,18 @@ function DetailTrips({tripid}) {
 
  
 
-<img url="https://www.bwca.com/index.cfm?fuseaction=maps.entrydetail&olon=-92.3220&olat=47.9144&nlon=-92.3220&nlat=47.9144&zoom=14&size=500&locid=1&ft=e&locname=Trout%20Lake&maptype=2"/>
+      // <h2>Detailed Trip</h2>
+      // {details.map((detail) => {
+      //   return (
+      //     <div key={detail.id}>
+      //       <p>{detail.entry_point}</p>
+      //       <p>{detail.entry_date}</p>
+      //       <p>{detail.longitude}</p>
+      //       <p>{detail.latitude}</p>
 
-      <h2>Detailed Trip</h2>
-      {details.map((detail) => {
-        return (
-          <div key={detail.id}>
-            <p>{detail.entry_point}</p>
-            <p>{detail.entry_date}</p>
-            <p>{detail.longitude}</p>
-            <p>{detail.latitude}</p>
-
-          </div>
-        )
-      })} 
+      //     </div>
+      //   )
+      // })} 
 
 
 
