@@ -17,6 +17,19 @@ function* fetchMeal(action) {
   }
 }
 
+// Redux Saga Create
+function* sendMeal(action) {
+  console.log("posting meal, due to action:", action);
+
+  try {
+    const serverResponse = yield axios({ method: 'POST', url: '/api/meallist', data: action.payload });
+    console.log('serverResponse:', serverResponse);
+    yield put({ type: 'FETCH_MEAL', payload: action.payload.tripid });
+  } catch (error) {
+    console.log("Error posting plants to the server");
+  }
+}
+
 // Redux Saga Update
 function* updateMeal(action) {
   console.log('updating meal list', action);
@@ -51,6 +64,7 @@ function* deleteMeal(action) {
 
 function* mealSaga() {
   yield takeEvery('FETCH_MEAL', fetchMeal);
+  yield takeEvery('SEND_MEAL', sendMeal);
   yield takeEvery('UPDATE_MEAL', updateMeal);
   yield takeEvery('DELETE_MEAL', deleteMeal);
 }
