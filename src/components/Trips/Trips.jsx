@@ -2,6 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import './Trips.css';
 
 function Trips() {
   const user = useSelector((store) => store.user);
@@ -15,47 +20,53 @@ function Trips() {
     dispatch({ type: 'FETCH_TRIPS', payload: user.id});
   }, []);
 
-// useEffect(() => {
-//   fetchTrips();
-// }, []);
 
-// const fetchTrips = () => {
-//   axios.get('/api/trips').then((response) => {
-//     setPastTripList(response.data);
-//   }).catch((error) => {
-//     console.log(error);
-//     alert('Something went wrong getting the trips.');
-//   });
-// }
 
 const handleClick = (id) => {
   console.log(id)
   history.push(`/dashboard/${id}`);
 };
 
-
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#f1f2ef' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.primary,
+  opacity: 0.9
+}));
   return (
-    <div className="container">
-      <h2>Ahoy, {user.username}!</h2>
+    <div className="trips">
+      <box className='bx'>
+        <h1>Past Trips</h1>
+      </box>
+        
       
-        <h2>Past Trips</h2>
-        {trips.map((trip) => {
-          return (
-          
-          <div className="list" key={trip.id} >
-            <p>{trip.entry_point}</p>
-            <p>{trip.entry_date}</p>
-            <p>{trip.id}</p> 
-            <button 
-            onClick={() => handleClick(trip.id)}
-            >Visit Trip </button>          
-            </div>
-        )})}
+        <Box sx={{ width: '100%' }}>
+        <Stack spacing={1} >
+          {trips.map((trip) => {
+            const formattedDate = new Date(trip.entry_date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            });
+            return (
+              <div key={trip.id} className="list">
+                <Item onClick={() => handleClick(trip.id)}>
+                  <p>{trip.id}. {trip.entry_point}</p>
+                  <p>{formattedDate}</p>                  
+                </Item>
+              </div>
+            );
+          })}
+        </Stack>
+      </Box>
      
       <br/>
       <div className='newTrip'>
-      <button
+      <button       
           type="button"
+          className="btn"
           onClick={() => {
             history.push('/newtrip');
           }}

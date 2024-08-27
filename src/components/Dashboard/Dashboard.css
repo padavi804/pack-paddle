@@ -1,0 +1,53 @@
+.accordian {
+    opacity: .5;
+}
+/* --------------------------------------------------------------------------------
+Button
+-------------------------------------------------------------------------------- */
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-color: #1c1f18;
+    border-width: 1px 1px 3px;
+    border-radius: 4px;
+    background-color: #a89e83;
+    color: #f8f8f8;
+    font-size: 1.1rem;
+    outline: 0;
+    cursor: pointer;
+  }
+  
+  .btn_sizeMin {
+    min-height: 50px;
+    min-width: 100px;
+  }
+  
+  .btn_sizeSm {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
+  
+  .btn_sizeFull {
+    display: block;
+    width: 100%;
+  }
+  
+  .btn:hover {
+    background-color: #8d9980;
+    text-decoration: none;
+  }
+
+/* --------------------------------------------------------------------------------
+Text by size
+-------------------------------------------------------------------------------- */
+
+  h1 {
+    color:#ab9571;
+    background-color: #332d22;
+    border-radius: 5px;
+  }
+
+  p {
+    color: #332d22;
+  }
