@@ -36,7 +36,7 @@ const Item = styled(Paper)(({ theme }) => ({
   opacity: 0.9
 }));
   return (
-    <div className="container">
+    <div className="trips">
       <box className='bx'>
         <h1>Past Trips</h1>
       </box>

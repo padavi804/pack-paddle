@@ -93,7 +93,7 @@ function Paddlers() {
       </div>
 
       <div>
-<ul>
+<li>
 <div className="past-trips" key={paddlers.id}>
         <h2>Paddlers</h2>
         {paddlers.map(paddler => {
@@ -102,7 +102,7 @@ function Paddlers() {
             </div>
         })}
       </div>
-</ul>
+</li>
 
       <button
           type="button"
