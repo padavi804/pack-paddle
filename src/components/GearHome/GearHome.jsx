@@ -43,29 +43,14 @@ function GearHome() {
     e.preventDefault();
     console.log('comment submitted');
 
-    axios({
-      method: 'POST',
-      url: '/api/gearlist',
-      data: {
-        item: item,
-        quantity: quantity,
-        buy: buy,
-        paddlerid: paddlerid,
-      }
-    })
-      .then((response) => {
-        console.log('successful post', response);
-        // fetchPaddlers();
-        setItem('');
-        setQuantity('');
-        setBuy(false);
-        setPaddlerid('');
-        setGearUpdate(!gearUpdate);
-      })
-      .catch((error) => {
-        console.log('post failed', error)
-      })
+    dispatch({ type: 'SEND_GEAR', payload: { item, quantity, buy, paddlerid, tripid: id } });
+    // Clear out input fields
+          setItem('');
+          setQuantity('');
+          setBuy(false);
+          setPaddlerid('');
   }
+
 
   return (
     <div className="container">
@@ -79,7 +64,7 @@ function GearHome() {
         <input placeholder="Quantity" onChange={(event) => setQuantity(event.target.value)} value={quantity}></input>      
         <br />
         <p>Need to buy</p>
-        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.value)} value={buy}></input>      
+        <input type="checkbox" placeholder="Buy" onChange={(event) => setBuy(event.target.checked)} checked={buy} value={buy}></input>      
         <br />
         {/* <input placeholder="Paddler" onChange={(event) => setPaddlerid(event.target.value)}></input>       */}
         <select name='entrypoint' id='entrypoint' 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
+// Redux Saga Fetch
 function* fetchMeal(action) {
   console.log("fetching meal list, due to action:", action.payload);
 
@@ -17,22 +17,18 @@ function* fetchMeal(action) {
   }
 }
 
-// Update, Create, ==> include fetch meal saga
+// Redux Saga Create
+function* sendMeal(action) {
+  console.log("posting meal, due to action:", action);
 
-// function* createMeal(action) {
-//   console.log('updating meal list', action);
-
-//   try {
-//     const mealResponse = axios.post(`/api/meallist`);
-//     console.log('create/post meal response', mealResponse);
-
-//     yield put({type: 'FETCH_MEAL', payload: action});
-//   }
-//   catch(error) {
-//     console.log('Error updating meal to the server')
-//   }
-// }
-
+  try {
+    const serverResponse = yield axios({ method: 'POST', url: '/api/meallist', data: action.payload });
+    console.log('serverResponse:', serverResponse);
+    yield put({ type: 'FETCH_MEAL', payload: action.payload.tripid });
+  } catch (error) {
+    console.log("Error posting plants to the server");
+  }
+}
 
 // Redux Saga Update
 function* updateMeal(action) {
@@ -68,7 +64,7 @@ function* deleteMeal(action) {
 
 function* mealSaga() {
   yield takeEvery('FETCH_MEAL', fetchMeal);
-  // yield takeEvery('CREATE_MEAL', createMeal);
+  yield takeEvery('SEND_MEAL', sendMeal);
   yield takeEvery('UPDATE_MEAL', updateMeal);
   yield takeEvery('DELETE_MEAL', deleteMeal);
 }
