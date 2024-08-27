@@ -53,7 +53,7 @@ const Item = styled(Paper)(({ theme }) => ({
             return (
               <div key={trip.id} className="list">
                 <Item onClick={() => handleClick(trip.id)}>
-                  <p>{trip.id}. {trip.entry_point}</p>
+                  <p> {trip.entry_point}</p>
                   <p>{formattedDate}</p>                  
                 </Item>
               </div>
