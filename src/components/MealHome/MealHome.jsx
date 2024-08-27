@@ -101,7 +101,7 @@ function MealHome() {
   </FormControl>
 
           <FormGroup>
-          <FormControlLabel control={<Checkbox defaultChecked />} 
+          <FormControlLabel control={<Checkbox defaultUnchecked />} 
           onChange={(event) => setBuy(event.target.value)} 
           value={buy}
           label="Add to Shopping List"

@@ -1,6 +1,6 @@
 const tripsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_DETAIL':
+    case 'SET_TRIPS':
       // console.log('action payload:', action.payload)
       return action.payload;   
     default:

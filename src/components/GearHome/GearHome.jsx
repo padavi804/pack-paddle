@@ -78,7 +78,7 @@ function GearHome() {
           <TextField id="outlined-basic" label="Quantity" variant="outlined" onChange={(event) => setQuantity(event.target.value)} value={quantity} />
           <br />
           <FormGroup>
-          <FormControlLabel control={<Checkbox defaultChecked />} 
+          <FormControlLabel control={<Checkbox defaultUnchecked />} 
           onChange={(event) => setBuy(event.target.value)} 
           value={buy}
           label="Add to Shopping List"
