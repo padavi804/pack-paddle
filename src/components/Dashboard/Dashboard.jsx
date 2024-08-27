@@ -25,7 +25,7 @@ function Dashboard() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
-  
+
 
   const getTrip = () => {
     axios({
@@ -48,19 +48,21 @@ function Dashboard() {
     <div className="container">
       <h1>Dashboard</h1>
       <div className='details'>
-      {details.map((detail) => {
-        return (
-          <div key={detail.id}>
-            <h3>{detail.entry_point}</h3>
-            <h3>{formatDate(detail.entry_date)}</h3>
-            
-          </div>
-        )
-      })}
+        {details.map((detail) => {
+          return (
+            <div key={detail.id}>
+              <h3>{detail.entry_point}</h3>
+              <h3>{formatDate(detail.entry_date)}</h3>
 
+            </div>
+          )
+        })}
+        <a href="https://tinyurl.com/2589yxmn" target="_blank" rel="noopener noreferrer">
+          <img src="../../../documentation/images/map.png" />
+        </a>
       </div>
       <br />
-     
+
 
       <div className='accordion'>
         <Accordion>
@@ -70,9 +72,9 @@ function Dashboard() {
             id="panel1-header"
           >
             <h3>Shopping List</h3>
-            </AccordionSummary>
+          </AccordionSummary>
           <AccordionDetails>
-        <ShoppingList tripid={id}/>
+            <ShoppingList tripid={id} />
           </AccordionDetails>
         </Accordion>
 
@@ -81,18 +83,18 @@ function Dashboard() {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
             id="panel2-header"
-            >
-              
+          >
+
             <h3>Meal List</h3>
-            </AccordionSummary>
+          </AccordionSummary>
           <AccordionDetails>
-          <button
-          className='btn'
-          type="button"
-          onClick={() => history.push(`/meal/${id}`)}
-        >Add to Meal List
-        </button>
-            <MealList tripid={id}/>
+            <button
+              className='btn'
+              type="button"
+              onClick={() => history.push(`/meal/${id}`)}
+            >Add to Meal List
+            </button>
+            <MealList tripid={id} />
           </AccordionDetails>
         </Accordion>
 
@@ -103,16 +105,16 @@ function Dashboard() {
             id="panel3-header"
           >
             <h3>Gear List</h3>
-            </AccordionSummary>
+          </AccordionSummary>
           <AccordionDetails>
-          <button
-           className='btn'
-          type="button"
-          onClick={() => history.push(`/gear/${id}`)}
-        >Add to Gear List
-        </button>
-        <GearList tripid={id}/>
-          </AccordionDetails> 
+            <button
+              className='btn'
+              type="button"
+              onClick={() => history.push(`/gear/${id}`)}
+            >Add to Gear List
+            </button>
+            <GearList tripid={id} />
+          </AccordionDetails>
         </Accordion>
       </div>
     </div>

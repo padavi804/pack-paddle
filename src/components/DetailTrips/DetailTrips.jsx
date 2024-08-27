@@ -43,18 +43,19 @@ function DetailTrips({tripid}) {
 
  return ( 
 <div>
-      // <h2>Detailed Trip</h2>
-      // {trips.map((detail) => {
+      {/* <h2>Detailed Trip</h2> */}
+      {trips.map((detail) => {
         return (
           <div key={detail.id}>
-            <p>{detail.entry_point}</p>
-            <p>{detail.entry_date}</p>
-            <p>{detail.longitude}</p>
-            <p>{detail.latitude}</p>
+            
+{/* <iframe width="400px" height="350px" 
+src="https://www.paddleplanner.com/tools/embeddedmap.aspx?map=queticosuperiormap.aspx&linkoption=2&scalecontrol=true&static=false&viewoptions=n,ca,ci,cn,cqa,cqi,cqn,eppo,eppmo,epdm,epho,epqt,rs,of,fsh,poi,pt,ht,rpd,rd,crt,pmam,pmaz,bnd,ba&lakeinfo=true&lat={detail.latitude}&lng={detail.longitude}&zoom=10&maptype=ppterraingreen&mode=e"></iframe> */}
 
           </div>
         )
       })} 
+
+
 
 </div>
 )
