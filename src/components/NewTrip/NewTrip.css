@@ -4,6 +4,7 @@ Button
 
 .btn {
     display: inline-block;
+    align-items: center;
     padding: 10px 20px;
     border-color: #1c1f18;
     border-width: 1px 1px 3px;
@@ -69,7 +70,7 @@ label {
     background-color: #f1f2ef;
     opacity: .9;
     border-radius: 5px;
-    display: flex;
+    display: block;
   place-content: center;
   align-items: center; 
   padding: 10px;
@@ -87,4 +88,10 @@ Select Dropdown
 
 .MuiAutocomplete-option {
   display: block;
+}
+
+.newTrip {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
 }

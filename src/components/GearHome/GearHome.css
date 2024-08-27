@@ -6,6 +6,6 @@
     opacity: .9;
     border-radius: 5px;
     padding: 15px;
-    display: flex;
+    display: block;
   place-content: center;
   align-items: center; }

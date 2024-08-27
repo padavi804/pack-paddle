@@ -98,7 +98,7 @@ function NewTrip() {
             </DemoContainer>
           </LocalizationProvider>
           <br />
-          <div className='toPaddlers'>
+          <div className='newTrip'>
             <button
               className='btn'
               type="button"

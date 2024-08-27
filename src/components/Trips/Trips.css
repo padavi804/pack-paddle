@@ -41,6 +41,8 @@ h1 {
   color: #ab9571;
   background-color: #332d22;
   text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 p {
@@ -48,7 +50,11 @@ p {
 }
 
 .trips {
-  min-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  min-height: 100vh;
 }
 
 .newTrip {

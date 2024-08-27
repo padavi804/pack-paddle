@@ -28,3 +28,19 @@ h1 {
   z-index: -100;
 }
 
+
+  /* --------------------------------------------------------------------------------
+Select Dropdown
+-------------------------------------------------------------------------------- */
+
+.MuiAutocomplete-listbox {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto; 
+}
+
+.MuiAutocomplete-option {
+  display: block;
+}
+
+
