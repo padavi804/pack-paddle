@@ -12,43 +12,12 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE "trips" (
-    "id" SERIAL PRIMARY KEY,
-    "entry_date" DATE,
-    "userid" INT REFERENCES "user",
-    "entryid" INT REFERENCES "entrypoints"
-);
-
 CREATE TABLE "entrypoints" (
     "id" SERIAL PRIMARY KEY,
     "entry_number" VARCHAR,
     "entry_point" VARCHAR (80) NOT NULL,
     "latitude" DECIMAL(10, 6),
     "longitude" DECIMAL(10, 6)
-);
-
-CREATE TABLE "paddlers" (
-    "id" SERIAL PRIMARY KEY,
-    "first_name" VARCHAR (1000) NOT NULL,
-    "last_name" VARCHAR (1000) NOT NULL,
-    "tripid" INT REFERENCES "trips"
-);
-
-CREATE TABLE "gearlist" (
-    "id" SERIAL PRIMARY KEY,
-    "item" VARCHAR (1000) NOT NULL,
-    "quantity" INT,
-    "got_it" BOOLEAN NOT NULL,
-    "paddlerid" INT REFERENCES "paddlers"
-);
-
-CREATE TABLE "meallist" (
-    "id" SERIAL PRIMARY KEY,
-    "item" VARCHAR (1000) NOT NULL,
-    "meal" VARCHAR (100) NOT NULL,
-    "quantity" INT,
-    "got_it" BOOLEAN NOT NULL,
-    "paddlerid" INT REFERENCES "paddlers"
 );
 
 INSERT INTO "entrypoints"
@@ -125,7 +94,35 @@ VALUES
     ('K', 'Seagull Lake', 48.14543, -90.86826),
     ('L', 'Clearwater Lake', 48.07138, -90.37451),
     ('M', 'East Bearskin Lake', 48.03990, -90.37811);
+    
+   
+CREATE TABLE "trips" (
+    "id" SERIAL PRIMARY KEY,
+    "entry_date" DATE,
+    "userid" INT REFERENCES "user",
+    "entryid" INT REFERENCES "entrypoints"
+);
 
-    -- PostgreSQL code for fetching entry point and date:
-    SELECT entry_date, entry_point FROM trips
-    JOIN entrypoints ON trips.entryid = entrypoints.id; 
+CREATE TABLE "paddlers" (
+    "id" SERIAL PRIMARY KEY,
+    "first_name" VARCHAR (1000) NOT NULL,
+    "last_name" VARCHAR (1000) NOT NULL,
+    "tripid" INT REFERENCES "trips"
+);
+
+CREATE TABLE "gearlist" (
+    "id" SERIAL PRIMARY KEY,
+    "item" VARCHAR (1000) NOT NULL,
+    "quantity" INT,
+    "buy" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers"
+);
+
+CREATE TABLE "meallist" (
+    "id" SERIAL PRIMARY KEY,
+    "item" VARCHAR (1000) NOT NULL,
+    "meal" VARCHAR (100) NOT NULL,
+    "quantity" INT,
+    "buy" BOOLEAN NOT NULL,
+    "paddlerid" INT REFERENCES "paddlers"
+);
