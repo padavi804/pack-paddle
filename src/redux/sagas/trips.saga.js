@@ -21,11 +21,12 @@ function* fetchDetail(action) {
   console.log('action payload set details', action.payload)
   try{
     const detailResponse = yield axios.get(`/api/trips/detail/${action.payload}`);
-    console.log('detail:', detailResponse);
+    console.log('server detail response:', detailResponse);
+    console.log('action payload:', action.payload);
 
     yield put ({
-      type:'SET_DETAIL',
-      payload: detailResponse.data,
+      type:'SET_TRIPS',
+      payload: detailResponse.data
     });
     } catch (error) {
       console.log('fecthDetails error:', error);

@@ -11,27 +11,17 @@ import GearList from '../GearList/GearList';
 
 
 function DetailTrips({tripid}) {
-  const user = useSelector((store) => store.user);
   const trips = useSelector((store) => store.trips)
   const history = useHistory();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
 
-//   const [details, setDetails] = useState([]);
-//   const [entryPoint, setEntryPoint] = useState('');
-//   const [entryDate, setEntryDate] = useState('');
-//   const [lat, setLat] = useState('');
-//   const [lon, setLon] = useState('');
-//   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: 'FETCH_DETAIL', payload: id });
+  }, [dispatch, id]);
 
-
-
-
-  // useEffect(() => {
-  //   dispatch({ type: 'SET_DETAIL', payload: id });
-  // }, [dispatch, id]);
-
-  // console.log('trips from store:', trips)
+  console.log('trips from store:', trips)
 
 
 //   const getTrip = () => {
@@ -51,35 +41,25 @@ function DetailTrips({tripid}) {
 
 //     apiKey: "process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY"
 
- 
+ return ( 
+<div>
+      {/* <h2>Detailed Trip</h2> */}
+      {trips.map((detail) => {
+        return (
+          <div key={detail.id}>
+            
+{/* <iframe width="400px" height="350px" 
+src="https://www.paddleplanner.com/tools/embeddedmap.aspx?map=queticosuperiormap.aspx&linkoption=2&scalecontrol=true&static=false&viewoptions=n,ca,ci,cn,cqa,cqi,cqn,eppo,eppmo,epdm,epho,epqt,rs,of,fsh,poi,pt,ht,rpd,rd,crt,pmam,pmaz,bnd,ba&lakeinfo=true&lat={detail.latitude}&lng={detail.longitude}&zoom=10&maptype=ppterraingreen&mode=e"></iframe> */}
 
-      // <h2>Detailed Trip</h2>
-      // {details.map((detail) => {
-      //   return (
-      //     <div key={detail.id}>
-      //       <p>{detail.entry_point}</p>
-      //       <p>{detail.entry_date}</p>
-      //       <p>{detail.longitude}</p>
-      //       <p>{detail.latitude}</p>
-
-      //     </div>
-      //   )
-      // })} 
-
+          </div>
+        )
+      })} 
 
 
-//       <h2>Detailed Trip</h2>
-//       {details.map((detail) => {
-//         return (
-//           <div key={detail.id}>
-//             <p>{detail.entry_point}</p>
-//             <p>{detail.entry_date}</p>
-//           </div>
-//         )
-//       })} 
-//       <h5>End of DetailTrips</h5>
-//     </div>
-//   );
+
+</div>
+)
+
 }
 
 export default DetailTrips;

@@ -19,18 +19,6 @@ function GearList({ tripid }) {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // const fetchGear = (id) => {
-  //   axios.get(`/api/gearlist/${id}`)
-  //     .then((response) => {
-  //       console.log('Fetched gear data',response.data);
-  //       setGearArray(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log('error fetching list', error);
-  //     });
-  // }
-  // useEffect(() => fetchGear(id), [id, gearUpdate]); 
-
   // Redux Saga Fetch
   useEffect(() => {
     dispatch({ type: 'FETCH_GEAR', payload: id });
@@ -136,33 +124,6 @@ function GearList({ tripid }) {
         </TableBody>
       </Table>
     </TableContainer>
-
-
-
-      {/* <table>
-        <tbody>
-          {gears.map((gear) => {
-            return (
-              <tr key={gear.id}>
-                <td>{gear.item}</td>
-                <td>{gear.quantity}</td>
-                <td>{gear.buy}</td>
-                <td>{gear.first_name}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    className="buyCheckbox"
-                    checked={gear.buy}
-                    onChange={() => toggleBuy(tripid, gear.id)}
-                  />
-                </td>
-                <td><button className="buyButton" onClick={() => toggleBuy(gear.id)}> Buy </button> </td>
-                <td><button className="deleteButton" onClick={() => deleteGear(tripid, gear.id)}>Remove</button></td>
-              </tr>);
-          })
-          }
-        </tbody>
-      </table> */}
       
     </div>
 

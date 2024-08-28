@@ -91,9 +91,9 @@ function Paddlers() {
         </form>
       </div>
 
-      <div>
+      <div className="paddlers">
         <ul >
-          <div className="past-trips" key={paddlers.id}>
+          <div key={paddlers.id}>
             <h2>Paddlers</h2>
             {paddlers.map(paddler => {
               return <div className="list" key={paddler.id}>

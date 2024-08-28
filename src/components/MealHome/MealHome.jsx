@@ -33,10 +33,10 @@ function MealHome() {
   const [paddlerid, setPaddlerid] = useState('');
   const [mealUpdate, setMealUpdate] = useState(false);
 
-// Generate paddler list for select input
+  // Generate paddler list for select input
   const fetchPaddlers = (id) => {
     axios.get(`/api/paddlers/names/${id}`).then((response) => {
-      console.log("home fetch paddlers response data",response.data)
+      console.log("home fetch paddlers response data", response.data)
       setPaddlers(response.data);
     }).catch((error) => {
       console.log(error);
@@ -44,7 +44,7 @@ function MealHome() {
     });
   }
 
-  useEffect(() => fetchPaddlers(id), [id]); 
+  useEffect(() => fetchPaddlers(id), [id]);
 
   // Handles sending the input information to the database
 
@@ -55,61 +55,62 @@ function MealHome() {
 
     dispatch({ type: 'SEND_MEAL', payload: { item, quantity, meal, buy, paddlerid, tripid: id } });
     // Clear out input fields
-          setItem('');
-          setQuantity('');
-          setMeal('');
-          setBuy(false);
-          setPaddlerid('');
+    setItem('');
+    setQuantity('');
+    setMeal('');
+    setBuy(false);
+    setPaddlerid(null);
   }
 
-  
+
   return (
     <div className="container">
 
       <h2>Add Meals</h2>
 
       <div className='inputs'>
-      <form>
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField id="outlined-basic" label="Item" variant="outlined" onChange={(event) => setItem(event.target.value)} value={item} />
-          <br />
-          <TextField id="outlined-basic" label="Quantity" variant="outlined" onChange={(event) => setQuantity(event.target.value)} value={quantity} />
-          <br />
-          <FormControl fullWidth>
-          <InputLabel id="meal">Meal</InputLabel>
-  <Select
-    labelId="meal"
-    placeholder="meal"
-    id="meal"
-    label="Meal"
-    onChange={(event) => setMeal(event.target.value)} 
-    value={meal}
-  >
-    <MenuItem value="Breakfast">Breakfast</MenuItem>
-    <MenuItem value="Lunch">Lunch</MenuItem>
-    <MenuItem value="Dinner">Dinner</MenuItem>
-    <MenuItem value="Snack">Snack</MenuItem>
+        <form>
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField id="outlined-basic" label="Item" variant="outlined" onChange={(event) => setItem(event.target.value)} value={item} />
+            <br />
+            <TextField id="outlined-basic" label="Quantity" variant="outlined" onChange={(event) => setQuantity(event.target.value)} value={quantity} />
+            <br />
+            <FormControl fullWidth>
+              <InputLabel id="meal">Meal</InputLabel>
+              <Select
+                labelId="meal"
+                placeholder="meal"
+                id="meal"
+                label="Meal"
+                onChange={(event) => setMeal(event.target.value)}
+                value={meal}
+              >
+                <MenuItem value="Breakfast">Breakfast</MenuItem>
+                <MenuItem value="Lunch">Lunch</MenuItem>
+                <MenuItem value="Dinner">Dinner</MenuItem>
+                <MenuItem value="Snack">Snack</MenuItem>
 
-  </Select>
-  </FormControl>
+              </Select>
+            </FormControl>
 
-          <FormGroup>
-          <FormControlLabel control={<Checkbox defaultChecked />} 
-          onChange={(event) => setBuy(event.target.value)} 
-          value={buy}
-          label="Add to Shopping List"
-           />
-          </FormGroup>
-        </Box>
-       
-        <Autocomplete
+            <FormGroup>
+              <FormControlLabel 
+                control={<Checkbox checked={buy} />}
+                onChange={(event) => setBuy(event.target.checked)}
+                value={buy}
+                label="Add to Shopping List"
+              />
+            </FormGroup>
+          </Box>
+
+          <Autocomplete
             disablePortal
             id="combo-box-demo"
             value={paddlers.id}
@@ -124,28 +125,28 @@ function MealHome() {
           />
 
 
-        <br />
-        <div className='toPaddlers'>
-          <button
+          <br />
+          <div className='toPaddlers'>
+            <button
+              className='btn'
+              type="button"
+              onClick={(e) => handleSubmit(e)}
+            >Add to Pack
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+      {/* MealList Component Displayed */}
+      <div className='mealComponent'>
+        <MealList tripid={id} mealUpdate={mealUpdate} />
+        <button
           className='btn'
-            type="button"
-            onClick={(e) => handleSubmit(e)}
-          >Add to Pack
-          </button>
-        </div>
-      </form>
-</div>
-
-
-{/* MealList Component Displayed */}
-<div className='mealComponent'>
-      <MealList tripid = {id} mealUpdate={mealUpdate}/>
-      <button
-        className='btn'
-        type="button"
-        onClick={(e) => history.push(`/dashboard/${id}`)}
-      >Return to Dashboard
-      </button>
+          type="button"
+          onClick={(e) => history.push(`/dashboard/${id}`)}
+        >Return to Dashboard
+        </button>
       </div>
     </div>
 
