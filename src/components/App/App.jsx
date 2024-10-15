@@ -28,7 +28,7 @@ import GearHome from '../GearHome/GearHome';
 import MealHome from '../MealHome/MealHome';
 import DetailTrips from '../DetailTrips/DetailTrips';
 import ShoppingList from '../ShoppingList/ShoppingList';
-
+import Leaflet from '../Leaflet/Leaflet';
 import './App.css';
 
 function App() {
@@ -118,6 +118,11 @@ function App() {
             exact path="/meallist/:id">
             <MealList />
           </ProtectedRoute>
+
+          <Route
+            path="/leaflet">
+            <Leaflet />
+          </ Route>
 
           <Route
             exact
