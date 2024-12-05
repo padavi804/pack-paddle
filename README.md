@@ -16,15 +16,11 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https:
 
 ### Prerequisites
 
-Link to software that is required to install the app (e.g. node).
-
 - [Node.js](https://nodejs.org/en/)
 - [Postico](https://eggerapps.at/postico2/)
 - [Postgres](https://www.postgresql.org/)
 
 ## Installation
-
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
 
 1. Create a database named `paddle`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
@@ -34,7 +30,6 @@ How do you get your application up and running? This is a step by step list for 
 6. The `npm run client` command will open up a new browser tab for you!
 
 ## Usage
-How does someone use this application? Tell a user story here.
 
 1. Create a username and password, or log in if you already have an account.
 2. On the trip page, you will be able to revisit previously created trips or click a button on the bottom to create a new trip.
