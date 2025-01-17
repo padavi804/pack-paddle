@@ -20,8 +20,6 @@ function Trips() {
     dispatch({ type: 'FETCH_TRIPS', payload: user.id});
   }, []);
 
-
-
 const handleClick = (id) => {
   console.log(id)
   history.push(`/dashboard/${id}`);

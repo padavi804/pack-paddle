@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import MealList from '../MealList/MealList'
 import GearList from '../GearList/GearList';
 import ShoppingList from '../ShoppingList/ShoppingList';
+import Leaflet from '../Leaflet/Leaflet';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -53,13 +54,11 @@ function Dashboard() {
             <div key={detail.id}>
               <h3>{detail.entry_point}</h3>
               <h3>{formatDate(detail.entry_date)}</h3>
-
+              <Leaflet lat={detail.latitude} long={detail.longitude}/>
             </div>
           )
         })}
-        <a href="https://tinyurl.com/2589yxmn" target="_blank" rel="noopener noreferrer">
-          <img src="../../../documentation/images/map.png" />
-        </a>
+       
       </div>
       <br />
 

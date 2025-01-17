@@ -1,0 +1,23 @@
+#map { 
+  height: 400px;
+  width: 350px;
+ }
+
+.map-container {
+  height: 400px!important;
+  width: 400px!important;
+  margin: 0!important;
+}
+
+
+.container {
+    max-width: fit-content;
+    height: autp;
+    margin-inline: auto;
+    background-color: #f1f2ef;
+    opacity: .9;
+    border-radius: 5px;
+    padding: 15px;
+  place-content: center;
+  align-items: center;
+}
