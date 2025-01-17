@@ -54,7 +54,7 @@ function Dashboard() {
             <div key={detail.id}>
               <h3>{detail.entry_point}</h3>
               <h3>{formatDate(detail.entry_date)}</h3>
-              <Leaflet />
+              <Leaflet lat={detail.latitude} long={detail.longitude}/>
             </div>
           )
         })}
