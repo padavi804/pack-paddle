@@ -1,15 +1,16 @@
 #map { 
-  height: 180px;
-  width: auto;
+  height: 400px;
+  width: 400px;
  }
 
 .map-container {
-  height: 400px;
-  width: auto;
+  height: 400px!important;
+  width: 400px!important;
+  margin: 0!important;
 }
 
 
-.container {
+/* .container {
     max-width: fit-content;
     height: autp;
     margin-inline: auto;
@@ -19,4 +20,4 @@
     padding: 15px;
   place-content: center;
   align-items: center;
-}
+} */
